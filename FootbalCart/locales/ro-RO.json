@@ -1,0 +1,8 @@
+{
+  "general": {
+    "404": {
+      "title": "Eroare",
+      "subtext_html": "Pagina nu poate fi gasita"
+    }
+  }
+}
