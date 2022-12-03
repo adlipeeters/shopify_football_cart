@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./assets*.liquid",
@@ -10,6 +11,10 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      Roboto: ['Roboto', 'sans-serif'],
+      Kufam: ['Kufam', 'sans-serif'],
+    },
   },
   plugins: [],
 }

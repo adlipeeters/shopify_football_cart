@@ -1,0 +1,76 @@
+<style>
+  #index_cover {
+    background: url('{{ 'main_page.png' | asset_url }}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 100%;
+  }
+  #intro__text-first {
+    font-size: 150px;
+    font-weight: 500 !important;
+  }
+  #intro__text-second {
+    font-size: 150px;
+    font-weight: 800;
+  }
+  #intro__text-paragraph {
+    font-size: 28px;
+  }
+
+  #header__shop_card-button {
+    font-weight: 500;
+    color: white;
+    padding: 10px 40px;
+    border-radius: 20px;
+    background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%); 
+    display: flex;
+    transition: 0.35s;
+  }
+
+  #header__shop_card-button:hover {
+    opacity: 0.75;
+  }
+  @media only screen and (max-width: 1536px) {
+    #intro__text-first,
+    #intro__text-second {
+      font-size: 120px;
+    }
+  }
+  @media only screen and (max-width: 1280px) {
+    #intro__text-first,
+    #intro__text-second {
+      font-size: 87.5px;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    #intro__text-first,
+    #intro__text-second {
+      font-size: 70px;
+    }
+  }
+</style>
+
+<div class="w-screen h-screen relative noselect" id="index_cover">
+  {% section 'header' %}
+  <div class="container absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <div class="flex">
+      <div class="w-1/2 flex flex-col justify-center align-center">
+        <h1 class="text-white whitespace-nowrap leading-none" id="intro__text-first">THE PERFECT</h1>
+        <h1 class="text-white whitespace-nowrap leading-none z-10" id="intro__text-second">FOOTBALL GIFT</h1>
+        <p class="text-white leading-none mt-5" id="intro__text-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
+        <div>
+          <button class="mt-16" id="header__shop_card-button">
+            Shop cards
+            <span class="ml-3">
+              {% render 'icon-arrow-right-rounded' %}
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="w-1/2 flex justify-center align-center">
+        <img src="{{ 'header_image.png' | asset_url }}" class="object-contain" id="img__header" alt="{{ 'header_image.png' | asset_url }}">
+      </div>
+    </div>
+  </div>
+</div>
