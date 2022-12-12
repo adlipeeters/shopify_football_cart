@@ -3,7 +3,7 @@ img {
     -khtml-user-drag: none;
     -moz-user-drag: none;
     -o-user-drag: none;
-    user-drag: none;
+    -user-drag: none;
 }
 
 .noselect {
@@ -20,4 +20,12 @@ img {
     user-select: none;
     /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background: #2f3642;
 }

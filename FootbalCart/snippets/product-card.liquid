@@ -1,0 +1,43 @@
+<style>
+  .animate {
+    animation-duration: 0.7s;
+    animation-name: animate-pop;
+    animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+  }
+
+  @keyframes animate-pop {
+    0% {
+      opacity: 0;
+      transform: scale(0.5, 0.5);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
+
+<div class="w-full py-6 px-3 animate">
+  <div class="border bg-white shadow-lg rounded-lg overflow-hidden">
+    <a href="{{ product.url }}">
+      {% if product.featured_image %}
+        <div class="h-80 overflow-hidden">
+          <img class="w-full h-full object-cover transition duration-1000 ease-in-out hover:scale-105 transform" src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.featured_image.alt }}">
+        </div>
+
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
+      {% endif %}
+    </a>
+
+    <div class="flex flex-col p-4">
+      <span class="text-sm text-gray-400">{{ product.vendor }}</span>
+
+      <a href="{{ product.url }}" class="text-gray-700 uppercase font-medium">{{ product.title }}</a>
+
+      <p class="text-gray-500">{{ product.price | money }}</p>
+    </div>
+
+  </div>
+</div>

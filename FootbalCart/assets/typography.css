@@ -1,5 +1,26 @@
-h1 {
+h1,
+.shop__name {
     font-family: 'Kufam', sans-serif;
     font-weight: 800 !important;
     font-style: italic;
+}
+
+.header__link {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    /* font-size: 20px; */
+    letter-spacing: 0.15em;
+}
+
+
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: white;
 }

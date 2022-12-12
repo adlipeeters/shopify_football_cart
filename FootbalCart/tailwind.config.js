@@ -10,11 +10,15 @@ module.exports = {
     "./templates/customers/*.liquid",
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        94: "22rem",
+      },
+    },
     fontFamily: {
-      Roboto: ['Roboto', 'sans-serif'],
-      Kufam: ['Kufam', 'sans-serif'],
+      Roboto: ["Roboto", "sans-serif"],
+      Kufam: ["Kufam", "sans-serif"],
     },
   },
   plugins: [],
-}
+};

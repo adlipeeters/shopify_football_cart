@@ -1,0 +1,192 @@
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<style>
+  .slick-slide {
+    margin: 20px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transform: scale(0.9)
+  }
+
+  .slick-center {
+    transform: scale(1.2)
+  }
+
+  .center-slider .slick-slide {
+    transition: all 1s ease-in-out;
+  }
+
+  .slick-list {
+    padding-bottom: 50px !important;
+  }
+
+  #slider__wrapper {
+    background: #242E3A;
+    box-shadow: inset 5px 5px 50px rgba(0, 0, 0, 0.25);
+  }
+  .carousel__arrow-back,
+  .carousel__arrow-next {
+    color: #fff;
+    opacity: 0.5;
+    transition: 0.35s;
+  }
+
+  .carousel__arrow-back:hover,
+  .carousel__arrow-next:hover {
+    opacity: 1;
+  }
+
+  .slick-dots li button:before {
+    background-color: transparent;
+    border: 2px solid rgb(129, 129, 129);
+    height: 10px;
+    width: 10px;
+    border-radius: 50px;
+    text-indent: -9999px;
+    overflow: hidden;
+    margin-top: 32.5px;
+  }
+
+  .slick-dots li.slick-active button:before {
+    background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 23px;
+    border: 2px solid rgb(129, 129, 129);
+    text-indent: -9999px;
+    overflow: hidden;
+    margin: 32.5px 5px 0;
+  }
+  @media only screen and (max-width: 640px) {
+    .carousel__arrow-back,
+    .carousel__arrow-next {
+      display: none;
+    }
+
+  }
+</style>
+
+<div class="flex justify-center align-center my-40">
+  <div class="container">
+    <div class="flex flex-col px-4">
+      <div class="w-full text-center">
+        <h1 class="text-6xl">BEST SELLING FOOTBALL CARDS</h1>
+      </div>
+
+      <div class="rounded-3xl mt-16 py-16" id="slider__wrapper">
+        <div class="slider flex">
+          <div class="flex flex-col align-center justify-center">
+            <img src="{{ '1.png' | asset_url }}" alt="">
+            <h3>Objective Card</h3>
+          </div>
+          <div class="flex flex-col align-center justify-center">
+            <img src="{{ '2.png' | asset_url }}" alt="">
+            <h3>Objective Card</h3>
+          </div>
+          <div class="flex flex-col align-center justify-center">
+            <img src="{{ '2.png' | asset_url }}" alt="">
+            <h3>Objective Card</h3>
+          </div>
+          <div class="flex flex-col align-center justify-center">
+            <img src="{{ '4.png' | asset_url }}" alt="">
+            <h3>Objective Card</h3>
+          </div>
+          <div class="flex flex-col align-center justify-center">
+            <img src="{{ '5.png' | asset_url }}" alt="">
+            <h3>Objective Card</h3>
+          </div>
+          <div class="flex flex-col align-center justify-center">
+            <img src="{{ '1.png' | asset_url }}" alt="">
+            <h3>Objective Card</h3>
+          </div>
+          <div class="flex flex-col align-center justify-center">
+            <img src="{{ '2.png' | asset_url }}" alt="">
+            <h3>Objective Card</h3>
+          </div>
+          <div class="flex flex-col align-center justify-center">
+            <img src="{{ '2.png' | asset_url }}" alt="">
+            <h3>Objective Card</h3>
+          </div>
+          <div class="flex flex-col align-center justify-center">
+            <img src="{{ '4.png' | asset_url }}" alt="">
+            <h3>Objective Card</h3>
+          </div>
+          <div class="flex flex-col align-center justify-center">
+            <img src="{{ '5.png' | asset_url }}" alt="">
+            <h3>Objective Card</h3>
+          </div>
+        </div>
+        <div class="float-right mr-16">
+          <button class="carousel__arrow-back">
+            {% render 'icon-slider-arrow-back' %}
+          </button>
+          <button class="carousel__arrow-next">
+            {% render 'icon-slider-arrow-next' %}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.slider').slick({
+      dots: true,
+      centerMode: true,
+      centerPadding: '60px',
+      slidesToShow: 5,
+      speed: 300,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      infinite: true,
+      prevArrow: $(".carousel__arrow-back"),
+      nextArrow: $(".carousel__arrow-next"),
+      cssEase: 'linear',
+      responsive: [
+        {
+          breakpoint: 1280,
+          settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 3
+          }
+        }, {
+          breakpoint: 1024,
+          settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 3
+          }
+        }, {
+          breakpoint: 768,
+          settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 3
+          }
+        }, {
+          breakpoint: 480,
+          settings: {
+            arrows: false,
+            centerMode: true,
+            centerPadding: '40px',
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+  });
+</script>

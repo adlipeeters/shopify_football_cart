@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "header": {
+      "type": "header"
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "featured_collection": "all"
+      }
+    },
+    "intro-index": {
+      "type": "intro-index"
+    },
+    "how-it-works": {
+      "type": "how_it_works"
+    },
+    "best-selling-cards": {
+      "type": "best-selling-cards"
+    }
+  },
+  "order": [
+    "header",
+    "intro-index",
+    "how-it-works",
+    "best-selling-cards",
+    "featured-collection"
+  ]
+}
