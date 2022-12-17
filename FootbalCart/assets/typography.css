@@ -1,8 +1,18 @@
 h1,
-.shop__name {
+.shop__name,
+.footer__logo {
     font-family: 'Kufam', sans-serif;
     font-weight: 800 !important;
     font-style: italic;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Kufam', sans-serif;
+    font-weight: 800 !important;
 }
 
 .header__link {

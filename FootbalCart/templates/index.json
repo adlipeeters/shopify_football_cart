@@ -17,6 +17,15 @@
     },
     "best-selling-cards": {
       "type": "best-selling-cards"
+    },
+    "why-cards-flex": {
+      "type": "why-cards-flex"
+    },
+    "frequently-asked-questions": {
+      "type": "frequently-asked-questions"
+    },
+    "get-in-touch": {
+      "type": "get-in-touch"
     }
   },
   "order": [
@@ -24,6 +33,9 @@
     "intro-index",
     "how-it-works",
     "best-selling-cards",
+    "why-cards-flex",
+    "frequently-asked-questions",
+    "get-in-touch",
     "featured-collection"
   ]
 }

@@ -1,0 +1,181 @@
+<style>
+  ul.accordion-list {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    list-style: none;
+
+  }
+  ul.accordion-list li {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 15px 20px;
+    margin: 0 auto 15px;
+    {% comment %}
+      border: 1px solid #eee;
+    {% endcomment %}
+    border-radius: 5px;
+    cursor: pointer;
+    background: #232D39;
+    box-shadow: 8px 10px 11px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+  ul.accordion-list li.active h3:after {
+    transform: rotate(180deg);
+  }
+  ul.accordion-list li h3 {
+    font-weight: 700;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+  }
+  ul.accordion-list li h3:after {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    content: "\f107";
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    font-size: 17px;
+  }
+  {% comment %}
+    ul.accordion-list li div.answer {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+    ul.accordion-list li div.answer p {
+      position: relative;
+      display: block;
+      font-weight: 300;
+      padding: 10px 0 0;
+      cursor: pointer;
+      line-height: 150%;
+      margin: 0 0 15px;
+      font-size: 14px;
+    }
+  {% endcomment %}
+</style>
+<div class="flex justify-center items-center my-24 ">
+  <div class="container">
+    <div class="flex flex-col">
+      <div class="w-full">
+        <h1 class="text-6xl">Frequently asked questions</h1>
+      </div>
+      <div class="mt-16">
+        <ul class="accordion-list">
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full">
+                <h3>What is CardsFlex?</h3>
+              </div>
+            </div>
+            <div class="answer py-4 mx-16">
+              <p class="text-gray-400">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?</p>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full">
+                <h3>Are CardsPlug cards high quality?</h3>
+              </div>
+            </div>
+            <div class="answer py-4 mx-16">
+              <p class="text-gray-400">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?</p>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full">
+                <h3>What are the cards made of?</h3>
+              </div>
+            </div>
+            <div class="answer py-4 mx-16">
+              <p class="text-gray-400">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?</p>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full">
+                <h3>Can I view my order before it is sent?</h3>
+              </div>
+            </div>
+            <div class="answer py-4 mx-16">
+              <p class="text-gray-400">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?</p>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full">
+                <h3>Will CardsPlug edit my photo for me?</h3>
+              </div>
+            </div>
+            <div class="answer py-4 mx-16">
+              <p class="text-gray-400">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?</p>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full">
+                <h3>What shall I do if I received the wrong cads(s)?</h3>
+              </div>
+            </div>
+            <div class="answer py-4 mx-16">
+              <p class="text-gray-400">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('.accordion-list > li > .answer').hide();
+    $('.accordion-list > li').click(function() {
+      if ($(this).hasClass("active")) {
+        $(this).removeClass("active").find(".answer").slideUp();
+      } else {
+        $(".accordion-list > li.active .answer").slideUp();
+        $(".accordion-list > li.active").removeClass("active");
+        $(this).addClass("active").find(".answer").slideDown();
+      }
+      return false;
+    });
+  });
+</script>

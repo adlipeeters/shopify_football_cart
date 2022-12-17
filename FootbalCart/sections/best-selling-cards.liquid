@@ -1,18 +1,39 @@
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
 <style>
+  @keyframes slideInFromLeft {
+    0% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+
   .slick-slide {
     margin: 20px;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    transform: scale(0.9)
+    transform: scale(0.9);
   }
 
+  .slick-center::before {
+    transition: 0.35s;
+  }
   .slick-center {
-    transform: scale(1.2)
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+  }
+  .slick-center {
+    transform: scale(1.2);
   }
 
   .center-slider .slick-slide {
@@ -68,9 +89,9 @@
   }
 </style>
 
-<div class="flex justify-center align-center my-40">
+<div class="flex justify-center align-center my-24">
   <div class="container">
-    <div class="flex flex-col px-4">
+    <div class="flex flex-col">
       <div class="w-full text-center">
         <h1 class="text-6xl">BEST SELLING FOOTBALL CARDS</h1>
       </div>
@@ -134,59 +155,71 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+  integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('.slider').slick({
-      dots: true,
-      centerMode: true,
-      centerPadding: '60px',
-      slidesToShow: 5,
-      speed: 300,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      infinite: true,
-      prevArrow: $(".carousel__arrow-back"),
-      nextArrow: $(".carousel__arrow-next"),
-      cssEase: 'linear',
-      responsive: [
-        {
-          breakpoint: 1280,
-          settings: {
-            arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 3
-          }
-        }, {
-          breakpoint: 1024,
-          settings: {
-            arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 3
-          }
-        }, {
-          breakpoint: 768,
-          settings: {
-            arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 3
-          }
-        }, {
-          breakpoint: 480,
-          settings: {
-            arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 1
-          }
-        }
-      ]
-    });
-  });
-</script>
+  $('.slider').slick({
+                            dots: true,
+                            centerMode: true,
+                            centerPadding: '60px',
+                            slidesToShow: 5,
+                            speed: 500,
+                            autoplay: true,
+                            autoplaySpeed: 2000,
+                            infinite: true,
+                            prevArrow: $(".carousel__arrow-back"),
+                            nextArrow: $(".carousel__arrow-next"),
+                            cssEase: 'linear',
+                            responsive: [
+                              {
+                                breakpoint: 1280,
+                                settings: {
+                                  arrows: false,
+                                  centerMode: true,
+                                  centerPadding: '40px',
+                                  slidesToShow: 3
+                                }
+                              }, {
+                                breakpoint: 1024,
+                                settings: {
+                                  arrows: false,
+                                  centerMode: true,
+                                  centerPadding: '40px',
+                                  slidesToShow: 3
+                                }
+                              }, {
+                                breakpoint: 768,
+                                settings: {
+                                  arrows: false,
+                                  centerMode: true,
+                                  centerPadding: '40px',
+                                  slidesToShow: 3
+                                }
+                              }, {
+                                breakpoint: 480,
+                                settings: {
+                                  arrows: false,
+                                  centerMode: true,
+                                  centerPadding: '40px',
+                                  slidesToShow: 1
+                                }
+                              }
+                            ]
+                          });
+                    
+                          $('.slider').on('wheel', (function(e) {
+                           e.preventDefault();
+                             if (e.originalEvent.deltaY < 0) {
+                               $(this).slick('slickNext');
+                             } else {
+                               $(this).slick('slickPrev');
+                             }
+                    }));
+                        })</script>
