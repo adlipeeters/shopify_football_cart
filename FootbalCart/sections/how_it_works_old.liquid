@@ -1,0 +1,102 @@
+<style>
+  #how_it_works__shop_card-button {
+    display: flex;
+    padding: 10px 75px;
+    background: #2F3740;
+    width: auto;
+  }
+</style>
+
+<div class="flex justify-center align-center my-32">
+  <div class="container">
+    <div class="flex flex-col">
+      <div class="w-full text-center">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl">HOW IT WORKS?</h1>
+      </div>
+      <div class="w-full flex flex-col md:flex-row justify-around items-center gap-y-24 md:gap-x-8 mt-24 bg-red-500">
+
+        <!--  first card start-->
+        <div class="w-12/12 sm:w-3/4 2xl:w-3/12 rounded-3xl flex flex-col text-center" style="background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);">
+          <div class="flex justify-center" style="transform: translateY(-55px)">
+            <img src="{{ 'icon-how-it-works-pick-card.png' | asset_url }}" alt="pick_a_card_img">
+          </div>
+          <div class="mb-8 flex flex-col text-center">
+            <h1 class="text-2xl">Pick a Card</h1>
+            <p class="mx-8" style="min-height: 100px; max-height: 100px">
+              We have over 35 cool football card designs for you to choose from. All you have to do is find one you like!
+            </p>
+            <div class="mt-6">
+              <button>
+                <a
+                  href="{{ routes.all_products_collection_url}}"
+                  class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                  id="how_it_works__shop_card-button">
+                  Shop cards
+                  <span class="ml-3">
+                    {% render 'icon-arrow-right-rounded' %}
+                  </span>
+                </a>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!--  first card end-->
+
+        <!--  second card start-->
+        <div class="w-12/12 sm:w-3/4 2xl:w-3/12 rounded-3xl flex flex-col text-center" style="background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);">
+          <div class="flex justify-center" style="transform: translateY(-55px)">
+            <img src="{{ 'icon-how-it-works-make-it-yours.png' | asset_url }}" alt="make_it_yours_img">
+          </div>
+          <div class="mb-8 flex flex-col text-center">
+            <h1 class="text-2xl">Make it Yours</h1>
+            <p class="mx-8" style="min-height: 100px; max-height: 100px">
+              Add your own photo, name, club, and stats with our easy online tool. Our expert designers will do the rest!
+            </p>
+            <div class="mt-6">
+              <button>
+                <a
+                  href="{{ routes.all_products_collection_url}}"
+                  class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                  id="how_it_works__shop_card-button">
+                  Shop cards
+                  <span class="ml-3">
+                    {% render 'icon-arrow-right-rounded' %}
+                  </span>
+                </a>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!--  second card end-->
+
+        <!--  third card start-->
+        <div class="w-12/12 sm:w-3/4 2xl:w-3/12 rounded-3xl flex flex-col text-center" style="background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);">
+          <div class="flex justify-center" style="transform: translateY(-55px)">
+            <img src="{{ 'icon-how-it-works-place-your-order.png' | asset_url }}" alt="place_your_order_img">
+          </div>
+          <div class="mb-8 flex flex-col text-center">
+            <h1 class="text-2xl">Place your Order</h1>
+            <p class="mx-8" style="min-height: 100px; max-height: 100px">
+              Our team will send you a stunning edited preview in 2-3 days. Once you approve, we’ll bring it to life and ship it to you worldwide!
+            </p>
+            <div class="mt-6">
+              <button>
+                <a
+                  href="{{ routes.all_products_collection_url}}"
+                  class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                  id="how_it_works__shop_card-button">
+                  Shop cards
+                  <span class="ml-3">
+                    {% render 'icon-arrow-right-rounded' %}
+                  </span>
+                </a>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!--  third card end-->
+
+      </div>
+    </div>
+  </div>
+</div>

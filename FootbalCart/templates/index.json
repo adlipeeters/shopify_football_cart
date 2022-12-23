@@ -21,6 +21,9 @@
     "why-cards-flex": {
       "type": "why-cards-flex"
     },
+    "discount": {
+      "type": "discount"
+    },
     "frequently-asked-questions": {
       "type": "frequently-asked-questions"
     },
@@ -34,6 +37,7 @@
     "how-it-works",
     "best-selling-cards",
     "why-cards-flex",
+    "discount",
     "frequently-asked-questions",
     "get-in-touch",
     "featured-collection"

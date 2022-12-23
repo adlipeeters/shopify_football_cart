@@ -29,3 +29,7 @@ img {
 body {
     background: #2f3642;
 }
+
+:root {
+    --background-blue: #2F3740;
+}

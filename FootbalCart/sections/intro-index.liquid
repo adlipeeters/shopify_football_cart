@@ -1,10 +1,6 @@
 {{ 'animation.css' | asset_url | stylesheet_tag }}
 <style>
-  .main {
-    height: 100vh;
-    width: 100vw;
-    position: relative;
-  }
+  .main {}
   #index_cover {
     background: url('{{ 'main_page.png' | asset_url }}');
     background-position: center;
@@ -13,30 +9,23 @@
     max-width: 100%;
   }
   #intro__text-first {
-    font-size: 150px;
     font-weight: 500 !important;
   }
   #intro__text-second {
-    font-size: 150px;
     font-weight: 800;
   }
   #intro__text-paragraph {
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 300;
-    font-size: 28px;
-    line-height: 1.2;
-    opacity: 0.7;
   }
 
   #header__shop_card-button {
     font-weight: 500;
     color: white;
-    padding: 10px 40px;
-    border-radius: 20px;
+    padding: 15px 50px;
     background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);
     transition: 0.35s;
-    width: 200px;
+    width: 250px;
     display: flex;
     justify-content: center;
   }
@@ -46,39 +35,13 @@
   }
 
   #intro__banner {
-    margin-top: -25px;
-  }
-
-  @media only screen and (max-width: 1536px) {
-    #intro__text-first,
-    #intro__text-second {
-      font-size: 120px;
-    }
-    #intro__text-paragraph {
-      font-size: 24px;
-    }
+    margin-top: -120px;
   }
 
 
-  @media only screen and (max-width: 1280px) {
-    #intro__text-first,
-    #intro__text-second {
-      font-size: 87.5px;
-    }
-    #intro__text-paragraph {
-      font-size: 20px;
-    }
-  }
   @media only screen and (max-width: 1024px) {
-    #intro__text-first,
-    #intro__text-second {
-      font-size: 70px;
-    }
-    #intro__text-paragraph {
-      font-size: 18px;
-    }
     #intro__banner {
-      margin-top: -20px;
+      margin-top: -115px;
     }
   }
 
@@ -86,11 +49,9 @@
   @media only screen and (max-width: 768px) {
     #intro__text-first,
     #intro__text-second {
-      font-size: 32px;
       margin: auto;
     }
     #intro__text-paragraph {
-      font-size: 12px;
       max-width: 400px;
       margin: 10px auto auto;
       text-align: center;
@@ -106,29 +67,44 @@
       margin: 20px auto auto;
     }
     #intro__banner {
-      margin-top: -10px;
+      margin-top: -110px;
+    }
+  }
+
+  @media only screen and (max-width: 640px) {
+    #intro__banner {
+      margin-top: -105px;
     }
   }
 </style>
 
-<div class="main noselect" id="index_cover">
-  <div class="container absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-    <div class="wrapper px-5 flex">
+<div class="flex justify-center items-center lg:h-screen lg:w-screen noselect" id="index_cover">
+  <div class="container">
+    <div class="wrapper px-5 flex py-24">
       <div class="w-fit md:w-1/2 flex flex-col justify-center align-center mx-auto">
-        <h1 class="text-white whitespace-nowrap leading-none" id="intro__text-first">THE PERFECT</h1>
-        <h1 class="text-white whitespace-nowrap leading-none z-10" id="intro__text-second">FOOTBALL GIFT</h1>
-        <p class="text-white leading-none mt-5" id="intro__text-paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
+        <h1 class="text-white whitespace-nowrap leading-none text-4xl md:text-6xl 2xl:text-8xl" id="intro__text-first">THE PERFECT</h1>
+        <h1 class="text-white whitespace-nowrap leading-none z-10 text-4xl md:text-6xl 2xl:text-8xl" id="intro__text-second">FOOTBALL GIFT</h1>
+        <p class="text-white lg:leading-7 mt-5 font-light lg:text-2xl tracking-wide" id="intro__text-paragraph">
+          CardsFlex is the best place to buy football cards in the Middle East.Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.
+        </p>
         <div>
-          <a href="{{ routes.all_products_collection_url}}" class="heartbeat mt-16" id="header__shop_card-button">
+          <a
+            href="{{ routes.all_products_collection_url}}"
+            class="heartbeat mt-10 rounded-full"
+            id="header__shop_card-button">
             Shop cards
-            <span class="ml-3">
+            <span class="translate-x-12">
               {% render 'icon-arrow-right-rounded' %}
             </span>
           </a>
         </div>
       </div>
       <div class="w-3/5 md:w-1/2 flex justify-center align-center mx-auto">
-        <img src="{{ 'header_image.png' | asset_url }}" class="object-fit" id="img__header" alt="{{ 'header_image.png' | asset_url }}">
+        <img
+          src="{{ 'header_image.png' | asset_url }}"
+          class="object-fit w-80 md:w-auto"
+          id="img__header"
+          alt="{{ 'header_image.png' | asset_url }}">
       </div>
     </div>
     <div class="w-full h-10 bg-white rounded-lg md:rounded-3xl" id="intro__banner"></div>
