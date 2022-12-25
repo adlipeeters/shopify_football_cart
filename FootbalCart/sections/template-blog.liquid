@@ -1,52 +1,107 @@
-<div class="container">
+<style>
+  {% comment %}
+    #blog__content {
+      background: url('{{ 'blog_background.png' | asset_url }}');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  {% endcomment %}
+  .blog__title {
+    font-weight: 500 !important;
+    font-style: normal;
+  }
+</style>
 
-  <div class="py-8">
-    {% paginate blog.articles by section.settings.number_of_blog_posts %}
-      <h1 class="text-center text-3xl uppercase">{{ blog.title }}</h1>
+<div class="flex justify-center align-center my-8" id="blog__content">
+  <div class="container px-6 sm:px-0">
+    <div class="flex flex-col">
+      <div class="w-full text-center">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">
+          {{ blog.title }}
+        </h1>
+      </div>
+      <div>
+        {% paginate blog.articles by section.settings.number_of_blog_posts %}
+          <div class="mx-auto mt-8 sm:mt-16">
+            <div class="grid lg:grid-rows-3 lg:grid-flow-col gap-x-32 gap-y-8">
+              {% for article in blog.articles %}
+                {% if forloop.index == 1 %}
 
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {% for article in blog.articles %}
-            <div class="w-full py-6 px-3">
-              <div class="bg-white shadow-xl rounded-lg overflow-hidden">
-                {% if article.image %}
-                  <a href="{{ article.url }}">
-                    <img
-                      class="w-full h-80 object-cover"
-                      src="{{ article.image | img_url: 'medium' }}"
-                      alt="{{ article.image.alt }}">
-                  </a>
+                  <!-- left side start -->
+                  <div class="row-span-2 col-span-2">
+                    <div class="w-full h-full">
+                      {% if article.image %}
+                        <a href="{{ article.url }}">
+                          <img
+                            class="object-cover w-full h-full"
+                            src="{{ article.image | img_url: 'medium' }}"
+                            alt="{{ article.image.alt }}">
+
+                        </a>
+                      {% else %}
+                        {{ 'image' | placeholder_svg_tag: 'w-full h-80 object-cover bg-gray-100' }}
+                      {% endif %}
+                      {% comment %} <div class="">
+                      <h1 class="text-3xl font-medium my-4 text-white blog__title">{{ article.title }}</h1>
+                      {% if article.excerpt.size > 0 %}
+                      <p>{{ article.excerpt | strip_html | truncatewords: 30 }}</p>
+                      {% else %}
+                      <p>{{ article.content | strip_html | truncatewords: 30 }}</p>
+                      {% endif %}
+                      <a href="{{ article.url }}" class="font-medium hover: text-gray-500 my-4 block">{{ section.settings.blog_read_more }}</a>
+                      </div> {% endcomment %}
+                    </div>
+                  </div>
+
+                  <div class="row-span-1 col-span-2">
+                    <div class="">
+                      <h1 class="text-3xl font-medium my-4 text-white blog__title">{{ article.title }}</h1>
+                      {% if article.excerpt.size > 0 %}
+                        <p>{{ article.excerpt | strip_html | truncatewords: 30 }}</p>
+                      {% else %}
+                        <p>{{ article.content | strip_html | truncatewords: 30 }}</p>
+                      {% endif %}
+                      <a href="{{ article.url }}" class="font-medium hover: text-gray-500 my-4 block">{{ section.settings.blog_read_more }}</a>
+                    </div>
+                  </div>
+                  <!-- left side end -->
+
                 {% else %}
-                  {{ 'image' | placeholder_svg_tag: 'w-full h-80 object-cover bg-gray-100' }}
+
+                  <!-- right side start -->
+                  <div class="row-span-1 col-span-2 flex">
+                    <div class="">
+                      {% if article.image %}
+                        <a href="{{ article.url }}">
+                          <img {% comment %}class="w-72 h-48 object-cover"{% endcomment %}class="h-full w-96 object-cover"src="{{ article.image | img_url: 'medium' }}"alt="{{ article.image.alt }}">
+                        </a>
+                      {% else %}
+                        {{ 'image' | placeholder_svg_tag: 'w-full h-80 object-cover bg-gray-100' }}
+                      {% endif %}
+                    </div>
+                    <div class="ml-6">
+                      <h1 class="text-3xl font-medium text-white blog__title">{{ article.title }}</h1>
+                      <a href="{{ article.url }}" class="font-medium hover: text-gray-500 my-4 block">{{ section.settings.blog_read_more }}</a>
+                    </div>
+                  </div>
+                  <!-- right side end -->
+
                 {% endif %}
-
-                <div class="p-4">
-                  <h1 class="text-xl font-medium my-4">{{ article.title }}</h1>
-
-                  {% if article.excerpt.size > 0 %}
-                    <p>{{ article.excerpt | strip_html | truncatewords: 15 }}</p>
-                  {% else %}
-                    <p>{{ article.content | strip_html | truncatewords: 15 }}</p>
-                  {% endif %}
-
-                  <a href="{{ article.url }}" class="font-medium hover: text-blue-800 my-4 block">{{ section.settings.blog_read_more }}</a>
-                </div>
-
-              </div>
-
+              {% endfor %}
             </div>
-          {% endfor %}
-        </div>
+          </div>
+
+          <div class="max-w-6xl mx-auto">
+            {% render 'pagination', pagination: paginate %}
+          </div>
+
+        {% endpaginate %}
       </div>
-
-      <div class="max-w-6xl mx-auto">
-        {% render 'pagination', pagination: paginate %}
-      </div>
-
-    {% endpaginate %}
-
+    </div>
   </div>
 </div>
+
 
 {% schema %}
   {
@@ -64,7 +119,7 @@
         "min": 1,
         "max": 6,
         "label": "Blog posts per page",
-        "default": 1
+        "default": 4
       }
     ]
   }

@@ -1,8 +1,11 @@
 {
   "sections": {
+    "header": {
+      "type": "header"
+    },
     "template": {
       "type": "template-blog"
     }
   },
-  "order": ["template"]
+  "order": ["header", "template"]
 }

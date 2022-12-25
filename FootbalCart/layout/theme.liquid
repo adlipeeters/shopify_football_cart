@@ -34,7 +34,7 @@
       crossorigin="anonymous"></script>
   </head>
   <body id="{{ page_title | handle }}">
-    {% if template != 'index' %}
+    {% if template != 'index' and template != 'blog' %}
       {% section 'header' %}
     {% endif %}
 
