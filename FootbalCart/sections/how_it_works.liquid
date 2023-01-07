@@ -1,6 +1,16 @@
-<style></style>
+<style>
+  #how_it_works-background {
+    background: url('{{ 'how_it_works__smoke-background.png' | asset_url }}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 100%;
+  }
+</style>
 
-<div class="flex justify-center align-center my-8 sm:my-32">
+
+<div class="flex justify-center align-center my-8 sm:my-32 relative">
+  <div id="how_it_works-background" class="h-screen w-screen absolute -translate-y-36 hidden 2xl:block"></div>
   <div class="container">
     <div class="flex flex-col">
       <div class="w-full text-center">

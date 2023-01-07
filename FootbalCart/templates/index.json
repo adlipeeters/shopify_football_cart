@@ -29,6 +29,9 @@
     },
     "get-in-touch": {
       "type": "get-in-touch"
+    },
+    "product-features": {
+      "type": "product-features"
     }
   },
   "order": [
@@ -40,6 +43,7 @@
     "discount",
     "frequently-asked-questions",
     "get-in-touch",
+    "product-features",
     "featured-collection"
   ]
 }

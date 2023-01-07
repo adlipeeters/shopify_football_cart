@@ -1,20 +1,21 @@
 <style>
-  {% comment %}
-    #blog__content {
-      background: url('{{ 'blog_background.png' | asset_url }}');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-  {% endcomment %}
   .blog__title {
     font-weight: 500 !important;
     font-style: normal;
   }
+
+  .blog__page-background {
+    background-image: linear-gradient(180deg, #0F1521 0%, rgba(15, 21, 33, 0.479167) 43.96%, #303741 100%), url('{{ 'blog_background.png' | asset_url }}');
+    width: 100%;
+    height: auto;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
 </style>
 
-<div class="flex justify-center align-center my-8" id="blog__content">
-  <div class="container px-6 sm:px-0">
+<div class="flex justify-center align-center">
+  <div class="container px-6 sm:px-0 py-24 mt-4 lg:mt-16">
     <div class="flex flex-col">
       <div class="w-full text-center">
         <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">
@@ -23,46 +24,37 @@
       </div>
       <div>
         {% paginate blog.articles by section.settings.number_of_blog_posts %}
-          <div class="mx-auto mt-8 sm:mt-16">
-            <div class="grid lg:grid-rows-3 lg:grid-flow-col gap-x-32 gap-y-8">
+          <div class="mx-auto mt-12">
+            <div class="grid xl:grid-rows-4 xl:grid-flow-col gap-x-40 gap-y-8 xl:gap-y-4">
               {% for article in blog.articles %}
                 {% if forloop.index == 1 %}
 
                   <!-- left side start -->
-                  <div class="row-span-2 col-span-2">
-                    <div class="w-full h-full">
+                  <div class="row-span-3 col-span-2">
+                    <div class="w-full h-full border-r-2 border-gray-800">
                       {% if article.image %}
                         <a href="{{ article.url }}">
                           <img
-                            class="object-cover w-full h-full"
+                            class="object-cover w-full h-full 2xl:pr-32"
                             src="{{ article.image | img_url: 'medium' }}"
                             alt="{{ article.image.alt }}">
 
                         </a>
                       {% else %}
-                        {{ 'image' | placeholder_svg_tag: 'w-full h-80 object-cover bg-gray-100' }}
+                        {{ 'image' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100 2xl:pr-32' }}
                       {% endif %}
-                      {% comment %} <div class="">
-                      <h1 class="text-3xl font-medium my-4 text-white blog__title">{{ article.title }}</h1>
-                      {% if article.excerpt.size > 0 %}
-                      <p>{{ article.excerpt | strip_html | truncatewords: 30 }}</p>
-                      {% else %}
-                      <p>{{ article.content | strip_html | truncatewords: 30 }}</p>
-                      {% endif %}
-                      <a href="{{ article.url }}" class="font-medium hover: text-gray-500 my-4 block">{{ section.settings.blog_read_more }}</a>
-                      </div> {% endcomment %}
                     </div>
                   </div>
 
                   <div class="row-span-1 col-span-2">
-                    <div class="">
-                      <h1 class="text-3xl font-medium my-4 text-white blog__title">{{ article.title }}</h1>
+                    <div>
+                      <a href="{{ article.url }}" class="font-medium hover: text-gray-500 block">{{ section.settings.blog_read_more }}</a>
+                      <h1 class="text-3xl font-medium text-white blog__title 2xl:pr-32 mt-4">{{ article.title }}</h1>
                       {% if article.excerpt.size > 0 %}
-                        <p>{{ article.excerpt | strip_html | truncatewords: 30 }}</p>
+                        <p class="text-zinc-500 font-light text-xl 2xl:pr-32">{{ article.excerpt | strip_html | truncatewords: 30 }}</p>
                       {% else %}
-                        <p>{{ article.content | strip_html | truncatewords: 30 }}</p>
+                        <p class="text-zinc-500 font-light text-xl 2xl:pr-32">{{ article.content | strip_html | truncatewords: 30 }}</p>
                       {% endif %}
-                      <a href="{{ article.url }}" class="font-medium hover: text-gray-500 my-4 block">{{ section.settings.blog_read_more }}</a>
                     </div>
                   </div>
                   <!-- left side end -->
@@ -70,19 +62,22 @@
                 {% else %}
 
                   <!-- right side start -->
-                  <div class="row-span-1 col-span-2 flex">
-                    <div class="">
+                  <div class="row-span-1 col-span-2 flex max-h-36 {% if forloop.index == 2 %} mt-16 xl:mt-0 {% endif %}">
+                    <div class="w-full xl:w-5/12 xl:h-full">
                       {% if article.image %}
                         <a href="{{ article.url }}">
-                          <img {% comment %}class="w-72 h-48 object-cover"{% endcomment %}class="h-full w-96 object-cover"src="{{ article.image | img_url: 'medium' }}"alt="{{ article.image.alt }}">
+                          <img
+                            class="w-full h-full object-cover"
+                            src="{{ article.image | img_url: 'medium' }}"
+                            alt="{{ article.image.alt }}">
                         </a>
                       {% else %}
-                        {{ 'image' | placeholder_svg_tag: 'w-full h-80 object-cover bg-gray-100' }}
+                        {{ 'image' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
                       {% endif %}
                     </div>
-                    <div class="ml-6">
-                      <h1 class="text-3xl font-medium text-white blog__title">{{ article.title }}</h1>
-                      <a href="{{ article.url }}" class="font-medium hover: text-gray-500 my-4 block">{{ section.settings.blog_read_more }}</a>
+                    <div class="ml-4 lg:ml-8 w-full lg:w-7/12">
+                      <h1 class="text-xs sm:text-base md:text-lg lg:text-2xl font-medium text-white blog__title">{{ article.title }}</h1>
+                      <a href="{{ article.url }}" class="text-xs sm:text-base font-medium hover: text-gray-500 my-2 xl:my-4 block">{{ section.settings.blog_read_more }}</a>
                     </div>
                   </div>
                   <!-- right side end -->
@@ -103,6 +98,7 @@
 </div>
 
 
+
 {% schema %}
   {
     "name": "Blog",
@@ -119,7 +115,7 @@
         "min": 1,
         "max": 6,
         "label": "Blog posts per page",
-        "default": 4
+        "default": 5
       }
     ]
   }

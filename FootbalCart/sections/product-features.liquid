@@ -1,0 +1,25 @@
+<style>
+  #product__features-background {
+    {% comment %}
+      background: url('{{ 'product_features-background.png' | asset_url }}');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      max-width: 100%;
+    {% endcomment %}
+  }
+</style>
+
+<div class="flex justify-center items-center my-8 sm:my-32">
+  <div class="container px-6 sm:px-0">
+    <div class="relative" id="product__features-background">
+      <div class="w-full absolute top-8 md:top-10 lg:top-12 xl:top-24">
+        <h1 class="text-center text-3xl sm:text-5xl lg:text-6xl uppercase">Product Features</h1>
+      </div>
+      <img
+        src="{{ 'product_features-background.svg' | asset_url }}"
+        alt=""
+        class="rounded-2xl object-cover">
+    </div>
+  </div>
+</div>

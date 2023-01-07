@@ -32,4 +32,15 @@ body {
 
 :root {
     --background-blue: #2F3740;
+    --main-blue-gradient: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);
+    --blue-text: #2756AD;
+}
+
+.bg-blue__gradient {
+    background: var(--main-blue-gradient);
+}
+
+.translate-x-22 {
+    --tw-translate-x: 5.85rem;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
