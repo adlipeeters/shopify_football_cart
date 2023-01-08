@@ -1,0 +1,204 @@
+<style>
+  @keyframes slideInFromLeft {
+    0% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+
+  @keyframes border-anim {
+    0% {
+      border-bottom: 0;
+    }
+    100% {
+      border-bottom: 1px solid white;
+      border-bottom-width: 100%;
+    }
+  }
+
+
+  .country-slider {
+    cursor: grab;
+  }
+  .country-slider .slick-slide {
+    margin: 5px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .country-slider .slick-center::before {
+    transition: 0.35s;
+  }
+  .country-slider .slick-center {
+    {% comment %}
+      border-bottom: 1px solid white;
+    {% endcomment %}
+    animation: border-anim 0.5s ease-in-out;
+    border-bottom: 1px solid white;
+  }
+  .country-slider .slick-center {}
+
+  .country-slider .center-slider .slick-slide {
+    transition: all 1s ease-in-out;
+  }
+
+  .country-slider .slick-list {}
+
+  #slider__wrapper-country .carousel__arrow-back,
+  #slider__wrapper-country .carousel__arrow-next {
+    color: #fff;
+    opacity: 0.5;
+    transition: 0.35s;
+  }
+
+
+  #slider__wrapper-country .carousel__arrow-back:hover,
+  #slider__wrapper-country .carousel__arrow-next:hover {
+    opacity: 1;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .country-slider .carousel__arrow-back,
+    .country-slider .carousel__arrow-next {
+      display: none;
+    }
+  }
+
+  .custom-dots {
+    all: unset;
+
+  }
+
+  .custom-country-radio {
+    position: relative;
+    display: inline-block;
+  }
+
+  .custom-country-radio input[type="radio"] {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .custom-country-radio .radio-button {
+    {% comment %}
+      width: 75px;
+    {% endcomment %}
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: transparent;
+    content: "";
+    opacity: 0.5;
+    transition: 0.35s;
+    cursor: pointer;
+  }
+
+  .custom-country-radio input[type="radio"]:checked + .radio-button {
+    background-color: rgb(255, 255, 255);
+    opacity: 1;
+    color: var(--blue-text) !important;
+  }
+  .custom-country-radio input[type="radio"]:checked + .radio-button p {
+    color: var(--blue-text) !important;
+  }
+</style>
+
+<div id="slider__wrapper-country" class="relative">
+  <button type="button" class="carousel__arrow-back absolute top-0 left-0 z-10 mt-1.5">
+    {% render 'icon-slider-arrow-back' %}
+  </button>
+  <div class="country-slider flex px-8">
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_country_option"
+        slider-index="0">
+        <p class="w-full">Most popular</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_country_option"
+        slider-index="1">
+        <p>Asia</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_country_option"
+        slider-index="2">
+        <p>Africa</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_country_option"
+        slider-index="3">
+        <p>Europe</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_country_option"
+        slider-index="4">
+        <p>North America</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_country_option"
+        slider-index="5">
+        <p>South America</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_country_option"
+        slider-index="6">
+        <p>Oceania</p>
+      </a>
+    </div>
+  </div>
+  <button type="button" class="carousel__arrow-next absolute top-0 right-0 z-10 mt-1.5">
+    {% render 'icon-slider-arrow-next' %}
+  </button>
+</div>
+
+{% comment %} <fieldset id="country-group"> {% endcomment %}
+<div class="options-for-country flex px-6 mt-4">
+  <div>
+    <label class="custom-country-radio px-3">
+      <input
+        type="radio"
+        name="country-group"
+        value="Saudi Arabia"
+        class="country-group">
+      <div class="radio-button flex items-center justify-around px-2">
+        <div>
+          <div class="mr-1.5">
+            {% render 'icon-circle-position' %}
+          </div>
+        </div>
+        <div>
+          <p class="font-medium">Saudi Arabia</p>
+        </div>
+      </div>
+    </label>
+  </div>
+  <div id="data-country-asia" class="grid grid-flow-col"></div>
+  <div>C</div>
+  <div>D</div>
+  <div>E</div>
+  <div>F</div>
+</div>
+{% comment %} </fieldset> {% endcomment %}
