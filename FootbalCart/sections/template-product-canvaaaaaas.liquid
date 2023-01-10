@@ -24,6 +24,15 @@
 
   .active {
     opacity: 1 !important;
+    {% comment %}
+      text-decoration: underline;
+    {% endcomment %}
+    {% comment %}
+      text-underline-offset: 5px;
+    {% endcomment %}
+    {% comment %}
+      transition: 0.5s;
+    {% endcomment %}
     border-bottom: 2px solid white !important;
   }
   .underline-animation {
@@ -40,38 +49,6 @@
   .animate-card-on-fixed {
     transition: transform 0.75s ease-out;
     transform: translateY(20px);
-  }
-
-
-  .custom-radio {
-    position: relative;
-    display: inline-block;
-  }
-
-  .custom-radio input[type="radio"] {
-    position: absolute;
-    left: -9999px;
-  }
-
-  .custom-radio .radio-button {
-    width: 75px;
-    height: 30px;
-    border-radius: 15px;
-    border: 1px solid rgb(255, 255, 255);
-    background-color: transparent;
-    content: "";
-    opacity: 0.5;
-    transition: 0.35s;
-    cursor: pointer;
-  }
-
-  .custom-radio input[type="radio"]:checked + .radio-button {
-    background-color: rgb(255, 255, 255);
-    opacity: 1;
-    color: var(--blue-text) !important;
-  }
-  .custom-radio input[type="radio"]:checked + .radio-button p {
-    color: var(--blue-text) !important;
   }
 </style>
 
@@ -92,11 +69,11 @@
 
         <!-- Product left side start -->
         <div class="w-full flex justify-center">
-          <div id="fixed__product">
+          <div id="canvas__container">
             <canvas
-              id="product-canvas"
-              width="500"
-              height="500"
+              id="myCanvas"
+              width="600"
+              height="600"
               id=""
               crossOrigin="anonymous"></canvas>
             <img
@@ -180,7 +157,7 @@
                 <div class="flex justify-between py-4">
                   <input
                     type="text"
-                    class="bg-transparent text-white border-white product__form-input w-full placeholder:uppercase placeholder:text-white placeholder:opacity-75 rounded px-3 py-1"
+                    class="bg-transparent text-white border-white product__form-input w-full placeholder:uppercase rounded px-3 py-1"
                     id="name"
                     name="properties[name]"
                     placeholder="Enter your name">
@@ -207,7 +184,8 @@
                     id="profile-picture"
                     name="properties[profile-picture]"
                     class="w-full h-full opacity-0"
-                    accept="image/*" />
+                    accept="image/*"
+                    onchange="previewImage(event);" />
                 </div>
                 <div class="flex items-center mt-4">
                   <div class="text-white">
@@ -230,14 +208,14 @@
                 <div class="flex justify-between py-4">
                   <input
                     type="text"
-                    class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
-                    id="search_for_player_position"
+                    class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1"
+                    id="name"
                     placeholder="Search position">
                 </div>
               </div>
               <div>
                 <div class="tabs">
-                  <ul class="flex justify-start gap-x-6 sm:gap-x-12">
+                  <ul class="flex justify-start gap-x-12">
                     <li class="tab-item text-white opacity-50 underline-animation active" data-attr="defence">
                       <a href="javascript:void(0)" class="uppercase">DEFENCE</a>
                     </li>
@@ -251,92 +229,29 @@
                       <a href="javascript:void(0)" class="uppercase">CUSTOM</a>
                     </li>
                   </ul>
-                  {% render 'player-position' %}
+                  <div class="tab-content" id="defence">
+                    <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora, nisi.</div>
+                  </div>
+                  <div class="tab-content hidden" id="midfield">
+                    <div>Lorem ipsum dolor sit amet.</div>
+                  </div>
+                  <div class="tab-content hidden" id="attack">
+                    <div>Lorem, ipsum dolor.</div>
+                  </div>
+                  <div class="tab-content hidden" id="custom">
+                    <div>Custom</div>
+                  </div>
                 </div>
               </div>
             </div>
             <!-- Product profile end -->
 
-
-
-            <!-- Product choose club start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12">
-              <div class="">
-                <h3 class="text-3xl">5. Choose club</h3>
-              </div>
-              <div>
-                <div class="flex justify-between py-4">
-                  <input
-                    type="text"
-                    class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
-                    id="search_for_club"
-                    placeholder="Search club name">
-                </div>
-              </div>
-              <div></div>
-            </div>
-            <!-- Product choose club end -->
-
-            <!-- Product choose country start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12">
-              <div class="">
-                <h3 class="text-3xl">6. Choose Country</h3>
-              </div>
-              <div>
-                <div class="flex justify-between py-4">
-                  <input
-                    type="text"
-                    class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
-                    id="search_for_club"
-                    placeholder="Search country">
-                </div>
-              </div>
-              {% render 'country-options' %}
-
-            </div>
-            <!-- Product choose country end -->
-
-            <!-- Product stats start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12">
-              <div class="flex justify-between">
-                <div>
-                  <h3 class="text-3xl">7. Choose Stats</h3>
-                </div>
-                <div>
-                  <button
-                    type="button"
-                    class="bg-white flex items-center px-4 py-2 rounded-full transition duration-300 hover:opacity-80 disabled:opacity-50"
-                    onclick="randomiseStats()"
-                    disabled
-                    id="randomise_btn">
-                    <span>
-                      {% render 'icon-randomise' %}
-                    </span>
-                    <p class="text-gray-900 ml-6 mr-6">
-                      Randomise
-                    </p>
-                  </button>
-                </div>
-              </div>
-              {% render 'product-page-stats-step' %}
-            </div>
-            <!-- Product stats end -->
-
-            <button
-              type="submit"
-              class=""
-              onclick="saveCanvas()">Submit</button><br>
-            <input
-              type="text"
-              name="properties[player_position]"
-              placeholder="Player position">
-            <input
-              type="file"
-              name="properties[generated-picture]"
-              id="generated-picture"
-              placeholder="Player position">
+            <button type="submit" class="">Click</button>
+            <div id="test-for-canvas"></div>
           {% endform %}
         </div>
+        <button type="button" onclick="saveCanvas()">Save canvas as image</button>
+        <button type="button" onclick="download()">download</button>
         <!-- Product right side end ( PRODUCT FORM ) -->
 
       </div>
@@ -346,9 +261,194 @@
   </div>
 </div>
 
+
 <script>
+  let canvas = null;
+  (function() {
+    if ($('#profile-picture').val() == '' || $('#profile-picture').val() == undefined || $('#profile-picture').val() == null) {}
+  })();
+
+  console.log({{ product.variants | json }})
+  console.log({{ product.media | json }})
+
+
   $(document).ready(function() {
-    console.log({{ product.variants | json }})
-    console.log({{ product.media | json }})
+    let imgElement = document.getElementById('featured__image');
+    let canvas = new fabric.Canvas('myCanvas');
+    canvas.setBackgroundColor('green', canvas.renderAll.bind(canvas));
+    let text = new fabric.Text('Hello, world!', {
+      left: 100,
+      top: 100,
+      fontSize: 30
+    });
+
+    canvas.add(text);
+    let img = new fabric.Image(imgElement, {
+      width: 200,
+      height: 200
+    });
+
+    canvas.add(img);
+
+// saveCanvas()
+
+// let cnv = document.createElement('canvas');
+// cnv.id = 'myCanvas';
+// cnv.width = 600;
+// cnv.height = 600;
+// cnv.id = 'fixed__product';
+// cnv.crossOrigin = 'anonymous';
+// $('#canvas__container').append(cnv);
+// canvas = new fabric.Canvas('fixed__product', {selection: false});
+// canvas.setBackgroundColor('red');
+// addImage()
+
   });
+  $('.tab-item').click(function() {
+    let id = $(this).attr('data-attr')
+    console.log($(this).attr('data-attr'));
+    $('.tab-item').removeClass('active');
+    $(this).addClass('active');
+    $('.tab-content').addClass('hidden');
+    $('#' + id).removeClass('hidden');
+  });
+
+
+  function addImage() {
+    let imageUrl = $('#featured__image').prop('src')
+    imageUrl.crossOrigin = 'anonymous';
+    imageUrl.crossOrigin = 'use-credentials';
+    fabric.Image.fromURL(imageUrl, function(img) {
+      let center = canvas.getCenter();
+      img.set({left: center.left, top: center.top});
+      canvas.add(img);
+    });
+
+  }
+
+  function editName(name) {
+    console.log(name)
+    var text = new fabric.Text(name, {
+      left: 10,
+      top: 10
+    });
+
+// canvas.remove(canvas.item(0));
+    canvas.add(text)
+    setTimeout(() => {
+      saveCanvas()
+      console.log('asdasdasdas')
+    }, 2000);
+  }
+
+
+
+  function saveCanvas() {
+
+    let canvas = document.querySelector("canvas");
+    let image = convertCanvasToImage(canvas);
+    image.id = 'myImage';
+    document.body.appendChild(image);
+
+// let input = document.createElement('input');
+// input.type = 'file';
+// input.accept = 'image/*';
+// input.name = 'properties[test-picture]';
+// canvas.toBlob(function(blob) {
+//     let file = new File([blob], 'image.png', {type: 'image/png'});
+//     console.log(file)
+//     input.files[0] = file;
+// });
+// $('#test-for-canvas').append(input)
+
+
+
+    const inputElement = document.createElement('input');
+    inputElement.type = 'file';
+    inputElement.name = 'properties[test-picture]';
+   // document.body.appendChild(inputElement);
+    $('#test-for-canvas').append(inputElement)
+
+    const imgElement = document.querySelector('#myImage');
+    const src = imgElement.src;
+    const mimeType = 'image/png';
+
+    const bytes = atob(src.split(',')[1]);
+    const buffer = new Uint8Array(bytes.length);
+
+    for (let i = 0; i < bytes.length; i++) {
+      buffer[i] = bytes.charCodeAt(i);
+    }
+
+    const blob = new Blob([buffer], {type: mimeType});
+    console.log(blob)
+
+// const fileList = new FileList()
+// fileList[0] = file
+    let list = new DataTransfer();
+    const file = new File([blob], 'image.png', {type: mimeType});
+    list.items.add(file);
+    let myFileList = list.files;
+    inputElement.files = myFileList;
+
+// You can now use the file object in your form submission
+
+
+  };
+  function convertCanvasToImage(canvas) {
+    let image = new Image();
+    image.src = canvas.toDataURL("image/png");
+    return image;
+  }
+
+  function download() {
+    var imgElement = document.getElementById('myImage');
+    var link = document.createElement('a');
+    link.download = 'image.png';
+    link.href = imgElement.src;
+    link.click();
+  }
+
+
+
+// Function to fix card on scroll
+  $(function() {
+    $(window).scroll(function() {
+      let pageWidth = $(window).width();
+      if (pageWidth > 1024) {
+        if ($(this).scrollTop() >= 350) {
+          $('#fixed__product').addClass('fixed')
+          $('#fixed__product').addClass('top-0')
+          $('#fixed__product').addClass('animate-card-on-fixed')
+        } else if ($(this).scrollTop() < 350) {
+          $('#fixed__product').removeClass('fixed')
+          $('#fixed__product').removeClass('top-0')
+          $('#fixed__product').removeClass('animate-card-on-fixed')
+        }
+      }
+    });
+  });
+
+// Function to set active variant in hidden input
+  function updateForm(id, price) {
+    console.log(id, price);
+    $('#variant__id').val(id)
+    $('.active__variant').removeClass('active__variant')
+    $('#selected__variant_id-' + id).addClass('active__variant')
+  }
+
+// event for changing profile name 
+  $('#name').on('keyup', function() {
+    let name = this.value;
+    if (name.length === 0) {
+      editName('');
+    } else {
+      editName(name);
+    }
+  })
+
+// event for changing profile name on image
+  $('#img__name').on('keyup', function() {
+    $('#name').val($(this).val())
+  })
 </script>
