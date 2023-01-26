@@ -1,21 +1,234 @@
-<div class="px-4 py-8">
-  <a href="{{ routes.collections_url }}" class="text-base text-gray-500 hover:underline text-center block my-4">Go back to collections</a>
-  {% paginate collection.products by section.settings.number_of_products_per_page %}
-    <h1 class="text-3xl text-center" style="font-size: {{section.settings.size}}px!important">{{ collection.title }}</h1>
+{% comment %} <a href="{{ routes.collections_url }}" class="text-base text-gray-500 hover:underline text-center block my-4">Go back to collections</a> {% endcomment %}
+{% comment %} <div class="px-4 py-8">
+{% paginate collection.products by section.settings.number_of_products_per_page %}
+<h1 class="text-3xl text-center" style="font-size: {{section.settings.size}}px!important">{{ collection.title }}</h1>
+<div class="max-w-6xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+{% for product in collection.products %}
+{%- render 'product-card', product: product -%}
+{% else %}
+<p>There are no products inside of this collection</p>
+{% endfor %}
+</div>
+</div>
 
-    <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {% for product in collection.products %}
-          {%- render 'product-card', product : product -%}
-        {% else %}
-          <p>There are no products inside of this collection</p>
-        {% endfor %}
+{% render 'pagination', pagination: paginate %}
+{% endpaginate %}
+</div>  {% endcomment %}<style>
+ul.filter-list,
+ul.filter-list-mobile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  list-style: none;
+}
+
+ul.filter-list li,
+ul.filter-list-mobile li {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  padding-top: 15px;
+  cursor: pointer;
+  {% comment %}
+    background: var(--background-blue);
+  {% endcomment %}
+}
+ul.filter-list li.active .filters:after,
+ul.filter-list-mobile li.active .filters:after {
+  transform: rotate(180deg);
+}
+ul.filter-list li .filters,
+ul.filter-list-mobile li .filters {
+  font-weight: 700;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+ul.filter-list li .filters:after,
+ul.filter-list-mobile li .filters:after {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  content: "\f107";
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #ffffff;
+  transition: all 0.3s ease-in-out;
+  font-size: 17px;
+}
+
+.product__collection__page-background {
+  background-image: linear-gradient(180deg, #0F1521 0%, rgba(15, 21, 33, 0) 100%), url('{{ 'collection_background.png' | asset_url }}');
+  width: 100%;
+  height: auto;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.filter__background {
+  background: var(--background-blue);
+  border-radius: 0.5rem;
+}
+.mobile__filter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background-color: white;
+  overflow-y: auto;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+  transform: translateY(91%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.mobile__filter.open {
+  transform: translateY(0%);
+}
+</style>
+
+
+
+  <div class="flex justify-center align-center my-8 md:my-32"> <div class="container document__click">
+    <div class="flex flex-col">
+      <div class="w-full text-center sm:text-start">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">Best selling football cards</h1>
+        <p class="font-light">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since.</p>
+      </div>
+
+      <div class="w-full">{% comment %} {% render 'products-filter' %} {% endcomment %}
+      </div>
+
+      <div class="w-full grid grid-cols-12 mt-16 gap-x-4 sm:gap-x-8 xl:gap-x-16">
+        <div class="hidden md:block col-span-4 lg:col-span-3">
+          {% render 'products-filter-new' %}
+        </div>
+        {% comment %} mobile filter {% endcomment %}
+        <div class="md:hidden mobile__filter z-30 rounded-t-2xl bg-blue__gradient">
+          <button class="open-filter fixed top-0 h-14 w-full px-6" type="button">
+            <div class="flex items-center justify-between mt-2">
+              <div>
+                <p class="font-family-kufam text-xl font-semibold italic">Filters</p>
+              </div>
+              <div>
+                {% render 'icon-filter' %}
+              </div>
+            </div>
+          </button>
+          <div class="w-full flex justify-center items-center px-6">
+            <hr class="w-full mt-14 opacity-30">
+          </div>
+          <div class="filter-options px-6">
+            {% render 'products-filter-mobile' %}
+          </div>
+        </div>
+        {% comment %} mobile filter {% endcomment %}
+        <div class="col-span-12 md:col-span-8 lg:col-span-9">
+          {% paginate collection.products by section.settings.number_of_products_per_page %}
+            <div class="px-4 sm:px-0 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-4 sm:gap-x-8 xl:gap-x-16 gap-y-8 place-items-center">
+              {% for product in collection.products %}
+                {%- render 'product-card', product: product -%}
+              {% else %}
+                <p>There are no products inside of this collection</p>
+              {% endfor %}
+            </div>
+            {% render 'pagination', pagination: paginate %}
+          {% endpaginate %}
+        </div>
       </div>
     </div>
-
-    {% render 'pagination', pagination: paginate %}
-  {% endpaginate %}
+  </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('.filter-list > li > .toggle__filter').click(function() {
+      console.log('asd')
+      if ($(this).parent().hasClass("active")) {
+        $(this)
+          .parent()
+          .removeClass("active")
+          .find(".answer")
+          .slideUp();
+      } else {
+        $(this)
+          .parent()
+          .addClass("active")
+          .find(".answer")
+          .slideDown();
+      }
+      return false;
+    });
+  });
+
+  $("button[data-bs-toggle='offcanvas']").click(function() {
+    console.log('asdasd')
+    var offcanvas = $("#myOffcanvas");{% comment %}offcanvas.slideToggle();{% endcomment %}offcanvas.animate({
+      height: "toggle"
+    }, 300);
+
+  });
+
+  $(".open-filter").click(function() {
+    $(".mobile__filter").toggleClass("open");
+  });
+  $(document).on("click", function(event) {
+    if (!$(".mobile__filter").is(event.target) && $(".mobile__filter").has(event.target).length === 0) {
+      $(".mobile__filter").removeClass("open");
+    }
+  });
+
+  $(".close-filter").click(function() {
+    $(".mobile__filter").removeClass("open");
+  });
+
+  $(document).on("swipeup", function() {
+    $(".mobile__filter").addClass("open");
+  });
+
+  $(document).on("swipedown", function() {
+    $(".mobile__filter").removeClass("open");
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('.filter-list-mobile > li > .answer').hide();
+    setTimeout(function() {
+      $('li#first__active-dropdown').find('.toggle__filter').click()
+    }, 1000);
+    $('.filter-list-mobile > li > .toggle__filter').click(function() {
+      if ($(this).parent().hasClass("active")) {
+        $(this)
+          .parent()
+          .removeClass("active")
+          .find(".answer")
+          .slideUp();
+      } else {
+        $(".filter-list-mobile > li.active .answer")
+          .slideUp()
+          $(".filter-list-mobile > li.active")
+          .removeClass("active")
+          $(this)
+          .parent()
+          .addClass("active")
+          .find(".answer")
+          .slideDown();
+      }
+      return false;
+    });
+
+  })
+</script>
 
 {%- schema -%}
   {
@@ -24,7 +237,7 @@
       {
         "type": "number",
         "id": "number_of_products_per_page",
-        "default": 6,
+        "default": 16,
         "label": "Number of products per page"
       }, {
         "type": "number",

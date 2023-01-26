@@ -1,0 +1,328 @@
+<style>
+  @keyframes slideInFromLeft {
+    0% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+
+  @keyframes border-anim {
+    0% {
+      border-bottom: 0;
+    }
+    100% {
+      border-bottom: 1px solid white;
+      border-bottom-width: 100%;
+    }
+  }
+
+
+  .league-slider {
+    cursor: grab;
+  }
+  .league-slider .slick-slide {
+    margin: 5px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .league-slider .slick-center::before {
+    transition: 0.35s;
+  }
+  .league-slider .slick-center {
+    {% comment %}
+      border-bottom: 1px solid white;
+    {% endcomment %}
+    animation: border-anim 0.5s ease-in-out;
+    border-bottom: 1px solid white;
+  }
+  .league-slider .slick-center {}
+
+  .league-slider .center-slider .slick-slide {
+    transition: all 1s ease-in-out;
+  }
+
+  .league-slider .slick-list {}
+
+  #slider__wrapper-league .carousel__arrow-back_league,
+  #slider__wrapper-league .carousel__arrow-next_league {
+    color: #fff;
+    opacity: 0.5;
+    transition: 0.35s;
+  }
+
+
+  #slider__wrapper-league .carousel__arrow-back_league:hover,
+  #slider__wrapper-league .carousel__arrow-next_league:hover {
+    opacity: 1;
+  }
+
+  @media only screen and (max-width: 640px) {
+    .league-slider .carousel__arrow-back_league,
+    .league-slider .carousel__arrow-next_league {
+      display: none;
+    }
+  }
+
+  .custom-dots {
+    all: unset;
+
+  }
+
+  .custom-league-radio {
+    position: relative;
+    display: inline-block;
+  }
+
+  .custom-league-radio input[type="radio"] {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .custom-league-radio .radio-button {
+    {% comment %}
+      width: 75px;
+    {% endcomment %}
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: transparent;
+    content: "";
+    opacity: 0.5;
+    transition: 0.35s;
+    cursor: pointer;
+  }
+
+  .custom-league-radio input[type="radio"]:checked + .radio-button {
+    background-color: rgb(255, 255, 255);
+    opacity: 1;
+    color: var(--blue-text) !important;
+  }
+  .custom-league-radio input[type="radio"]:checked + .radio-button p {
+    color: var(--blue-text) !important;
+  }
+</style>
+
+<div id="slider__wrapper-league" class="relative">
+  <button type="button" class="carousel__arrow-back_league absolute top-0 left-0 z-10 mt-1.5">
+    {% render 'icon-slider-arrow-back' %}
+  </button>
+  <div class="league-slider flex px-8">
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="0">
+        <p class="w-full">Other</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="1">
+        <p>Premier League</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="2">
+        <p>Champinoship</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="3">
+        <p>Bundesliga</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="4">
+        <p>Ligue 1</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="5">
+        <p>La Liga</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="6">
+        <p>Serie A</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="7">
+        <p>Eredivisie</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="8">
+        <p>Scottish Premiership</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="9">
+        <p>MLS</p>
+      </a>
+    </div>
+    {% comment %} <div class="flex flex-col align-center justify-center">
+    <a
+    href="javascript:void(0)"
+    class="go_to_league_option"
+    slider-index="6">
+    <p>Super Lig</p>
+    </a>
+    </div> {% endcomment %}
+    {% comment %} <div class="flex flex-col align-center justify-center">
+    <a
+    href="javascript:void(0)"
+    class="go_to_league_option"
+    slider-index="6">
+    <p>Pro League</p>
+    </a>
+    </div> {% endcomment %}
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="10">
+        <p>A-League</p>
+      </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="11">
+        <p>Primeira Liga</p>
+      </a>
+    </div>
+    {% comment %}
+    <div class="flex flex-col align-center justify-center">
+    <a
+    href="javascript:void(0)"
+    class="go_to_league_option"
+    slider-index="6">
+    <p>Eliteserien</p>
+    </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+    <a
+    href="javascript:void(0)"
+    class="go_to_league_option"
+    slider-index="6">
+    <p>Raiffeisen Super League</p>
+    </a>
+    </div>
+    <div class="flex flex-col align-center justify-center">
+    <a
+    href="javascript:void(0)"
+    class="go_to_league_option"
+    slider-index="6">
+    <p>Allsvenskan</p>
+    </a>
+    </div> {% endcomment %}
+    {% comment %} <div class="flex flex-col align-center justify-center">
+    <a
+    href="javascript:void(0)"
+    class="go_to_league_option"
+    slider-index="6">
+    <p>Canadian Premier League</p>
+    </a>
+    </div> {% endcomment %}
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="12">
+        <p>Saudi Pro League</p>
+      </a>
+    </div>
+    {% comment %} <div class="flex flex-col align-center justify-center">
+    <a
+    href="javascript:void(0)"
+    class="go_to_league_option"
+    slider-index="6">
+    <p>EURO 2020</p>
+    </a>
+    </div> {% endcomment %}
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_league_option"
+        slider-index="13">
+        <p>Search</p>
+      </a>
+    </div>
+  </div>
+  <button type="button" class="carousel__arrow-next_league absolute top-0 right-0 z-10 mt-1.5">
+    {% render 'icon-slider-arrow-next' %}
+  </button>
+</div>
+
+{% comment %} <fieldset id="country-group"> {% endcomment %}
+<div class="options-for-league flex px-6 mt-4 h-96">
+  <div>
+    <label class="custom-league-radio px-3">
+      <input
+        type="radio"
+        name="country-group"
+        value="Saudi Arabia"
+        class="country-group">
+      <div class="radio-button flex items-center justify-around px-2">
+        <div>
+          <div class="mr-1.5">
+            {% render 'icon-circle-position' %}
+          </div>
+        </div>
+        <div>
+          <p class="font-medium">Premier League</p>
+        </div>
+      </div>
+    </label>
+  </div>
+  <div id="data-league-english-premier-league" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-championship" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-bundesliga" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-french-league-1" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-la-liga" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-seria-a" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-dutch-eredivisie" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-scottish-premier-league" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-american-major-league-soccer" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-australian-a-league" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-portuguese-primeira-liga" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-saudi-arabian-pro-league" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-league-search" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  {% comment %} <div id="data-league-north_america" class="grid grid-flow-col h-96 overflow-y-scroll"></div> {% endcomment %}
+  {% comment %} <div id="data-league-south_america" class="grid grid-flow-col h-96 overflow-y-scroll"></div> {% endcomment %}
+  {% comment %} <div id="data-league-oceania" class="grid grid-flow-col h-96 overflow-y-scroll"></div> {% endcomment %}
+</div>
+{% comment %} </fieldset> {% endcomment %}

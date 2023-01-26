@@ -168,6 +168,14 @@
         <p>Oceania</p>
       </a>
     </div>
+    <div class="flex flex-col align-center justify-center">
+      <a
+        href="javascript:void(0)"
+        class="go_to_country_option"
+        slider-index="7">
+        <p>Search</p>
+      </a>
+    </div>
   </div>
   <button type="button" class="carousel__arrow-next absolute top-0 right-0 z-10 mt-1.5">
     {% render 'icon-slider-arrow-next' %}
@@ -175,7 +183,7 @@
 </div>
 
 {% comment %} <fieldset id="country-group"> {% endcomment %}
-<div class="options-for-country flex px-6 mt-4">
+<div class="options-for-country flex px-6 mt-4 h-96">
   <div>
     <label class="custom-country-radio px-3">
       <input
@@ -190,15 +198,17 @@
           </div>
         </div>
         <div>
-          <p class="font-medium">Saudi Arabia</p>
+          <p class="font-medium">Saudi Arabiaa</p>
         </div>
       </div>
     </label>
   </div>
-  <div id="data-country-asia" class="grid grid-flow-col"></div>
-  <div>C</div>
-  <div>D</div>
-  <div>E</div>
-  <div>F</div>
+  <div id="data-country-asia" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-country-africa" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-country-europe" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-country-north_america" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-country-south_america" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-country-oceania" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
+  <div id="data-country-search" class="grid grid-flow-col h-96 overflow-y-scroll"></div>
 </div>
 {% comment %} </fieldset> {% endcomment %}

@@ -1,43 +1,85 @@
 <style>
-  .animate {
-    animation-duration: 0.7s;
-    animation-name: animate-pop;
-    animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+  {% comment %}
+    .animate {
+      animation-duration: 0.7s;
+      animation-name: animate-pop;
+      animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+    }
+
+    @keyframes animate-pop {
+      0% {
+        opacity: 0;
+        transform: scale(0.5, 0.5);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  {% endcomment %}
+  .product-background {
+    background-color: var(--background-blue);
   }
 
-  @keyframes animate-pop {
-    0% {
-      opacity: 0;
-      transform: scale(0.5, 0.5);
-    }
+  .product__description {
+    background: linear-gradient(105.87deg, #292E35 0%, #21262F 99.23%);
+  }
 
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
+  .product__tag-new {
+    background: var(--main-blue-gradient)
   }
 </style>
-
-<div class="w-full py-6 px-3 animate">
-  <div class="border bg-white shadow-lg rounded-lg overflow-hidden">
+{% assign counter = 1 %}
+<div class="w-full collection-product">
+  {% for variant in product.variants %}
+    <input
+      type="hidden"
+      id="variant_option1"
+      value="{{variant.option1}}">
+    <input
+      type="hidden"
+      id="variant_option2"
+      value="{{variant.option2}}">
+    <input
+      type="hidden"
+      id="variant_option3"
+      value="{{variant.option3}}">
+  {% endfor %}
+  <div class="product-background rounded-lg overflow-hidden">
     <a href="{{ product.url }}">
       {% if product.featured_image %}
-        <div class="h-80 overflow-hidden">
-          <img class="w-full h-full object-cover transition duration-1000 ease-in-out hover:scale-105 transform" src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.featured_image.alt }}">
+        <div class="h-72 md:h-80 overflow-hidden flex items-center justify-center relative">
+          <img
+            class="object-contain transition duration-1000 ease-in-out hover:scale-105 transform p-3"
+            src="{{ product.featured_image | img_url: 'large'}}"
+            alt="{{ product.featured_image.alt }}">
+          {% for tag in product.tags %}
+            {%- if tag == 'New' -%}
+              <div class="absolute right-1.5 sm:right-3 top-1.5 sm:top-3 product__tag-new px-2 sm:px-4 rounded-xl">
+                <p class="text-sm">
+                  New
+                </p>
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
-
       {% else %}
         {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
       {% endif %}
     </a>
-
-    <div class="flex flex-col p-4">
-      <span class="text-sm text-gray-400">{{ product.vendor }}</span>
-
-      <a href="{{ product.url }}" class="text-gray-700 uppercase font-medium">{{ product.title }}</a>
-
-      <p class="text-gray-500">{{ product.price | money }}</p>
+    <div class="grid grid-cols-3 px-3 py-4 sm:py-2  product__description">
+      <div class="col-span-2 flex items-center">
+        <a href="{{ product.url }}">
+          <p class="font-family-kufam font-medium text-sm sm:text-lg">
+            {{ product.title }}
+          </p>
+        </a>
+      </div>
+      <div class="float-right text-right flex items-center">
+        <p class="font-family-kufam font-black italic text-sm sm:text-lg opacity-50">{{ product.price | money }}</p>
+        {% comment %} <p class="font-family-kufam font-black italic text-sm sm:text-lg opacity-50">{{ product.collection }}</p> {% endcomment %}
+      </div>
     </div>
-
   </div>
 </div>

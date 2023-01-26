@@ -1,53 +1,62 @@
 let canvas;
-// let canvas_order = [];
+let clubs = [];
+let countries = [];
 let stats = {
   1: {
     name: "",
     value: "",
-    left: 155,
+    left: 85,
     top: 335,
     index: 1,
   },
   2: {
     name: "",
     value: "",
-    left: 275,
+    left: 205,
     top: 335,
     index: 2,
   },
   3: {
     name: "",
     value: "",
-    left: 155,
+    left: 85,
     top: 365,
     index: 3,
   },
   4: {
     name: "",
     value: "",
-    left: 275,
+    left: 205,
     top: 365,
     index: 4,
   },
   5: {
     name: "",
     value: "",
-    left: 155,
+    left: 85,
     top: 395,
     index: 5,
   },
   6: {
     name: "",
     value: "",
-    left: 275,
+    left: 205,
     top: 395,
     index: 6,
   },
 };
+let currIndex = 0;
+
+const indicators = document.getElementsByClassName("screen-indicator");
+const progressElm = document.getElementsByClassName("progress")[0];
+
 $(document).ready(function () {
+  getLeaguesData();
   canvas = new fabric.Canvas("product-canvas");
+  // canvas.setBackgroundColor("#00ff00", canvas.renderAll.bind(canvas));
+  let dominantColor = getDominantColor(canvas);
+  console.log(dominantColor);
   initialiseCanvas();
-  getCountries();
 
   $(".tab-item").click(function () {
     let id = $(this).attr("data-attr");
@@ -118,6 +127,82 @@ $(document).ready(function () {
     }
   });
 
+  $("#search_for_club").on("keyup", function () {
+    $("#data-league-search").empty();
+    let filter = $(this).val().toUpperCase();
+    $(".league-slider").slick("slickGoTo", 13);
+    const options = {
+      includeScore: true,
+      caseSensitive: true,
+      includeMatches: true,
+      threshold: 0.0,
+      keys: ["strTeam"],
+      weight: 1,
+    };
+    const fuzzyClubs = new Fuse(clubs, options);
+    const result = fuzzyClubs.search(filter);
+    result.forEach((league) => {
+      let res = `<label class="custom-league-radio my-2">
+            <input
+            type="radio"
+              name="properties[Club]"
+              value="${league.item.strTeam}"
+              class="league-group"
+              badge="${league.item.strTeamBadge}"
+              >
+              <div class="radio-button flex items-center justify-around px-3">
+              <div>
+                <div class="mr-1.5">
+                  <img src="${league.item.strTeamBadge}" class="w-4 h-4 rounded-full"/>
+                </div>
+                </div>
+                <div>
+                <p class="font-medium">${league.item.strTeam}</p>
+                </div>
+                </div>
+                </label> `;
+      $("#data-league-search").append(res);
+    });
+  });
+
+  $("#search_for_country").on("keyup", function () {
+    $("#data-country-search").empty();
+    let filter = $(this).val().toUpperCase();
+    $(".country-slider").slick("slickGoTo", 7);
+    const options = {
+      includeScore: true,
+      caseSensitive: true,
+      includeMatches: true,
+      threshold: 0.0,
+      keys: ["name.official"],
+      weight: 1,
+    };
+    const fuzzyCountries = new Fuse(countries, options);
+    const result = fuzzyCountries.search(filter);
+    result.forEach((country) => {
+      let res = `<label class="custom-country-radio my-2">
+          <input
+          type="radio"
+            name="properties[Country]"
+            value="${country.item.name.official}"
+            class="country-group"
+            flag="${country.item.flags["svg"]}"
+            >
+            <div class="radio-button flex items-center justify-around px-3">
+            <div>
+              <div class="mr-1.5">
+                <img src="${country.item.flags["svg"]}" class="w-4 h-4 rounded-full"/>
+              </div>
+              </div>
+              <div>
+              <p class="font-medium">${country.item.name.official}</p>
+              </div>
+              </div>
+              </label> `;
+      $("#data-country-search").append(res);
+    });
+  });
+
   $("#name").on("keyup", function () {
     profileName($(this).val());
   });
@@ -142,15 +227,34 @@ $(document).ready(function () {
       $(this).val(100);
     }
     $("#position_number_property_" + num).text(value);
+    num = Number(num);
+    stats[num].value = value;
+    profileStats();
+  });
+
+  $(".player_number_property_keyup").on("change", function () {
+    let num = $(this).attr("data-number");
+    let value = $(this).val();
+    if (value > 100) {
+      value = 100;
+      $(this).val(100);
+    }
+    $("#position_number_property_" + num).text(value);
+    num = Number(num);
+    stats[num].value = value;
+    profileStats();
   });
 
   $("#overall-rating").on("keyup", function () {
     profileRating($(this).val());
   });
 
+  // let element = document.getElementById("fixed__product");
+  // var lastScrollTop = 0;
   $(function () {
     $(window).scroll(function () {
       let pageWidth = $(window).width();
+      let pageHeight = $(window).height();
       if (pageWidth > 1024) {
         if ($(this).scrollTop() >= 300) {
           $("#fixed__product").addClass("fixed");
@@ -219,12 +323,74 @@ $(document).ready(function () {
     ],
   });
 
+  $(".league-slider").slick({
+    dots: false,
+    centerMode: true,
+    centerPadding: "60px",
+    slidesToShow: 5,
+    speed: 250,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    infinite: true,
+    prevArrow: $(".carousel__arrow-back_league"),
+    nextArrow: $(".carousel__arrow-next_league"),
+    cssEase: "linear",
+    asNavFor: ".options-for-league",
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 1,
+        },
+      },
+    ],
+  });
+
   $(".options-for-country").slick({
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
     fade: true,
     asNavFor: ".country-slider",
+  });
+
+  $(".options-for-league").slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    asNavFor: ".league-slider",
   });
 
   $(".country-slider").on("wheel", function (e) {
@@ -240,7 +406,51 @@ $(document).ready(function () {
     let index = $(this).attr("slider-index");
     $(".country-slider").slick("slickGoTo", index);
   });
+  $(".go_to_league_option").on("click", function () {
+    let index = $(this).attr("slider-index");
+    $(".league-slider").slick("slickGoTo", index);
+  });
 });
+
+$(document).on("change", ".country-group", function () {
+  let url = $(this).attr("flag");
+  profileCountry(url);
+});
+
+$(document).on("change", ".league-group", function () {
+  let url = $(this).attr("badge");
+  profileLeague(url);
+});
+
+$(document).on("click", ".submit_btn", function (e) {
+  e.preventDefault();
+  setTimeout(() => {
+    addToCart();
+  }, 500);
+});
+
+function addToCart() {
+  let addToCartForm = document.querySelector('form[action$="/cart/add"]');
+  let formData = new FormData(addToCartForm);
+
+  $.ajax({
+    url: "/cart/add.js",
+    type: "POST",
+    dataType: "json",
+    processData: false,
+    contentType: false,
+    data: formData,
+    success: function (data) {
+      // Handle successful submission
+      console.log(data);
+      $("#success_dialog").fadeIn();
+    },
+    error: function (XMLHttpRequest, textStatus) {
+      // Handle error
+      console.log("Error: " + textStatus);
+    },
+  });
+}
 
 function initialiseCanvas() {
   let imgElement = document.getElementById("featured__image");
@@ -263,7 +473,7 @@ function profileName(name) {
   removeCanvasItem("profile_name");
   let color = "white";
   let text = new fabric.Text(name, {
-    left: 150,
+    left: 75,
     top: 300,
     fill: color,
     fontSize: 16,
@@ -292,13 +502,73 @@ function profileImage(input) {
       // fabricImage.scaleToHeight(200);
       fabricImage.scaleToWidth(110);
       fabricImage.set({
-        left: 250,
+        left: 175,
         top: 75,
         index: "profile_image",
       });
     };
   });
   reader.readAsDataURL(input.files[0]);
+}
+
+function profilePosition(name) {
+  let left;
+  if (name.length == 2) {
+    left = 80;
+  } else {
+    left = 75;
+  }
+  removeCanvasItem("profile_position");
+  let color = "white";
+  let text = new fabric.Text(name, {
+    left: left,
+    top: 125,
+    fill: color,
+    fontSize: 16,
+    fontFamily: "Roboto",
+    index: "profile_position",
+  });
+  canvas.add(text);
+  text.set("text", name);
+  canvas.renderAll();
+}
+
+function profileCountry(url) {
+  removeCanvasItem("profile_country");
+  $("#form_flag").val(url);
+  let uploadedImg = document.getElementById("hidden_flag_img");
+  uploadedImg.setAttribute("crossOrigin", "anonymous");
+  uploadedImg.src = url;
+
+  setTimeout(() => {
+    let img = new fabric.Image(uploadedImg);
+    img.scaleToWidth(30);
+    img.set({
+      index: "profile_country",
+      top: 175,
+      left: 77,
+    });
+    canvas.add(img);
+  }, 500);
+}
+
+function profileLeague(url) {
+  removeCanvasItem("profile_league");
+  $("#form_badge").val(url);
+  let uploadedImg = document.getElementById("hidden_badge_img");
+  uploadedImg.setAttribute("crossOrigin", "anonymous");
+  uploadedImg.src = url;
+
+  setTimeout(() => {
+    let img = new fabric.Image(uploadedImg);
+    img.scaleToWidth(30);
+    img.set({
+      index: "profile_league",
+      top: 210,
+      left: 77,
+    });
+    canvas.add(img);
+  }, 500);
 }
 
 function profileStats() {
@@ -318,27 +588,11 @@ function profileStats() {
   canvas.renderAll();
 }
 
-function profilePosition(name) {
-  removeCanvasItem("profile_position");
-  let color = "white";
-  let text = new fabric.Text(name, {
-    left: 150,
-    top: 125,
-    fill: color,
-    fontSize: 16,
-    fontFamily: "Roboto",
-    index: "profile_position",
-  });
-  canvas.add(text);
-  text.set("text", name);
-  canvas.renderAll();
-}
-
 function profileRating(num) {
   removeCanvasItem("profile_rating");
   let color = "white";
   let text = new fabric.Text(num, {
-    left: 150,
+    left: 75,
     top: 90,
     fill: color,
     fontSize: 16,
@@ -372,6 +626,7 @@ function saveCanvas() {
 function convertCanvasToImage(canvas) {
   let image = new Image();
   image.src = canvas.toDataURL("image/png");
+
   return image;
 }
 
@@ -444,7 +699,6 @@ function enableInputStats() {
 function randomiseStats() {
   let min = 1;
   let max = 100;
-  // let stats = [];
   for (let i = 1; i <= 6; i++) {
     let random = Math.floor(Math.random() * (max - min + 1) + min);
     stats[i].value = random;
@@ -456,31 +710,44 @@ function randomiseStats() {
   profileStats();
 }
 
-async function getCountries() {
-  try {
-    const response_1 = await fetch("https://restcountries.com/v2/region/asia");
-    const asia = await response_1.json();
-    asia.forEach((country) => {
-      let data = `<label class="custom-country-radio my-2">
-        <input
-          type="radio"
-          name="country-group"
-          value="${country.name}"
-          class="country-group">
-        <div class="radio-button flex items-center justify-around px-3">
-          <div>
-            <div class="mr-1.5">
-              <img src="${country.flag}" class="w-4 h-4 rounded-full"/>
-            </div>
-          </div>
-          <div>
-            <p class="font-medium">${country.name}</p>
-          </div>
-        </div>
-      </label> `;
-      $("#data-country-asia").append(data);
-    });
-  } catch (error) {
-    console.error(error);
+function getDominantColor(canvas) {
+  var context = canvas.getContext("2d");
+  var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+  var pixels = imageData.data;
+  var colorCount = {};
+  for (var i = 0, n = pixels.length; i < n; i += 4) {
+    var red = pixels[i];
+    var green = pixels[i + 1];
+    var blue = pixels[i + 2];
+    var color = "rgb(" + red + "," + green + "," + blue + ")";
+    if (colorCount[color]) {
+      colorCount[color]++;
+    } else {
+      colorCount[color] = 1;
+    }
   }
+  var dominantColor = Object.keys(colorCount).sort(function (a, b) {
+    return colorCount[b] - colorCount[a];
+  })[0];
+  return dominantColor;
+}
+
+function checkStepper() {}
+
+function previous() {
+  // Delay should not be applied when removing class
+  indicators[currIndex].style.transitionDelay = "0s";
+  indicators[currIndex].classList.remove("completed");
+  --currIndex;
+  progressElm.style.height = `${(currIndex / (indicators.length - 1)) * 100}%`;
+  // disableControls();
+}
+
+function next() {
+  ++currIndex;
+  // Delay should be applied when adding class
+  indicators[currIndex].style.transitionDelay = "0.6s";
+  indicators[currIndex].classList.add("completed");
+  progressElm.style.height = `${(currIndex / (indicators.length - 1)) * 100}%`;
+  // disableControls();
 }

@@ -78,12 +78,12 @@
 
 <div class="flex justify-center align-center relative">
   <div class="container">
-    <div class="flex flex-col my-12 sm:my-36">
+    <div class="flex flex-col my-24 sm:my-36">
 
       <!-- Product title start -->
-      <div class="w-2/3">
+      <div class="w-full text-center sm:text-start">
         <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">{{ product.title }}</h1>
-        <p class="font-light">{{ product.description }}</p>
+        <p class="font-light sm:w-2/3">{{ product.description }}</p>
       </div>
       <!-- Product title end -->
 
@@ -91,20 +91,41 @@
       <div class="w-full grid grid-cols-1 lg:grid-cols-2 justify-items-center mt-8 sm:mt-16">
 
         <!-- Product left side start -->
-        <div class="w-full flex justify-center">
-          <div id="fixed__product">
-            <canvas
-              id="product-canvas"
-              width="500"
-              height="500"
-              id=""
-              crossOrigin="anonymous"></canvas>
-            <img
-              class="object-cover hidden"
-              src="{{ product.featured_image | img_url: 'large' }}"
-              alt="{{ product.featured_image.alt }}"
-              id="featured__image"
-              crossorigin="Anonymous">
+        <div class="w-full grid grid-cols-5 justify-center">
+          <div class="stepper-container hidden lg:block">
+            <div class="stepper-wrapper">
+              <div class="progress"></div>
+              <div class="screen-indicator completed">1/7</div>
+              <div class="screen-indicator">2/7</div>
+              <div class="screen-indicator">3/7</div>
+              <div class="screen-indicator">4/7</div>
+              <div class="screen-indicator">5/7</div>
+              <div class="screen-indicator">6/7</div>
+              <div class="screen-indicator">7/7</div>
+            </div>
+            <button
+              class="control-btn"
+              id="prev-btn"
+              onclick="previous()">Back</button>
+            <button
+              class="control-btn"
+              id="next-btn"
+              onclick="next()">Continue</button>
+          </div>
+          <div class="z-10 col-span-5 lg:col-span-4 flex justify-center">
+            <div id="fixed__product">
+              <canvas
+                id="product-canvas"
+                width="350"
+                height="500"
+                crossOrigin="anonymous"></canvas>
+              <img
+                class="object-cover hidden"
+                src="{{ product.featured_image | img_url: 'large' }}"
+                alt="{{ product.featured_image.alt }}"
+                id="featured__image"
+                crossorigin="Anonymous">
+            </div>
           </div>
         </div>
         <!-- Product left side end -->
@@ -169,7 +190,7 @@
             <!-- Product size end -->
 
             <!-- Product name/picture start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12">
+            <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
               <div class="">
                 <h3 class="text-3xl">2. Profile</h3>
               </div>
@@ -222,7 +243,7 @@
             <!-- Product name/picture end -->
 
             <!-- Product profile start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12">
+            <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
               <div class="">
                 <h3 class="text-3xl">4. Position</h3>
               </div>
@@ -260,7 +281,7 @@
 
 
             <!-- Product choose club start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12">
+            <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
               <div class="">
                 <h3 class="text-3xl">5. Choose club</h3>
               </div>
@@ -273,12 +294,14 @@
                     placeholder="Search club name">
                 </div>
               </div>
-              <div></div>
+              <div>
+                {% render 'league-options' %}
+              </div>
             </div>
             <!-- Product choose club end -->
 
             <!-- Product choose country start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12">
+            <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
               <div class="">
                 <h3 class="text-3xl">6. Choose Country</h3>
               </div>
@@ -287,17 +310,16 @@
                   <input
                     type="text"
                     class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
-                    id="search_for_club"
+                    id="search_for_country"
                     placeholder="Search country">
                 </div>
               </div>
               {% render 'country-options' %}
-
             </div>
             <!-- Product choose country end -->
 
             <!-- Product stats start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12">
+            <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
               <div class="flex justify-between">
                 <div>
                   <h3 class="text-3xl">7. Choose Stats</h3>
@@ -323,18 +345,30 @@
             <!-- Product stats end -->
 
             <button
-              type="submit"
-              class=""
+              type="button"
+              class="submit_btn"
               onclick="saveCanvas()">Submit</button><br>
             <input
               type="text"
               name="properties[player_position]"
-              placeholder="Player position">
+              placeholder="Player position"
+              class="hidden">
             <input
               type="file"
               name="properties[generated-picture]"
               id="generated-picture"
-              placeholder="Player position">
+              placeholder="Player position"
+              class="hidden">
+            <input
+              type="url"
+              name="properties[Flag]"
+              id="form_flag"
+              class="hidden">
+            <input
+              type="url"
+              name="properties[Badge]"
+              id="form_badge"
+              class="hidden">
           {% endform %}
         </div>
         <!-- Product right side end ( PRODUCT FORM ) -->
@@ -345,10 +379,16 @@
     </div>
   </div>
 </div>
+{% render 'add-modal-success' %}
+<img style="display:none" id="hidden_flag_img">
+<img style="display:none" id="hidden_badge_img">
 
 <script>
   $(document).ready(function() {
     console.log({{ product.variants | json }})
     console.log({{ product.media | json }})
+    getCountries()
+   
+
   });
 </script>

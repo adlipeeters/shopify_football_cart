@@ -50,27 +50,6 @@
     transition: all 0.3s ease-in-out;
     font-size: 17px;
   }
-  {% comment %}
-    ul.accordion-list li div.answer {
-      position: relative;
-      display: block;
-      width: 100%;
-      height: auto;
-      margin: 0;
-      padding: 0;
-      cursor: pointer;
-    }
-    ul.accordion-list li div.answer p {
-      position: relative;
-      display: block;
-      font-weight: 300;
-      padding: 10px 0 0;
-      cursor: pointer;
-      line-height: 150%;
-      margin: 0 0 15px;
-      font-size: 14px;
-    }
-  {% endcomment %}
 </style>
 <div class="flex justify-center items-center my-8 sm:my-32">
   <div class="container px-6 sm:px-0">
@@ -171,8 +150,8 @@
       if ($(this).hasClass("active")) {
         $(this).removeClass("active").find(".answer").slideUp();
       } else {
-        $(".accordion-list > li.active .answer").slideUp();
-        $(".accordion-list > li.active").removeClass("active");
+        {% comment %} $(".accordion-list > li.active .answer").slideUp(); {% endcomment %}
+        {% comment %} $(".accordion-list > li.active").removeClass("active"); {% endcomment %}
         $(this).addClass("active").find(".answer").slideDown();
       }
       return false;
