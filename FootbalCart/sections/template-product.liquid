@@ -1,4 +1,6 @@
 {% assign selected_variant = product.selected_or_first_available_variant %}
+{{ 'leagues.js' | asset_url | script_tag }}
+{{ 'countries.js' | asset_url | script_tag }}
 
 <style>
   .product--information {
@@ -15,6 +17,7 @@
   }
   .product__page-background {
     background-image: linear-gradient(180deg, #0F1521 0%, rgba(15, 21, 33, 0.479167) 43.96%, #303741 100%);
+    background-repeat: no-repeat;
   }
 
   .active__variant {
@@ -75,25 +78,26 @@
   }
 </style>
 
+{% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
+  <div class="tab-pane activee" id="tab-1">
+    <div class="flex justify-center align-center relative">
+      <div class="container">
+        <div class="flex flex-col my-24 sm:my-36">
 
-<div class="flex justify-center align-center relative">
-  <div class="container">
-    <div class="flex flex-col my-24 sm:my-36">
+          <!-- Product title start -->
+          <div class="w-full text-center sm:text-start">
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">{{ product.title }}</h1>
+            <p class="font-light sm:w-2/3">{{ product.description }}</p>
+          </div>
+          <!-- Product title end -->
 
-      <!-- Product title start -->
-      <div class="w-full text-center sm:text-start">
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">{{ product.title }}</h1>
-        <p class="font-light sm:w-2/3">{{ product.description }}</p>
-      </div>
-      <!-- Product title end -->
+          <!-- Product options start -->
+          <div class="w-full grid grid-cols-1 lg:grid-cols-2 justify-items-center mt-8 sm:mt-16">
 
-      <!-- Product options start -->
-      <div class="w-full grid grid-cols-1 lg:grid-cols-2 justify-items-center mt-8 sm:mt-16">
-
-        <!-- Product left side start -->
-        <div class="w-full grid grid-cols-5 justify-center">
-          <div class="stepper-container hidden lg:block">
-            <div class="stepper-wrapper">
+            <!-- Product left side start -->
+            <div class="w-full grid grid-cols-5 justify-center">
+              {% comment %} <div class="stepper-container hidden lg:block">
+              <div class="stepper-wrapper">
               <div class="progress"></div>
               <div class="screen-indicator completed">1/7</div>
               <div class="screen-indicator">2/7</div>
@@ -102,293 +106,381 @@
               <div class="screen-indicator">5/7</div>
               <div class="screen-indicator">6/7</div>
               <div class="screen-indicator">7/7</div>
-            </div>
-            <button
+              </div>
+              <button
+              type="button"
               class="control-btn"
               id="prev-btn"
               onclick="previous()">Back</button>
-            <button
+              <button
+              type="button"
               class="control-btn"
               id="next-btn"
               onclick="next()">Continue</button>
-          </div>
-          <div class="z-10 col-span-5 lg:col-span-4 flex justify-center">
-            <div id="fixed__product">
-              <canvas
-                id="product-canvas"
-                width="350"
-                height="500"
-                crossOrigin="anonymous"></canvas>
-              <img
-                class="object-cover hidden"
-                src="{{ product.featured_image | img_url: 'large' }}"
-                alt="{{ product.featured_image.alt }}"
-                id="featured__image"
-                crossorigin="Anonymous">
-            </div>
-          </div>
-        </div>
-        <!-- Product left side end -->
-
-        <!-- Product right side start ( PRODUCT FORM ) -->
-        <div class="w-full h-full flex flex-col">
-          {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
-            <input type="hidden"
-              name="id"
-              id="variant__id"
-              value="{{ selected_variant.id }}">
-
-            <!-- Product size start -->
-            <div class="bg-blue__gradient p-6 rounded-lg">
-              <div class="">
-                <h3 class="text-3xl">1. Card Size</h3>
-              </div>
-              <div>
-                <div>
-                  <label for="" class="uppercase text-xs">SELECT THE SIZE OF YOUR PERSONAL CARD</label>
-
-                  <!-- Current price start -->
-                  <div class="my-3" id="price-{{ section.id }}">
-                    <span class="text-base text-gray-500 line-through">{{ selected_variant.compare_at_price | money }}</span>
-                    <span class="text-lg text-white">{{ selected_variant.price | money }}</span>
-
-                    {% if selected_variant.price < selected_variant.compare_at_price %}
-                      <span class="px-5 py-1 text-sm font-bold bg-red-500 rounded-full text-white mx-4">Sale</span>
-                    {% endif %}
-                  </div>
-                  <!-- Current price end -->
-
-                </div>
-                <div class="grid grid-cols-2 gap-y-4 gap-x-4 xl:grid-cols-4 place-items-center py-4">
-                  {% for item in product.variants %}
-                    <a
-                      href="javascript:void(0)"
-                      onclick="updateForm('{{item.id}}', '{{ item.price | money }}')"
-                      id="selected__variant_id-{{item.id}}"
-                      class="">
-                      <div class="relative">
-                        <p class="font-family-kufam absolute italic font-black text-gray-500 right-0 mr-2">{{ item.price | money }}</p>
-                        <p class="font-family-kufam absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-500 text-sm">{{ item.title }}</p>
-                        <img
-                          src="{{ item.featured_image.src | img_url: 'large' }}"
-                          alt=""
-                          class="object-cover">
-                      </div>
-                    </a>
-                  {% endfor %}
-                </div>
-                <div class="flex items-center">
-                  <div class="text-white">
-                    {% render 'icon-info' %}
-                  </div>
-                  <div class="ml-1">
-                    <p class="text-xs">Size Guide</p>
-                  </div>
+              </div> {% endcomment %}
+              <div class="z-10 col-span-5 lg:col-span-4 flex justify-center">
+                <div id="fixed__product">
+                  <canvas
+                    id="product-canvas"
+                    width="350"
+                    height="500"
+                    crossOrigin="anonymous"></canvas>
+                  <img
+                    class="object-cover hidden"
+                    src="{{ product.featured_image | img_url: 'large' }}"
+                    alt="{{ product.featured_image.alt }}"
+                    id="featured__image"
+                    crossorigin="Anonymous">
                 </div>
               </div>
             </div>
-            <!-- Product size end -->
+            <!-- Product left side end -->
 
-            <!-- Product name/picture start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
-              <div class="">
-                <h3 class="text-3xl">2. Profile</h3>
-              </div>
-              <div>
+            <!-- Product right side start ( PRODUCT FORM ) -->
+            <div class="w-full h-full flex flex-col">
+              <input type="hidden"
+                name="id"
+                id="variant__id"
+                value="{{ selected_variant.id }}">
+
+              <!-- Product size start -->
+              <div class="bg-blue__gradient p-6 rounded-lg">
+                <div class="">
+                  <h3 class="text-3xl">1. Card Size</h3>
+                </div>
                 <div>
-                  <label for="name" class="text-xs uppercase">Name</label>
-                </div>
-                <div class="flex justify-between py-4">
-                  <input
-                    type="text"
-                    class="bg-transparent text-white border-white product__form-input w-full placeholder:uppercase placeholder:text-white placeholder:opacity-75 rounded px-3 py-1"
-                    id="name"
-                    name="properties[name]"
-                    placeholder="Enter your name">
-                </div>
-              </div>
-              <div class="mt-16">
-                <h3 class="text-3xl">3. Upload Picture</h3>
-              </div>
-              <div>
-                <div>
-                  <label for="profile-picture" class="text-xs uppercase">Choose an image from your phone or computer</label>
-                </div>
-                <div class="flex justify-between py-4 bordered border-dashed border-white border-2 relative h-64 mt-2 rounded cursor-pointer">
-                  <div class="absolute flex items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer">
+                  <div>
+                    <label for="" class="uppercase text-xs">SELECT THE SIZE OF YOUR PERSONAL CARD</label>
+
+                    <!-- Current price start -->
+                    <div class="my-3" id="price-{{ section.id }}">
+                      <span class="text-base text-gray-500 line-through">{{ selected_variant.compare_at_price | money }}</span>
+                      <span class="text-lg text-white">{{ selected_variant.price | money }}</span>
+
+                      {% if selected_variant.price < selected_variant.compare_at_price %}
+                        <span class="px-5 py-1 text-sm font-bold bg-red-500 rounded-full text-white mx-4">Sale</span>
+                      {% endif %}
+                    </div>
+                    <!-- Current price end -->
+
+                  </div>
+                  <div class="grid grid-cols-2 gap-y-4 gap-x-4 xl:grid-cols-4 place-items-center py-4">
+                    {% for item in product.variants %}
+                      <a
+                        href="javascript:void(0)"
+                        onclick="updateForm('{{item.id}}', '{{ item.price | money }}')"
+                        id="selected__variant_id-{{item.id}}"
+                        class="">
+                        <div class="relative">
+                          <p class="font-family-kufam absolute italic font-black text-gray-500 right-0 mr-2">{{ item.price | money }}</p>
+                          <p class="font-family-kufam absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-500 text-sm">{{ item.title }}</p>
+                          <img
+                            src="{{ item.featured_image.src | img_url: 'large' }}"
+                            alt=""
+                            class="object-cover">
+                        </div>
+                      </a>
+                    {% endfor %}
+                  </div>
+                  <div class="flex items-center">
                     <div class="text-white">
-                      {% render 'icon-upload-image' %}
+                      {% render 'icon-info' %}
                     </div>
-                    <div class="ml-2">
-                      <p class="text-gray-300">Drop here</p>
+                    <div class="ml-1">
+                      <p class="text-xs">Size Guide</p>
                     </div>
                   </div>
-                  <input
-                    type="file"
-                    id="profile-picture"
-                    name="properties[profile-picture]"
-                    class="w-full h-full opacity-0"
-                    accept="image/*" />
-                </div>
-                <div class="flex items-center mt-4">
-                  <div class="text-white">
-                    {% render 'icon-info' %}
-                  </div>
-                  <div class="ml-1">
-                    <p class="text-xs">If necessary the background of the image will be removed by our design team.</p>
-                  </div>
                 </div>
               </div>
-            </div>
-            <!-- Product name/picture end -->
+              <!-- Product size end -->
 
-            <!-- Product profile start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
-              <div class="">
-                <h3 class="text-3xl">4. Position</h3>
-              </div>
-              <div>
-                <div class="flex justify-between py-4">
-                  <input
-                    type="text"
-                    class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
-                    id="search_for_player_position"
-                    placeholder="Search position">
-                </div>
-              </div>
-              <div>
-                <div class="tabs">
-                  <ul class="flex justify-start gap-x-6 sm:gap-x-12">
-                    <li class="tab-item text-white opacity-50 underline-animation active" data-attr="defence">
-                      <a href="javascript:void(0)" class="uppercase">DEFENCE</a>
-                    </li>
-                    <li class="tab-item text-white opacity-50 underline-animation" data-attr="midfield">
-                      <a href="javascript:void(0)" class="uppercase">MIDFIELD</a>
-                    </li>
-                    <li class="tab-item text-white opacity-50 underline-animation" data-attr="attack">
-                      <a href="javascript:void(0)" class="uppercase">ATTACK</a>
-                    </li>
-                    <li class="tab-item text-white opacity-50 underline-animation" data-attr="custom">
-                      <a href="javascript:void(0)" class="uppercase">CUSTOM</a>
-                    </li>
-                  </ul>
-                  {% render 'player-position' %}
-                </div>
-              </div>
-            </div>
-            <!-- Product profile end -->
-
-
-
-            <!-- Product choose club start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
-              <div class="">
-                <h3 class="text-3xl">5. Choose club</h3>
-              </div>
-              <div>
-                <div class="flex justify-between py-4">
-                  <input
-                    type="text"
-                    class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
-                    id="search_for_club"
-                    placeholder="Search club name">
-                </div>
-              </div>
-              <div>
-                {% render 'league-options' %}
-              </div>
-            </div>
-            <!-- Product choose club end -->
-
-            <!-- Product choose country start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
-              <div class="">
-                <h3 class="text-3xl">6. Choose Country</h3>
-              </div>
-              <div>
-                <div class="flex justify-between py-4">
-                  <input
-                    type="text"
-                    class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
-                    id="search_for_country"
-                    placeholder="Search country">
-                </div>
-              </div>
-              {% render 'country-options' %}
-            </div>
-            <!-- Product choose country end -->
-
-            <!-- Product stats start -->
-            <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
-              <div class="flex justify-between">
-                <div>
-                  <h3 class="text-3xl">7. Choose Stats</h3>
+              <!-- Product name/picture start -->
+              <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
+                <div class="">
+                  <h3 class="text-3xl">2. Profile</h3>
                 </div>
                 <div>
-                  <button
-                    type="button"
-                    class="bg-white flex items-center px-4 py-2 rounded-full transition duration-300 hover:opacity-80 disabled:opacity-50"
-                    onclick="randomiseStats()"
-                    disabled
-                    id="randomise_btn">
-                    <span>
-                      {% render 'icon-randomise' %}
-                    </span>
-                    <p class="text-gray-900 ml-6 mr-6">
-                      Randomise
+                  <div>
+                    <label for="name" class="text-xs uppercase">Name</label>
+                  </div>
+                  <div class="flex justify-between py-4">
+                    <input
+                      type="text"
+                      class="bg-transparent text-white border-white product__form-input w-full placeholder:uppercase placeholder:text-white placeholder:opacity-75 rounded px-3 py-1"
+                      id="name"
+                      name="properties[name]"
+                      placeholder="Enter your name">
+                  </div>
+                </div>
+                <div class="mt-16">
+                  <h3 class="text-3xl">3. Upload Picture</h3>
+                </div>
+                <div>
+                  <div>
+                    <label for="profile-picture" class="text-xs uppercase">Choose an image from your phone or computer</label>
+                  </div>
+                  <div class="flex justify-between py-4 bordered border-dashed border-white border-2 relative h-64 mt-2 rounded cursor-pointer">
+                    <div class="absolute flex items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer">
+                      <div class="text-white">
+                        {% render 'icon-upload-image' %}
+                      </div>
+                      <div class="ml-2">
+                        <p class="text-gray-300">Drop here</p>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      id="profile-picture"
+                      name="properties[profile-picture]"
+                      class="w-full h-full opacity-0"
+                      accept="image/*" />
+                  </div>
+                  <div class="flex items-center mt-4">
+                    <div class="text-white">
+                      {% render 'icon-info' %}
+                    </div>
+                    <div class="ml-1">
+                      <p class="text-xs">If necessary the background of the image will be removed by our design team.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Product name/picture end -->
+
+              <!-- Product profile start -->
+              <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
+                <div class="">
+                  <h3 class="text-3xl">4. Position</h3>
+                </div>
+                <div>
+                  <div class="flex justify-between py-4">
+                    <input
+                      type="text"
+                      class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
+                      id="search_for_player_position"
+                      placeholder="Search position">
+                  </div>
+                </div>
+                <div>
+                  <div class="tabs">
+                    <ul class="flex justify-start gap-x-6 sm:gap-x-12">
+                      <li class="tab-item text-white opacity-50 underline-animation active" data-attr="defence">
+                        <a href="javascript:void(0)" class="uppercase">DEFENCE</a>
+                      </li>
+                      <li class="tab-item text-white opacity-50 underline-animation" data-attr="midfield">
+                        <a href="javascript:void(0)" class="uppercase">MIDFIELD</a>
+                      </li>
+                      <li class="tab-item text-white opacity-50 underline-animation" data-attr="attack">
+                        <a href="javascript:void(0)" class="uppercase">ATTACK</a>
+                      </li>
+                      <li class="tab-item text-white opacity-50 underline-animation" data-attr="custom">
+                        <a href="javascript:void(0)" class="uppercase">CUSTOM</a>
+                      </li>
+                    </ul>
+                    {% render 'player-position' %}
+                  </div>
+                </div>
+              </div>
+              <!-- Product profile end -->
+
+
+
+              <!-- Product choose club start -->
+              <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
+                <div class="">
+                  <h3 class="text-3xl">5. Choose club</h3>
+                </div>
+                <div>
+                  <div class="flex justify-between py-4">
+                    <input
+                      type="text"
+                      class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
+                      id="search_for_club"
+                      placeholder="Search club name">
+                  </div>
+                </div>
+                <div>
+                  {% render 'league-options' %}
+                </div>
+              </div>
+              <!-- Product choose club end -->
+
+              <!-- Product choose country start -->
+              <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
+                <div class="">
+                  <h3 class="text-3xl">6. Choose Country</h3>
+                </div>
+                <div>
+                  <div class="flex justify-between py-4">
+                    <input
+                      type="text"
+                      class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
+                      id="search_for_country"
+                      placeholder="Search country">
+                  </div>
+                </div>
+                {% render 'country-options' %}
+              </div>
+              <!-- Product choose country end -->
+
+              <!-- Product stats start -->
+              <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
+                <div class="flex justify-between">
+                  <div>
+                    <h3 class="text-3xl">7. Choose Stats</h3>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      class="bg-white flex items-center px-4 py-2 rounded-full transition duration-300 hover:opacity-80 disabled:opacity-50"
+                      onclick="randomiseStats()"
+                      disabled
+                      id="randomise_btn">
+                      <span>
+                        {% render 'icon-randomise' %}
+                      </span>
+                      <p class="text-gray-900 ml-6 mr-6">
+                        Randomise
+                      </p>
+                    </button>
+                  </div>
+                </div>
+                {% render 'product-page-stats-step' %}
+                <label class="checkbox__container flex items-center mt-12">
+                  <div>
+                    <p class="opacity-75 font-light text-lg">
+                      {{ section.settings.confirm_submit }}
                     </p>
-                  </button>
-                </div>
+                  </div>
+                  <div>
+                    <input type="checkbox" required>
+                    <span class="checkmark"></span>
+                  </div>
+                </label>
+                <button
+                  type="button"
+                  onclick="saveCanvas()"
+                  id="add_to_cart_first_step"
+                  class="bg-white w-full rounded-full font-medium mt-12 py-3 duration-300 hover:opacity-75 tab-item active"
+                  data-tab="tab-2"
+                  style="color:var(--blue-text)">
+                  {{ section.settings.add_to_cart }}</button>
               </div>
-              {% render 'product-page-stats-step' %}
-            </div>
-            <!-- Product stats end -->
+              <!-- Product stats end -->
 
-            <button
+              {% comment %} <button
               type="button"
               class="submit_btn"
-              onclick="saveCanvas()">Submit</button><br>
-            <input
-              type="text"
-              name="properties[player_position]"
-              placeholder="Player position"
-              class="hidden">
-            <input
-              type="file"
-              name="properties[generated-picture]"
-              id="generated-picture"
-              placeholder="Player position"
-              class="hidden">
-            <input
-              type="url"
-              name="properties[Flag]"
-              id="form_flag"
-              class="hidden">
-            <input
-              type="url"
-              name="properties[Badge]"
-              id="form_badge"
-              class="hidden">
-          {% endform %}
+              onclick="saveCanvas()">Submit</button> {% endcomment %}
+              {% comment %} <button type="button" onclick="saveCanvas()">Submit</button> {% endcomment %} <br> <input
+                type="text"
+                name="properties[player_position]"
+                placeholder="Player position"
+                class="hidden"> <input
+                type="file"
+                name="properties[generated-picture]"
+                id="generated-picture"
+                placeholder="Player position"
+                class="hidden">
+              <input
+                type="url"
+                name="properties[Flag]"
+                id="form_flag"
+                class="hidden">
+              <input
+                type="url"
+                name="properties[Badge]"
+                id="form_badge"
+                class="hidden">
+            </div>
+            <!-- Product right side end ( PRODUCT FORM ) -->
+
+          </div>
+          <!-- Product options end -->
+
         </div>
-        <!-- Product right side end ( PRODUCT FORM ) -->
-
       </div>
-      <!-- Product options end -->
-
     </div>
   </div>
+  <div class="tab-pane" id="tab-2">
+    <div class="flex justify-center align-center relative">
+      <div class="container">
+        {% render 'additional-options', products: collection.products %}
+      </div>
+    </div>
+    <!-- Product title end -->
+    {% comment %} <button class="bg-white w-full rounded-full mt-12  py-3 hover:opacity-75 transition-opacity duration-300 tab_item" data-tab="tab-1">{{ section.settings.back_to_product }}</button> {% endcomment %}
+  </div>
+{% endform %}
+{% comment %} <div class="tab-group">
+<div class="tab-list">
+<button class="tab_item active" data-tab="tab-1">Tab 1</button>
+<button class="tab_item" data-tab="tab-2">Tab 2</button>
 </div>
+<div class="tab-content">
+<div class="tab-pane active" id="tab-1">Content for Tab 1</div>
+<div class="tab-pane" id="tab-2">Content for Tab 2</div>
+</div>
+</div> {% endcomment %}
 {% render 'add-modal-success' %}
+<div class="fixed top-2 left-0 right-0 mx-auto flex justify-center z-30">
+  {% render 'error-notification' %}
+</div>
 <img style="display:none" id="hidden_flag_img">
 <img style="display:none" id="hidden_badge_img">
 
+
+{% schema %}
+  {
+    "name": "Product",
+    "settings": [
+      {
+        "type": "text",
+        "id": "confirm_submit",
+        "default": "I confirm I have reviewed and am happy the image provided is suitable and I have all relevant permissions to use the images provided.",
+        "label": "Confirm Checkbox"
+      },
+      {
+        "type": "text",
+        "id": "add_to_cart",
+        "default": "Add to Cart",
+        "label": "Add to Cart"
+      },
+      {
+        "type": "text",
+        "id": "submit_button",
+        "default": "Add to Cart",
+        "label": "Submit Button"
+      },
+      {
+        "type": "text",
+        "id": "back_to_product",
+        "default": "Back",
+        "label": "Back to Product"
+      }, {
+        "type": "text",
+        "id": "warning_error",
+        "default": "Complete all fields!",
+        "label": "Error Message"
+      }
+    ]
+  }
+{% endschema %}
 <script>
   $(document).ready(function() {
-    console.log({{ product.variants | json }})
-    console.log({{ product.media | json }})
     getCountries()
-   
+    getLeaguesData();
+  });
+</script>
 
+
+<script>
+  $(document).ready(function() {
+    $(".tab_item").click(function() {
+      $(".tab_item").removeClass("activee");
+      $(this).addClass("activee");
+      $(".tab-pane").removeClass("activee");
+      $("#" + $(this).attr("data-tab")).addClass("activee");
+    });
   });
 </script>

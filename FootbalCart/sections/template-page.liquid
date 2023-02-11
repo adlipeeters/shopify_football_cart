@@ -1,4 +1,254 @@
-<div class="flex flex-col items-center my-8">
-  <h1 class="text-3xl font-medium my-8 md:my-16">{{ page.title }}</h1>
-  <div class="max-w-6xl mx-auto px-4">{{ page.content }}</div>
+{% comment %} <div class="flex flex-col items-center my-8">
+<h1 class="text-3xl font-medium my-8 md:my-16">{{ page.title }}</h1>
+<div class="max-w-6xl mx-auto px-4">{{ page.content }}</div>
+</div> {% endcomment %}
+<style>
+  ul.help-list {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    list-style: none;
+    padding: 0 25px;
+  }
+  ul.help-list li {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 25px 0;
+    cursor: pointer;
+    background: var(--background-blue);
+  }
+  ul.help-list li.active h3:after {
+    transform: rotate(180deg);
+  }
+  ul.help-list li h3 {
+    font-weight: 700;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+  }
+  ul.help-list li h3:after {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    content: "\f107";
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    font-size: 17px;
+  }
+
+  .filter__background {
+    background: var(--background-blue);
+    border-radius: 0.5rem;
+  }
+</style>
+<div class="flex justify-center items-center my-8 sm:my-32">
+  <div class="container px-6 sm:px-0">
+    <div class="flex flex-col">
+      <div class="w-full">
+        <h1 class="text-center sm:text-start text-3xl sm:text-5xl lg:text-6xl">{{ page.title }}</h1>
+      </div>
+      <div class="mt-8 sm:mt-16 grid grid-cols-12">
+        <div class="col-span-3 filter__background py-4">
+          <ul class="help-list">
+            {% render 'support-general-information' %}
+
+            {% render 'support-delivery' %}
+
+            {% render 'support-order' %}
+
+            {% render 'support-technical' %}
+
+            {% render 'support-payment' %}
+
+            {% render 'support-return-refunds' %}
+          </ul>
+        </div>
+        {% render 'support-info' %}
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('.help-list > li > .answer').hide();
+    $('.help-list > li > .toggle__filter').click(function() {
+      if ($(this).parent().hasClass("active")) {
+        $(this)
+          .parent()
+          .removeClass("active")
+          .find(".answer")
+          .slideUp();
+      } else {
+        $(this)
+          .parent()
+          .addClass("active")
+          .find(".answer")
+          .slideDown();
+      }
+      return false;
+    });
+  });
+
+  $('.info-link').on('click', function() {
+    let href = $(this).attr('data-href')
+    $('.info-section').hide()
+    $('#' + href).show()
+  })
+</script>
+
+
+{% schema %}
+  {
+    "name": "Support",
+    "settings": [
+      {
+        "type": "text",
+        "id": "support_title_1",
+        "default": "General Information",
+        "label": "Title1"
+      },
+      {
+        "type": "text",
+        "id": "support_subtitle_1_1",
+        "default": "COVID-19",
+        "label": "Subtitle_1_1"
+      },
+      {
+        "type": "text",
+        "id": "support_info_1_1",
+        "default": "1Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "label": "Info_1_1"
+      },
+      {
+        "type": "text",
+        "id": "support_subtitle_1_2",
+        "default": "Price & Size Guide",
+        "label": "Subtitle_1_2"
+      }, {
+        "type": "text",
+        "id": "support_info_1_2",
+        "default": "2Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "label": "Info_1_2"
+      }, {
+        "type": "text",
+        "id": "support_subtitle_1_3",
+        "default": "Money Back Guarantee",
+        "label": "Subtitle_1_3"
+      }, {
+        "type": "text",
+        "id": "support_info_1_3",
+        "default": "3Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "label": "Info_1_3"
+      }, {
+        "type": "text",
+        "id": "support_subtitle_1_4",
+        "default": "Parntnerships & Sponsorships",
+        "label": "Subtitle_1_4"
+      }, {
+        "type": "text",
+        "id": "support_info_1_4",
+        "default": "4Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "label": "Info_1_4"
+      }, {
+        "type": "text",
+        "id": "support_subtitle_1_5",
+        "default": "Bulk Discounts",
+        "label": "Subtitle_1_5"
+      }, {
+        "type": "text",
+        "id": "support_info_1_5",
+        "default": "5Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "label": "Info_1_5"
+      }, {
+        "type": "text",
+        "id": "support_subtitle_1_6",
+        "default": "Groupon VAT & Registration",
+        "label": "Subtitle_1_6"
+      }, {
+        "type": "text",
+        "id": "support_info_1_6",
+        "default": "6Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "label": "Info_1_6"
+      }, {
+        "type": "text",
+        "id": "support_subtitle_1_7",
+        "default": "Terms & Conditions",
+        "label": "Subtitle_1_7"
+      }, {
+        "type": "text",
+        "id": "support_info_1_7",
+        "default": "7Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "label": "Info_1_7"
+      }, {
+        "type": "text",
+        "id": "support_subtitle_1_8",
+        "default": "Privacy Policy",
+        "label": "Subtitle_1_8"
+      }, {
+        "type": "text",
+        "id": "support_info_1_8",
+        "default": "8Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "label": "Info_1_8"
+      }, {
+        "type": "text",
+        "id": "support_subtitle_1_9",
+        "default": "Playstation 5 Giveaway",
+        "label": "Subtitle_1_9"
+      }, {
+        "type": "text",
+        "id": "support_info_1_9",
+        "default": "9Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "label": "Info_1_9"
+      }, {
+        "type": "text",
+        "id": "support_title_2",
+        "default": "Delivery",
+        "label": "Title2"
+      }, {
+        "type": "text",
+        "id": "support_title_3",
+        "default": "Order Processing and Orders",
+        "label": "Title3"
+      }, {
+        "type": "text",
+        "id": "support_title_4",
+        "default": "Technical",
+        "label": "Title4"
+      }, {
+        "type": "text",
+        "id": "support_title_5",
+        "default": "Payment Methods",
+        "label": "Title5"
+      }, {
+        "type": "text",
+        "id": "support_title_6",
+        "default": "Returns & Refunds",
+        "label": "Title6"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "description",
+        "name": "Description",
+        "limit": 1
+      }, {
+        "type": "checkout_buttons",
+        "name": "Checkout Buttons",
+        "limit": 1
+      }
+    ]
+  }
+{% endschema %}

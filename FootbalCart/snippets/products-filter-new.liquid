@@ -36,7 +36,7 @@
               </div>
             </label>
             {% for collection in collections %}
-              {% if collection.all_products_count > 0 %}
+              {% if collection.all_products_count > 0 and collection.handle != 'additional-options' %}
                 <label class="checkbox__container flex items-center">
                   <div>
                     <p class="opacity-75 font-light text-lg">
@@ -87,28 +87,40 @@
                 {%- endfor -%}
               </ul>
               {%- when 'price_range' -%}
-              <div class="filter-group-display__price-range">
+              <div class="filter-group-display__price-range flex gap-x-8">
                 <div class="filter-group-display__price-range-from">
                   <span>{{ cart.currency.symbol }}</span>
 
-                  <input name="{{ filter.min_value.param_name }}"id="Filter-{{ filter.min_value.param_name }}"{% if filter.min_value.value -%}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{%- endif %}type="number"placeholder="0"min="0"max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+                  <input
+                    class="bg-transparent text-gray-500 border-white border-b w-full placeholder:uppercase placeholder:text-white placeholder:opacity-75 px-3 py-1"
+                    name="{{ filter.min_value.param_name }}"
+                    id="Filter-{{ filter.min_value.param_name }}"
+                    {% if filter.min_value.value -%}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{%- endif %}type="number"placeholder="0"min="0"max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
 
                   <label for="Filter-{{ filter.min_value.param_name }}">From</label>
                 </div>
                 <div class="filter-group-display__price-range-to">
                   <span>{{ cart.currency.symbol }}</span>
 
-                  <input name="{{ filter.max_value.param_name }}"id="Filter-{{ filter.max_value.param_name }}"{% if filter.max_value.value -%}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{%- endif %}type="number"placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"min="0"max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
+                  <input
+                    class="bg-transparent text-gray-500 border-white border-b w-full placeholder:uppercase placeholder:text-white placeholder:opacity-75 px-3 py-1"
+                    name="{{ filter.max_value.param_name }}"
+                    id="Filter-{{ filter.max_value.param_name }}"
+                    {% if filter.max_value.value -%}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{%- endif %}type="number"placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"min="0"max="{{ filter.range_max | money_without_currency | replace: ',', '' }}">
 
                   <label for="Filter-{{ filter.max_value.param_name }}">To</label>
                 </div>
               </div>
-
             {%- endcase -%}
           </div>
         </li>
       {% endfor %}
       <div class="filter-group-display__submit">
+        <input
+          type="submit"
+          value="Submit"
+          id="filter-fucking-form"
+          class="w-0 h-0 opacity-0">
       </div>
     </ul>
   </form>

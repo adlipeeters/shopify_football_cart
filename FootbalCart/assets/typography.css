@@ -12,7 +12,7 @@ h4,
 h5,
 h6 {
     font-family: 'Kufam', sans-serif;
-    font-weight: 800 !important;
+    font-weight: 800;
 }
 
 .header__link {
@@ -22,8 +22,6 @@ h6 {
     /* font-size: 20px; */
     letter-spacing: 0.15em;
 }
-
-
 
 p,
 h1,
@@ -38,4 +36,8 @@ label {
 
 .font-family-kufam {
     font-family: 'Kufam', sans-serif;
+}
+
+.font-family-roboto {
+    font-family: 'Roboto';
 }

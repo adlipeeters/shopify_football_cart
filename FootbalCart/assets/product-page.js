@@ -51,11 +51,11 @@ const indicators = document.getElementsByClassName("screen-indicator");
 const progressElm = document.getElementsByClassName("progress")[0];
 
 $(document).ready(function () {
-  getLeaguesData();
+  // getLeaguesData();
   canvas = new fabric.Canvas("product-canvas");
   // canvas.setBackgroundColor("#00ff00", canvas.renderAll.bind(canvas));
   let dominantColor = getDominantColor(canvas);
-  console.log(dominantColor);
+  // console.log(dominantColor);
   initialiseCanvas();
 
   $(".tab-item").click(function () {
@@ -422,35 +422,71 @@ $(document).on("change", ".league-group", function () {
   profileLeague(url);
 });
 
-$(document).on("click", ".submit_btn", function (e) {
-  e.preventDefault();
+// $(document).on("click", ".submit_btn", function (e) {
+//   e.preventDefault();
+//   setTimeout(() => {
+//     addToCart();
+//   }, 500);
+// });
+
+$(document).on("click", "#add_to_cart_first_step", function () {
+  // $("#success_dialog").show(300);
+  // tab_item
+  let is_completed = false;
+  let fields = {
+    name: $('input[name="properties[name]"]').val(),
+    profile_picture: $(
+      "input[type='file'][name='properties[profile-picture]']"
+    ).get(0).files.length,
+    player_postion: $('input[name="properties[player_position]"]').val(),
+    flag: $("input[type='url'][name='properties[Flag]']").val().trim(),
+    badge: $("input[type='url'][name='properties[Badge]']").val().trim(),
+  };
+
+  console.log($('input[name="properties[name]"]').val());
+  console.log(
+    $("input[type='file'][name='properties[profile-picture]']").get(0).files
+      .length
+  );
+  console.log($('input[name="properties[player_position]"]').val());
+
+  if (!is_completed) {
+    $("#toast-warning").slideDown(300);
+  } else {
+    $("#tab-1").hide(300).removeClass("activee");
+    $("#tab-2").show(300).addClass("activee");
+  }
   setTimeout(() => {
-    addToCart();
-  }, 500);
+    $("#toast-warning").slideUp(300);
+  }, 1500);
 });
 
-function addToCart() {
-  let addToCartForm = document.querySelector('form[action$="/cart/add"]');
-  let formData = new FormData(addToCartForm);
+$(document).on("click", "#close-success-modal", function () {
+  $("#success_dialog").hide(300);
+});
 
-  $.ajax({
-    url: "/cart/add.js",
-    type: "POST",
-    dataType: "json",
-    processData: false,
-    contentType: false,
-    data: formData,
-    success: function (data) {
-      // Handle successful submission
-      console.log(data);
-      $("#success_dialog").fadeIn();
-    },
-    error: function (XMLHttpRequest, textStatus) {
-      // Handle error
-      console.log("Error: " + textStatus);
-    },
-  });
-}
+// function addToCart() {
+//   let addToCartForm = document.querySelector("#product-form");
+//   let formData = new FormData(addToCartForm);
+
+//   $.ajax({
+//     url: "/cart/add.js",
+//     type: "POST",
+//     dataType: "json",
+//     processData: false,
+//     contentType: false,
+//     data: formData,
+//     success: function (data) {
+//       // Handle successful submission
+//       // console.log(data);
+//       $("#success_dialog").fadeIn();
+//     },
+//     error: function (XMLHttpRequest, textStatus) {
+//       // Handle error
+//       // console.log("Error: " + textStatus);
+//     },
+//   });
+// }
 
 function initialiseCanvas() {
   let imgElement = document.getElementById("featured__image");
@@ -626,6 +662,7 @@ function saveCanvas() {
 function convertCanvasToImage(canvas) {
   let image = new Image();
   image.src = canvas.toDataURL("image/png");
+  $("#generated_image_preview").attr("src", image.src);
 
   return image;
 }

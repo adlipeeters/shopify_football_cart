@@ -1,11 +1,11 @@
-async function getCountries() {
+function getCountries() {
   try {
-    // const response_1 = await fetch("/assets/countries.json");
-    const response_1 = await fetch("https://restcountries.com/v3.1/all");
-    // const response_1 = await fetch("https://restcountries.com/v2/region/south-america");
-    const asia = await response_1.json();
-    countries = [...asia];
-    asia.forEach((country) => {
+    // const response_1 = await fetch("https://restcountries.com/v3.1/all");
+    // const asia = await response_1.json();
+    // console.log(asia);
+    // console.log(countries_json_data);
+    countries = [...countries_json_data];
+    countries_json_data.forEach((country) => {
       if (country.region == "Asia") {
         let asia = `<label class="custom-country-radio my-2">
           <input
@@ -135,289 +135,86 @@ async function getCountries() {
       }
     });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
   }
 }
 
+// const getCountries = () => {
+//   console.log("ready");
+//   console.log(countries_json_data)
+// };
+
 const getLeaguesData = async () => {
   try {
-    const response = await fetch("/assets/leagues.js");
-    const data = await response.json();
+    let data = leagues_json_data[0];
+    // console.log(data)
+    // clubs = [...leagues_json_data[0]];
     for (const [key, value] of Object.entries(data)) {
-      clubs = clubs.concat(value);
+      value.forEach((league) => {
+        clubs.push(league)
+        let append = `<label class="custom-league-radio my-2">
+                <input
+                type="radio"
+                  name="properties[Club]"
+                  value="${league.strTeam}"
+                  class="league-group"
+                  badge="${league.strTeamBadge}"
+                  >
+                  <div class="radio-button flex items-center justify-around px-3">
+                  <div>
+                    <div class="mr-1.5">
+                      <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
+                    </div>
+                    </div>
+                    <div>
+                    <p class="font-medium">${league.strTeam}</p>
+                    </div>
+                    </div>
+                    </label> `;
+        $("#data-league-" + key).append(append);
+      });
     }
-    data.english_premier_league.forEach((league) => {
-      let english_premier_league = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-english-premier-league").append(english_premier_league);
-    });
-
-    data.english_league_championship.forEach((league) => {
-      let english_league_championship = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-championship").append(english_league_championship);
-    });
-    data.german_bundesliga.forEach((league) => {
-      let german_bundesliga = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-bundesliga").append(german_bundesliga);
-    });
-    data.french_league_1.forEach((league) => {
-      let french_league_1 = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-french-league-1").append(french_league_1);
-    });
-    data.spanish_la_liga.forEach((league) => {
-      let spanish_la_liga = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-la-liga").append(spanish_la_liga);
-    });
-    data.italian_serie_a.forEach((league) => {
-      let italian_serie_a = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-seria-a").append(italian_serie_a);
-    });
-
-    data.dutch_eredivisie.forEach((league) => {
-      let dutch_eredivisie = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-dutch-eredivisie").append(dutch_eredivisie);
-    });
-
-    data.scottish_premier_league.forEach((league) => {
-      let scottish_premier_league = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-scottish-premier-league").append(scottish_premier_league);
-    });
-    data.american_major_league_soccer.forEach((league) => {
-      let american_major_league_soccer = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-american-major-league-soccer").append(
-        american_major_league_soccer
-      );
-    });
-    data.australian_a_league.forEach((league) => {
-      let australian_a_league = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-australian-a-league").append(australian_a_league);
-    });
-    data.portuguese_primeira_liga.forEach((league) => {
-      let portuguese_primeira_liga = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-portuguese-primeira-liga").append(
-        portuguese_primeira_liga
-      );
-    });
-    data.saudi_arabian_pro_league.forEach((league) => {
-      let saudi_pro_league = `<label class="custom-league-radio my-2">
-            <input
-            type="radio"
-              name="properties[Club]"
-              value="${league.strTeam}"
-              class="league-group"
-              badge="${league.strTeamBadge}"
-              >
-              <div class="radio-button flex items-center justify-around px-3">
-              <div>
-                <div class="mr-1.5">
-                  <img src="${league.strTeamBadge}" class="w-4 h-4 rounded-full"/>
-                </div>
-                </div>
-                <div>
-                <p class="font-medium">${league.strTeam}</p>
-                </div>
-                </div>
-                </label> `;
-      $("#data-league-saudi-arabian-pro-league").append(saudi_pro_league);
-    });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
+
+$(document).on("click", ".additional-product-options", function () {
+  if ($(this).is(":checked")) {
+    addToCart($(this).attr("variant"));
+    // console.log("Checkbox is checked");
+  } else {
+    removeFromCart($(this).attr("variant"));
+    // console.log("Checkbox is not checked");
+  }
+});
+
+function addToCart(variantId) {
+  fetch("/cart/add.js", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: variantId,
+      quantity: 1,
+    }),
+  }).then(function (response) {
+    // Handle the response here
+  });
+}
+
+function removeFromCart(variantId) {
+  fetch("/cart/change.js", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: variantId,
+      quantity: 0,
+    }),
+  }).then(function (response) {
+    // Handle the response here
+  });
+}

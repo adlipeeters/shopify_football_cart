@@ -1,0 +1,114 @@
+<style>
+  #account {
+    background-image: linear-gradient(180deg, #0F1521 0%, rgba(15, 21, 33, 0) 100%);
+    width: 100%;
+    height: auto;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+</style>
+
+{% assign number_of_orders = customer.orders | size %}
+
+<div class="flex justify-center">
+  <div class="container">
+    <div class="flex flex-col my-24 sm:my-36">
+      <div class="w-full text-center sm:text-start">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">{{ section.settings.title }}</h1>
+      </div>
+      <div class="w-full grid grid-cols-12 py-6 gap-y-6 px-2">
+        {% if number_of_orders > 0 %}
+          {% paginate customer.orders by 2 %}
+            {% for order in customer.orders %}
+              <div class="col-span-12 bg-blue-custom flex justify-center items-center rounded-lg duration-300 hover:opacity-75">
+                <div class="flex justify-between items-center w-full p-6">
+                  <div class="flex flex-col">
+                    <div>
+                      {% comment %} <h1>
+                      {{ order.name | link_to: order.customer_url }}
+                      </h1> {% endcomment %}
+                      <a
+                        target="_blank"
+                        href="{{ order.customer_url }}"
+                        class="flex w-max text-sm text-white font-medium bg-gray-700 duration-300 hover:bg-gray-900 px-4 py-2 items-center justify-center rounded">
+                        <h1 class="pt-1">
+                          {{ order.name }}
+                        </h1>
+                        <span class="ml-1">{% render 'icon-link' %}</span>
+                      </a>
+                    </div>
+                    <div>
+                      <p class="font-family-kufam mt-3">
+                        Financial status :
+                        <span class="bg-blue__gradient font-family-roboto py px-3 rounded-full">{{ order.financial_status_label }}</span>
+                      </p>
+                      <p class="mt-3 font-family-kufam">
+                        Fulfillment status :
+                        <span class="bg-blue__gradient font-family-roboto py px-2 rounded-full">{{ order.fulfillment_status_label }}</span>
+                      </p>
+                      <p class="mt-3 font-family-kufam">
+                        Total items :
+                        <span class="bg-blue__gradient font-family-roboto py px-2 rounded-full">{{ order.item_count }}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <h1>
+                      {{ order.total_price | money }}
+                    </h1>
+                  </div>
+                </div>
+                <script>
+                  console.log({{order|json}})
+                </script>
+              </div>
+
+            {% endfor %}
+            {% render 'pagination', pagination: paginate %}
+          {% endpaginate %}
+
+        {% else %}
+          <div class="col-span-12 bg-blue-custom">
+            <div class="flex">
+              <div>
+                <h1>
+                  {{ section.settings.no_order_message }}
+                </h1>
+              </div>
+              <div>
+                <p>
+                  {{ section.settings.no_order_message_desc }}
+                </p>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{{ customer.default_address | format_address }}
+{% schema %}
+  {
+    "name": "Orders",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "Orders",
+        "label": "Title"
+      }, {
+        "type": "text",
+        "id": "no_order_message",
+        "default": "No Orders Yet",
+        "label": "No order message title"
+      }, {
+        "type": "text",
+        "id": "no_order_message_desc",
+        "default": "No Orders Yet",
+        "label": "Go to store to place an order."
+      }
+    ]
+  }
+{% endschema %}

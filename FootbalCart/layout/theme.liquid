@@ -28,16 +28,20 @@
     {{ 'tailwind.css' | asset_url | stylesheet_tag }}
     {{ 'typography.css' | asset_url | stylesheet_tag }}
     {{ 'custom_style.css' | asset_url | stylesheet_tag }}
-    {{ 'application.js' | asset_url | script_tag }}
+    {% comment %} {{ 'application.js' | asset_url | script_tag }} {% endcomment %}
+    {{ 'global.js' | asset_url | script_tag }}
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
       integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"></script>
+    {{ 'application.js' | asset_url | script_tag }}
+
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
     {{ 'product-page.js' | asset_url | script_tag }}
     {{ 'product_page_api.js' | asset_url | script_tag }}
     {{ 'products-collections.js' | asset_url | script_tag }}
+    {% comment %} {{ 'leagues.js' | asset_url | script_tag }} {% endcomment %}
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -48,7 +52,7 @@
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script> {% endcomment %}</head>
-  <body id="{{ page_title | handle }}" class="{% if template == 'blog' %} blog__page-background {% elsif template == 'article' %} blog__page_article-background {% elsif template == 'product' %} product__page-background {% elsif template == 'collection' %} product__collection__page-background {% endif %}">
+  <body id="{{ page_title | handle }}" class="{% if template == 'blog' %} blog__page-background {% elsif template == 'article' %} blog__page_article-background {% elsif template == 'product' %} product__page-background {% elsif template == 'collection' %} product__collection__page-background {% elsif template == 'blog.second' %} blog_second__page-background{% elsif template == 'article.second' %}blog_second__page-background{% elsif template == 'customers/login' or template == 'customers/register' %}customer_login_account__page-background{% elsif template == 'account' %}customer_account__page-background {% endif %}">
     {% if template != 'index' and template != 'blog' %}
       {% section 'header' %}
     {% endif %}
@@ -56,6 +60,12 @@
     <main role="main">
       {{ content_for_layout }}
     </main>
-    {% section 'footer' %}
+
+    {% render 'loading-spinner' %}
+
+    {% if template != 'customers/login' and template != 'customers/register' and template != 'customers/account' and template != 'customers/order' and template != 'product' %}
+      {% section 'footer' %}
+    {% endif %}
+
   </body>
 </html>

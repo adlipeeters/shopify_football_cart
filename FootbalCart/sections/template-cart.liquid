@@ -54,10 +54,17 @@
                 </td>
               </tr>
 
-              <div class="bg-red text-white">
+              <div class="bg-red-500 text-white">
                 {% assign property_size = item.properties | size %}
                 {% if property_size > 0 %}
                 {% for p in item.properties %}
+                  <script>
+                    console.log({{item.properties | json}})
+                  </script>
+                  {% if p.first == 'generated-picture' %}
+                  {% comment %} <div>{{p.last}}</div> {% endcomment %}
+                  <img src="{{p.last}}" alt="">
+                  {% endif %}
                 {% assign first_character_in_key = p.first | truncate: 1, '' %}
                 {% unless p.last == blank or first_character_in_key == '_' %}
                 {{ p.first }}:
@@ -146,7 +153,3 @@
     ]
   }
 {% endschema %}
-
-<script>
-  console.log('{{ cart | json}}')
-</script>

@@ -1,0 +1,308 @@
+<style>
+  .blog__title {
+    font-weight: 500 !important;
+    font-style: normal;
+  }
+
+  .blog_second__page-background {
+    background-image: linear-gradient(180deg, #0F1521 0%, rgba(15, 21, 33, 0.479167) 43.96%, #303741 100%);
+    width: 100%;
+    height: auto;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  ul.help-list {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    list-style: none;
+    padding: 0 25px;
+  }
+  ul.help-list li {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 25px 0;
+    cursor: pointer;
+    background: var(--background-blue);
+  }
+  ul.help-list li.active h3:after {
+    transform: rotate(180deg);
+  }
+  ul.help-list li h3 {
+    font-weight: 700;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+  }
+  ul.help-list li h3:after {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    content: "\f107";
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    font-size: 17px;
+  }
+  ul.support-list-mobile {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  ul.support-list-mobile li {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-top: 15px;
+    cursor: pointer;
+    {% comment %}
+      background: var(--background-blue);
+    {% endcomment %}
+  }
+  ul.support-list-mobile li.active .filters:after {
+    transform: rotate(180deg);
+  }
+  ul.support-list-mobile li .filters {
+    font-weight: 700;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  ul.support-list-mobile li .filters:after {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    content: "\f107";
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    font-size: 17px;
+  }
+  .support_mobile_menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background-color: white;
+    overflow-y: auto;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+    transform: translateY(91%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .support_mobile_menu.open {
+    transform: translateY(0%);
+  }
+  .filter__background {
+    background: var(--background-blue);
+    border-radius: 0.5rem;
+  }
+</style>
+<div class="flex justify-center align-center">
+  <div class="container px-6 sm:px-0 my-8 sm:my-32">
+    <div class="flex flex-col">
+      <div class="w-full text-center">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">
+          {% comment %} {{ blog.title }} {% endcomment %}
+          {{ section.settings.page_title }}
+        </h1>
+      </div>
+      <div class="w-full text-center mt-6">
+        {% render 'articles-search' %}
+      </div>
+      <div class="mt-8 sm:mt-16 grid grid-cols-12 gap-x-6">
+        <div class="hidden md:block col-span-4 lg:col-span-3">
+          {% render 'support-desktop-menu' %}
+        </div>
+        {% render 'support-info' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} mobile menu {% endcomment %}
+<div class="md:hidden support_mobile_menu z-30 rounded-t-2xl bg-blue__gradient">
+  <button class="open-filter fixed top-0 h-14 w-full px-6" type="button">
+    <div class="flex items-center justify-between mt-2">
+      <div>
+        <p class="font-family-kufam text-xl font-semibold italic">{{ section.settings.filter }}</p>
+      </div>
+      <div>
+        {% render 'icon-filter' %}
+      </div>
+    </div>
+  </button>
+  <div class="w-full flex justify-center items-center px-6">
+    <hr class="w-full mt-14 opacity-30">
+  </div>
+  <div class="filter-options px-6">
+    {% render 'support-mobile-menu' %}
+  </div>
+</div>
+
+<script>
+  let articles
+  $(document).ready(function() {
+    articles = {{blog.articles|json}}
+    $('.help-list > li > .answer').hide();
+    $('.help-list > li > .toggle__filter').click(function() {
+      if ($(this).parent().hasClass("active")) {
+        $(this)
+          .parent()
+          .removeClass("active")
+          .find(".answer")
+          .slideUp();
+      } else {
+        $(this)
+          .parent()
+          .addClass("active")
+          .find(".answer")
+          .slideDown();
+      }
+      return false;
+    });
+  });
+
+  $('.info-link').on('click', function() {
+    let href = $(this).attr('data-href')
+    localStorage.setItem("active-support-collapse", href);
+  })
+
+  $(".info-link").mousedown(function(event) {
+    if (event.which === 2) {
+      let href = $(this).attr('data-href')
+      localStorage.setItem("active-support-collapse", href);
+    }
+  });
+</script>
+
+<script src="{{ 'articles-search.js' | asset_url }}" defer="defer"></script>
+<script>
+  $(document).ready(function() {
+    $('.support-list-mobile > li > .answer').hide();
+    setTimeout(function() {
+      $('li#first__active-dropdown').find('.toggle__filter').click()
+    }, 1000);
+    $('.support-list-mobile > li > .toggle__filter').click(function() {
+      if ($(this).parent().hasClass("active")) {
+        $(this)
+          .parent()
+          .removeClass("active")
+          .find(".answer")
+          .slideUp();
+      } else {
+        $(".support-list-mobile > li.active .answer")
+          .slideUp()
+          $(".support-list-mobile > li.active")
+          .removeClass("active")
+          $(this)
+          .parent()
+          .addClass("active")
+          .find(".answer")
+          .slideDown();
+      }
+      return false;
+    });
+
+  })
+
+  $(".open-filter").click(function() {
+    $(".support_mobile_menu").toggleClass("open");
+  });
+  $(document).on("click", function(event) {
+    if (!$(".support_mobile_menu").is(event.target) && $(".support_mobile_menu").has(event.target).length === 0) {
+      $(".support_mobile_menu").removeClass("open");
+    }
+  });
+
+  $(".close-filter").click(function() {
+    $(".support_mobile_menu").removeClass("open");
+  });
+
+  $(document).on("swipeup", function() {
+    $(".support_mobile_menu").addClass("open");
+  });
+
+  $(document).on("swipedown", function() {
+    $(".support_mobile_menu").removeClass("open");
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Blog",
+    "settings": [
+      {
+        "type": "text",
+        "id": "search_placeholder",
+        "default": "Search your question",
+        "label": "Search text"
+      },
+      {
+        "type": "text",
+        "id": "filter",
+        "default": "Filters",
+        "label": "Filters"
+      },
+      {
+        "type": "text",
+        "id": "page_title",
+        "default": "HOW CAN WE HELP?",
+        "label": "Page Title"
+      },
+      {
+        "type": "text",
+        "id": "support_title_1",
+        "default": "General Information",
+        "label": "Title1"
+      }, {
+        "type": "text",
+        "id": "support_title_2",
+        "default": "Delivery",
+        "label": "Title2"
+      }, {
+        "type": "text",
+        "id": "support_title_3",
+        "default": "Order Processing and Orders",
+        "label": "Title3"
+      }, {
+        "type": "text",
+        "id": "support_title_4",
+        "default": "Technical",
+        "label": "Title4"
+      }, {
+        "type": "text",
+        "id": "support_title_5",
+        "default": "Payment Methods",
+        "label": "Title5"
+      }, {
+        "type": "text",
+        "id": "support_title_6",
+        "default": "Returns & Refunds",
+        "label": "Title6"
+      }
+    ]
+  }
+{% endschema %}

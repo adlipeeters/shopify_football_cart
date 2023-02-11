@@ -1,0 +1,30 @@
+<style>
+    .card-box {
+        padding: 3rem 2rem;
+    }
+
+    .support-paragraph-title {
+        font-size: 1.875rem;
+        font-weight: 500;
+    }
+
+    .ul-style {
+        padding-left: 2rem;
+        color: white;
+        list-style-type: disc !important;
+    }
+
+
+    @media (min-width: 1280px) {
+        .card-box {
+            padding: 3rem 2rem;
+            padding-right: 10rem;
+        }
+    }
+</style>
+
+<div class="col-span-12 md:col-span-8 lg:col-span-9">
+  <div class="flex flex-col gap-y-6">
+    {{ article.content }}
+  </div>
+</div>

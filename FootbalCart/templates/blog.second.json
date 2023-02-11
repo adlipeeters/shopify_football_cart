@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-blog-second"
+    }
+  },
+  "order": ["template"]
+}

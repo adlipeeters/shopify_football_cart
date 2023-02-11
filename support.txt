@@ -1,0 +1,318 @@
+<style>
+  .blog__title {
+    font-weight: 500 !important;
+    font-style: normal;
+  }
+
+  .blog_second__page-background {
+    background-image: linear-gradient(180deg, #0F1521 0%, rgba(15, 21, 33, 0.479167) 43.96%, #303741 100%);
+    width: 100%;
+    height: auto;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  ul.help-list {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    list-style: none;
+    padding: 0 25px;
+  }
+  ul.help-list li {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 25px 0;
+    cursor: pointer;
+    background: var(--background-blue);
+  }
+  ul.help-list li.active h3:after {
+    transform: rotate(180deg);
+  }
+  ul.help-list li h3 {
+    font-weight: 700;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+  }
+  ul.help-list li h3:after {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    content: "\f107";
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    font-size: 17px;
+  }
+
+  .filter__background {
+    background: var(--background-blue);
+    border-radius: 0.5rem;
+  }
+</style>
+
+<div class="flex justify-center align-center">
+  <div class="container px-6 sm:px-0 my-8 sm:my-32">
+    <div class="flex flex-col">
+      <div class="w-full text-center">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">
+          {% comment %} {{ blog.title }} {% endcomment %}
+          {{ section.settings.page_title }}
+        </h1>
+      </div>
+      <div class="mt-8 sm:mt-16 grid grid-cols-12 gap-x-6">
+        <div class="hidden md:block col-span-4 lg:col-span-3">
+          <div class="filter__background">
+            <ul class="help-list">
+              <li>
+                <div class="flex items-center toggle__filter">
+                  <div class="text-white rounded-full p-2">
+                    {% render 'icon-support-general-information' %}
+                  </div>
+                  <div class="ml-4 w-full mr-3">
+                    <h3 class="">
+                      <span class="italic">{{ section.settings.support_title_1 }}</span>
+                    </h3>
+                  </div>
+                </div>
+                <div class="answer py-4 ml-16 ">
+                  {% for article in blog.articles %}
+                    {% if article.tags contains 'general_information' %}
+                      <a
+                        href="{{article.url}}"
+                        id=""
+                        data-href="general_information"
+                        class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link">
+                        <p>{{ article.title }}</p>
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center toggle__filter">
+                  <div class="text-white rounded-full p-2">
+                    {% render 'icon-support-delivery' %}
+                  </div>
+                  <div class="ml-4 w-full mr-3">
+                    <h3 class="">
+                      <span class="italic">{{ section.settings.support_title_2 }}</span>
+                    </h3>
+                  </div>
+                </div>
+                <div class="answer py-4 ml-16 ">
+                  {% for article in blog.articles %}
+                    {% if article.tags contains 'delivery' %}
+                      <a
+                        href="{{article.url}}"
+                        id=""
+                        data-href="delivery"
+                        class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link">
+                        <p>{{ article.title }}</p>
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center toggle__filter">
+                  <div class="text-white rounded-full p-2">
+                    {% render 'icon-support-order' %}
+                  </div>
+                  <div class="ml-4 w-full mr-3">
+                    <h3 class="">
+                      <span class="italic">{{ section.settings.support_title_3 }}</span>
+                    </h3>
+                  </div>
+                </div>
+                <div class="answer py-4 ml-16 ">
+                  {% for article in blog.articles %}
+                    {% if article.tags contains 'order' %}
+                      <a
+                        href="{{article.url}}"
+                        id=""
+                        data-href="order"
+                        class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link">
+                        <p>{{ article.title }}</p>
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center toggle__filter">
+                  <div class="text-white rounded-full p-2">
+                    {% render 'icon-support-technical' %}
+                  </div>
+                  <div class="ml-4 w-full mr-3">
+                    <h3 class="">
+                      <span class="italic">{{ section.settings.support_title_4 }}</span>
+                    </h3>
+                  </div>
+                </div>
+                <div class="answer py-4 ml-16 ">
+                  {% for article in blog.articles %}
+                    {% if article.tags contains 'technical' %}
+                      <a
+                        href="{{article.url}}"
+                        id=""
+                        data-href="technical"
+                        class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link">
+                        <p>{{ article.title }}</p>
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center toggle__filter">
+                  <div class="text-white rounded-full p-2">
+                    {% render 'icon-support-payment' %}
+                  </div>
+                  <div class="ml-4 w-full mr-3">
+                    <h3 class="">
+                      <span class="italic">{{ section.settings.support_title_5 }}</span>
+                    </h3>
+                  </div>
+                </div>
+                <div class="answer py-4 ml-16 ">
+                  {% for article in blog.articles %}
+                    {% if article.tags contains 'payment' %}
+                      <a
+                        href="{{article.url}}"
+                        id=""
+                        data-href="payment"
+                        class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link">
+                        <p>{{ article.title }}</p>
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </li>
+              <li>
+                <div class="flex items-center toggle__filter">
+                  <div class="text-white rounded-full p-2">
+                    {% render 'icon-support-return' %}
+                  </div>
+                  <div class="ml-4 w-full mr-3">
+                    <h3 class="">
+                      <span class="italic">{{ section.settings.support_title_6 }}</span>
+                    </h3>
+                  </div>
+                </div>
+                <div class="answer py-4 ml-16 ">
+                  {% for article in blog.articles %}
+                    {% if article.tags contains 'return' %}
+                      <a
+                        href="{{article.url}}"
+                        id=""
+                        data-href="return"
+                        class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link">
+                        <p>{{ article.title }}</p>
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {% render 'support-info' %}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    $('.help-list > li > .answer').hide();
+    $('.help-list > li > .toggle__filter').click(function() {
+      if ($(this).parent().hasClass("active")) {
+        $(this)
+          .parent()
+          .removeClass("active")
+          .find(".answer")
+          .slideUp();
+      } else {
+        $(this)
+          .parent()
+          .addClass("active")
+          .find(".answer")
+          .slideDown();
+      }
+      return false;
+    });
+  });
+
+  $('.info-link').on('click', function() {
+    let href = $(this).attr('data-href')
+    localStorage.setItem("active-support-collapse", href);
+  })
+
+  $(".info-link").mousedown(function(event) {
+    if (event.which === 2) {
+      let href = $(this).attr('data-href')
+      localStorage.setItem("active-support-collapse", href);
+    }
+  });
+</script>
+
+
+
+{% schema %}
+  {
+    "name": "Blog",
+    "settings": [
+      {
+        "type": "text",
+        "id": "page_title",
+        "default": "HOW CAN WE HELP?",
+        "label": "Page Title"
+      },
+      {
+        "type": "text",
+        "id": "support_title_1",
+        "default": "General Information",
+        "label": "Title1"
+      },
+      {
+        "type": "text",
+        "id": "support_title_2",
+        "default": "Delivery",
+        "label": "Title2"
+      },
+      {
+        "type": "text",
+        "id": "support_title_3",
+        "default": "Order Processing and Orders",
+        "label": "Title3"
+      }, {
+        "type": "text",
+        "id": "support_title_4",
+        "default": "Technical",
+        "label": "Title4"
+      }, {
+        "type": "text",
+        "id": "support_title_5",
+        "default": "Payment Methods",
+        "label": "Title5"
+      }, {
+        "type": "text",
+        "id": "support_title_6",
+        "default": "Returns & Refunds",
+        "label": "Title6"
+      }
+    ]
+  }
+{% endschema %}

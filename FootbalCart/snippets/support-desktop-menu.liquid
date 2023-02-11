@@ -1,0 +1,148 @@
+<div class="filter__background">
+  <ul class="help-list">
+    <li>
+      <div class="flex items-center toggle__filter" id="general_information">
+        <div class="text-white rounded-full p-2">
+          {% render 'icon-support-general-information' %}
+        </div>
+        <div class="ml-4 w-full mr-3">
+          <h3 class="">
+            <span class="italic">{{ section.settings.support_title_1 }}</span>
+          </h3>
+        </div>
+      </div>
+      <div class="answer py-4 ml-16 ">
+        {% for article in blog.articles %}
+          {% if article.tags contains 'general_information' %}
+            <a
+              href="{{article.url}}"
+              data-href="general_information"
+              class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
+              <p>{{ article.title }}</p>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </li>
+    <li>
+      <div class="flex items-center toggle__filter" id="delivery">
+        <div class="text-white  rounded-full p-2">
+          {% render 'icon-support-delivery' %}
+        </div>
+        <div class="ml-4 w-full mr-3">
+          <h3 class="">
+            <span class="italic">{{ section.settings.support_title_2 }}</span>
+          </h3>
+        </div>
+      </div>
+      <div class="answer py-4 ml-16 ">
+        {% for article in blog.articles %}
+          {% if article.tags contains 'delivery' %}
+            <a
+              href="{{article.url}}"
+              data-href="delivery"
+              class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
+              <p>{{ article.title }}</p>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </li>
+    <li>
+      <div class="flex items-center toggle__filter" id="order">
+        <div class="text-white  rounded-full p-2">
+          {% render 'icon-support-order' %}
+        </div>
+        <div class="ml-4 w-full mr-3">
+          <h3 class="">
+            <span class="italic">{{ section.settings.support_title_3 }}</span>
+          </h3>
+        </div>
+      </div>
+      <div class="answer py-4 ml-16 ">
+        {% for article in blog.articles %}
+          {% if article.tags contains 'order' %}
+            <a
+              href="{{article.url}}"
+              data-href="order"
+              class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
+              <p>{{ article.title }}</p>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </li>
+    <li>
+      <div class="flex items-center toggle__filter" id="technical">
+        <div class="text-white  rounded-full p-2">
+          {% render 'icon-support-technical' %}
+        </div>
+        <div class="ml-4 w-full mr-3">
+          <h3 class="">
+            <span class="italic">{{ section.settings.support_title_4 }}</span>
+          </h3>
+        </div>
+      </div>
+      <div class="answer py-4 ml-16 ">
+        {% for article in blog.articles %}
+          {% if article.tags contains 'technical' %}
+            <a
+              href="{{article.url}}"
+              data-href="technical"
+              class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
+              <p>{{ article.title }}</p>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </li>
+    <li>
+      <div class="flex items-center toggle__filter" id="payment">
+        <div class="text-white  rounded-full p-2">
+          {% render 'icon-support-payment' %}
+        </div>
+        <div class="ml-4 w-full mr-3">
+          <h3 class="">
+            <span class="italic">{{ section.settings.support_title_5 }}</span>
+          </h3>
+        </div>
+      </div>
+      <div class="answer py-4 ml-16 ">
+        {% for article in blog.articles %}
+          {% if article.tags contains 'payment' %}
+            <a
+              href="{{article.url}}"
+              data-href="payment"
+              class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
+              <p>{{ article.title }}</p>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </li>
+    <li>
+      <div class="flex items-center toggle__filter" id="return">
+        <div class="text-white  rounded-full p-2">
+          {% render 'icon-support-return' %}
+        </div>
+        <div class="ml-4 w-full mr-3">
+          <h3 class="">
+            <span class="italic">{{ section.settings.support_title_6 }}</span>
+          </h3>
+        </div>
+      </div>
+      <div class="answer py-4 ml-16 ">
+        {% for article in blog.articles %}
+          {% if article.tags contains 'return' %}
+            <a
+              href="{{article.url}}"
+              data-href="return"
+              class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
+              <p>{{ article.title }}</p>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,147 @@
+<style>
+  .customer_login_account__page-background {
+    background-image: linear-gradient(180deg, #0F1521 0%, rgba(15, 21, 33, 0.479167) 43.96%, #303741 100%), url('{{ 'login_bg.png' | asset_url }}');
+    width: 100%;
+    height: auto;
+    height: 100vh;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+</style>
+
+<div class="h-full flex items-center justify-center py-12 px-6 md:px-4 lg:px-8 mt-28">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <p class="text-center text-3xl font-normal mt-6">{{ section.settings.login_text }}</p>
+    </div>
+    <div class="mt-8">
+      {% form 'create_customer' %}
+        {% if form.errors %}
+          <div class="relative border border-red-400 bg-red-100 text-red 700 px-4 py-3" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <p class="block sm:inline">{{ form.errors | default_errors }}</p>
+          </div>
+        {% endif %}
+
+        <div class="my-2">
+          <label for="first_name" class="sr-only">{{ section.settings.firstname_label }}</label>
+          <input
+            type="text"
+            name="customer[first_name]"
+            id="first_name"
+            autocomplete="given-name"
+            class="w-full bg-transparent rounded-md text-white px-3 py-2 border placeholder:text-white placeholder:opacity-75 duration-300 hover:opacity-75"
+            placeholder="{{ section.settings.firstname_label }}">
+        </div>
+
+        <div class="my-2">
+          <label for="last_name" class="sr-only">{{ section.settings.lastname_label }}</label>
+          <input
+            type="text"
+            name="customer[last_name]"
+            id="last_name"
+            autocomplete="family-name"
+            class="w-full bg-transparent rounded-md text-white px-3 py-2 border placeholder:text-white placeholder:opacity-75 duration-300 hover:opacity-75"
+            placeholder="{{ section.settings.lastname_label }}">
+        </div>
+
+        <div class="my-2">
+          <label for="birthday" class="sr-only">{{ section.settings.birthday_label }}</label>
+          <input
+            type="date"
+            name="customer[note][Birthday]"
+            id="birthday"
+            class="w-full bg-transparent rounded-md text-white px-3 py-2 border placeholder:text-white placeholder:opacity-75 duration-300 hover:opacity-75">
+        </div>
+
+        <div class="my-2">
+          <label for="email_address" class="sr-only">{{ section.settings.email_label }}</label>
+          <input
+            type="email"
+            name="customer[email]"
+            id="email_address"
+            autocomplete="email"
+            class="w-full bg-transparent rounded-md text-white px-3 py-2 border placeholder:text-white placeholder:opacity-75 duration-300 hover:opacity-75"
+            placeholder="{{ section.settings.email_label }}">
+        </div>
+
+
+        <div class="my-4">
+          <label for="password" class="sr-only">{{ section.settings.password_label }}</label>
+          <input
+            type="password"
+            name="customer[password]"
+            id="password"
+            autocomplete="new-password"
+            class="w-full bg-transparent rounded-md text-white px-3 py-2 border placeholder:text-white placeholder:opacity-75 duration-300 hover:opacity-75"
+            placeholder="{{ section.settings.password_label }}">
+        </div>
+        <div class="my-2 text-sm">
+          <a href="{{ shop.url }}/account/login" class="duration-300 hover:opacity-75">
+            <p>
+              {{ section.settings.login_link }}</a>
+          </p>
+        </div>
+        <div class="flex justify-center items-center my-4">
+          <button type="submit" class="py-2 text-sm text-white bg-blue__gradient w-7/12 rounded-full duration-300 hover:opacity-75">
+            {{ section.settings.register_btn_text }}
+          </button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Customer register",
+    "settings": [
+      {
+        "type": "text",
+        "id": "login_text",
+        "default": "Register",
+        "label": "Register title"
+      },
+      {
+        "type": "text",
+        "id": "register_btn_text",
+        "default": "Create account",
+        "label": "Login button text"
+      },
+      {
+        "type": "text",
+        "id": "email_label",
+        "default": "Email address",
+        "label": "Email label"
+      },
+      {
+        "type": "text",
+        "id": "password_label",
+        "default": "Password",
+        "label": "Password label"
+      }, {
+        "type": "text",
+        "id": "firstname_label",
+        "default": "Firstname",
+        "label": "Firstname label"
+      }, {
+        "type": "text",
+        "id": "lastname_label",
+        "default": "Lastname",
+        "label": "Lastname label"
+      }, {
+        "type": "text",
+        "id": "birthday_label",
+        "default": "Birthday",
+        "label": "Birthday label"
+      }, {
+        "type": "text",
+        "id": "login_link",
+        "default": "Already have an account? Sign in",
+        "label": "Login link"
+      }
+    ]
+  }
+{% endschema %}
