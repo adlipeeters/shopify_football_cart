@@ -1,0 +1,218 @@
+<form
+  action="{{ routes.cart_url }}"
+  method="POST"
+  novalidate>
+  <div class="flex flex-col gap-y-7 mt-6">
+    {% if cart.item_count > 0 %}
+      {% for item in cart.items %}
+        {% comment %}  {% endcomment %}
+        <div class="flex flex-col gap-y-3">
+          <div class="bg-blue-custom rounded-xl px-8 py-4 flex flex-col items-center justify-center gap-y-1.5">
+            <div class="flex flex-col justify-center items-center">
+              <div>
+                {% assign has_generated_picture = false %}
+                {% for p in item.properties %}
+                  {% if p.first == 'Generated picture' %}
+                    {% assign has_generated_picture = true %}
+                    <img
+                      src="{{p.last}}"
+                      alt="Generated picture"
+                      class="w-24">
+                {% else %}
+                  {% endif %}
+                {% endfor %}
+                {% if has_generated_picture == false %}
+                  <img
+                    src="{{ item | img_url: 'small' }}"
+                    alt="{{ item.title | escape }}"
+                    class="w-24">
+                {% endif %}
+              </div>
+            </div>
+            <hr class="w-full border-1 border-white opacity-20 hover:border-red-500 duration-500" />
+            <div class="flex flex-col items-center justify-center">
+              <script>
+                console.log({{item|json}})
+              </script>
+              <p class="font-medium lg:text-lg xl:text-xl leading-tight">
+                {{ item.product.title }}
+              </p>
+              <p class="font-medium lg:text-lg xl:text-xl leading-tight">
+                {% if item.variant.title != 'Default Title' %}
+                  {{ item.variant.title }}
+                {% endif %}
+              </p>
+            </div>
+            <hr class="w-full border-1 border-white opacity-20 hover:border-red-500 duration-500" />
+            <div class="flex flex-col gap-y-3 items-start justify-center">
+              {% assign stat_title_1 = '' %}
+              {% assign stat_title_2 = '' %}
+              {% assign stat_title_3 = '' %}
+              {% assign stat_title_4 = '' %}
+              {% assign stat_title_5 = '' %}
+              {% assign stat_title_6 = '' %}
+              {% assign stat_value_1 = 0 %}
+              {% assign stat_value_2 = 0 %}
+              {% assign stat_value_3 = 0 %}
+              {% assign stat_value_4 = 0 %}
+              {% assign stat_value_5 = 0 %}
+              {% assign stat_value_6 = 0 %}
+              {% for p in item.properties %}
+                {% if p.first == 'Stat Title 1' %}
+                  {% assign stat_title_1 = p[1] %}
+                {% elsif p.first == 'Stat Title 2' %}
+                  {% assign stat_title_2 = p[1] %}
+                {% elsif p.first == 'Stat Title 3' %}
+                  {% assign stat_title_3 = p[1] %}
+                {% elsif p.first == 'Stat Title 4' %}
+                  {% assign stat_title_4 = p[1] %}
+                {% elsif p.first == 'Stat Title 5' %}
+                  {% assign stat_title_5 = p[1] %}
+                {% elsif p.first == 'Stat Title 6' %}
+                  {% assign stat_title_6 = p[1] %}
+                {% elsif p.first == 'Stat Value 1' %}
+                  {% assign stat_value_1 = p[1] %}
+                {% elsif p.first == 'Stat Value 2' %}
+                  {% assign stat_value_2 = p[1] %}
+                {% elsif p.first == 'Stat Value 3' %}
+                  {% assign stat_value_3 = p[1] %}
+                {% elsif p.first == 'Stat Value 4' %}
+                  {% assign stat_value_4 = p[1] %}
+                {% elsif p.first == 'Stat Value 5' %}
+                  {% assign stat_value_5 = p[1] %}
+                {% elsif p.first == 'Stat Value 6' %}
+                  {% assign stat_value_6 = p[1] %}
+                {% endif %}
+              {% endfor %}
+              <div class="grid grid-cols-2 gap-x-4 font-light opacity-80">
+                <div class="w-full flex justify-between gap-x-2 py-1">
+                  <p class="opacity-70">
+                    {% if stat_value_1 != 0 %}
+                      {{ stat_value_1 }}
+                    {% endif %}
+                  </p>
+                  <p>
+                    {% if stat_title_1 != 0 %}
+                      {{ stat_title_1 }}
+                    {% endif %}
+                  </p>
+                </div>
+                <div class="w-full flex justify-between gap-x-2 py-1">
+                  <p class="opacity-70">
+                    {% if stat_value_2 != 0 %}
+                      {{ stat_value_2 }}
+                    {% endif %}
+                  </p>
+                  <p>
+                    {% if stat_title_2 != 0 %}
+                      {{ stat_title_2 }}
+                    {% endif %}
+                  </p>
+                </div>
+                <div class="w-full flex justify-between gap-x-2 py-1">
+                  <p class="opacity-70">
+                    {% if stat_value_3 != 0 %}
+                      {{ stat_value_3 }}
+                    {% endif %}
+                  </p>
+                  <p>
+                    {% if stat_title_3 != 0 %}
+                      {{ stat_title_3 }}
+                    {% endif %}
+                  </p>
+                </div>
+                <div class="w-full flex justify-between gap-x-2 py-1">
+                  <p class="opacity-70">
+                    {% if stat_value_4 != 0 %}
+                      {{ stat_value_4 }}
+                    {% endif %}
+                  </p>
+                  <p>
+                    {% if stat_title_4 != 0 %}
+                      {{ stat_title_4 }}
+                    {% endif %}
+                  </p>
+                </div>
+                <div class="w-full flex justify-between gap-x-2 py-1">
+                  <p class="opacity-70">
+                    {% if stat_value_5 != 0 %}
+                      {{ stat_value_5 }}
+                    {% endif %}
+                  </p>
+                  <p>
+                    {% if stat_title_5 != 0 %}
+                      {{ stat_title_5 }}
+                    {% endif %}
+                  </p>
+                </div>
+                <div class="w-full flex justify-between gap-x-2 py-1">
+                  <p class="opacity-70">
+                    {% if stat_value_6 != 0 %}
+                      {{ stat_value_6 }}
+                    {% endif %}
+                  </p>
+                  <p>
+                    {% if stat_title_6 != 0 %}
+                      {{ stat_title_6 }}
+                    {% endif %}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <hr class="w-full border-1 border-white opacity-20 hover:border-red-500 duration-500" />
+            <div class="flex flex-col">
+              <p class="font-bold lg:text-xl xl:text-2xl">
+                {{ item.price | money }}
+              </p>
+            </div>
+          </div>
+          <div class="grid grid-cols-5 gap-x-4">
+            <div class="bg-blue-custom col-span-2 flex items-center justify-center rounded-xl p-4">
+              <a class="duration-300 hover:opacity-75" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">
+                {% render 'icon-trash' %}
+              </a>
+            </div>
+            <div class="flex justify-center gap-x-6 bg-blue-custom col-span-3 rounded-xl p-4">
+              <button
+                type="submit"
+                name="update"
+                onclick="changeQuantity('decrement', {{ forloop.index }})"
+                class="rounded-full bg-gray-300 px-3 flex justify-center items-center duration-300 hover:opacity-75">
+                {% render 'icon-minus' %}
+              </button>
+              <div class="flex items-center justify-center">
+                <p class="font-bold text-4xl font-family-kufam translate-y-0.5">
+                  <span id="quantity_item_mobile_{{ forloop.index }}">{{ item.quantity }}</span>
+                  <input
+                    type="hidden"
+                    name="updates[]"
+                    id="updates_mobile_{{ forloop.index }}"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    class="w-20 border p-2 bg-transparent">
+                </p>
+              </div>
+              <button
+                type="submit"
+                name="update"
+                onclick="changeQuantity('increment', {{ forloop.index }})"
+                class="rounded-full bg-blue__gradient px-3 flex justify-center items-center duration-300 hover:opacity-75">
+                {% render 'icon-plus' %}
+              </button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% comment %}  {% endcomment %}
+  {% else %}
+    {% endif %}
+  </div>
+  <div class="flex flex-col gap-y-2 pt-10">
+    <p class="font-normal text-2xl">Subtotal:
+      <span class="font-bold text-3xl">{{ cart.total_price | money }}</span>
+    </p>
+    <p class="opacity-50">
+      <span class="underline underline-offset-2">Shipping</span>
+      & taxes calculated at checkout</p>
+  </div>
+</form>

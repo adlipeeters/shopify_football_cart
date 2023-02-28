@@ -1,0 +1,82 @@
+<!--  grid start-->
+<div class="hidden md:grid grid-cols-6 mt-8 sm:mt-24 gap-x-20 gap-y-20 lg:gap-x-16 xl:gap-x-20 2xl:gap-x-28 2xl:px-28 justify-items-center">
+  <div class="bg-blue__gradient rounded-3xl grid grid-cols-1 col-span-3 lg:col-span-2">
+    <div class="flex justify-center items-center -translate-y-16">
+      <img
+        src="{{ 'icon-how-it-works-pick-card.png' | asset_url }}"
+        alt="pick_a_card_img"
+        class="object-contain">
+    </div>
+    <div class="-translate-y-8 flex justify-center items-center">
+      <div class="flex flex-col justify-center items-center px-12 lg:px-6 xl:px-12 ">
+        <h1 class="text-lg lg:text-xl xl:text-3xl">{{ section.settings.title_1 }}</h1>
+        <p class="text-xs sm:text-base font-normal opacity-70 mt-4 h-24 lg:h-28 xl:h-24  text-center">
+          {{ section.settings.description_1 }}
+        </p>
+        <a
+          href="#"
+          type="button"
+          style="background: var(--background-blue)"
+          class="mt-10 text-white focus:outline-none font-medium rounded-lg text-sm w-full flex justify-center py-3 text-center items-center">
+          {{ section.settings.shop_button }}
+          <span class="mr-2 ml-3">
+            {% render 'icon-arrow-right-rounded' %}
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="bg-blue__gradient rounded-3xl grid grid-cols-1 col-span-3 lg:col-span-2">
+    <div class="flex justify-center items-center -translate-y-16">
+      <img
+        src="{{ 'icon-how-it-works-make-it-yours.png' | asset_url }}"
+        alt="pick_a_card_img"
+        class="object-contain">
+    </div>
+    <div class="-translate-y-8 flex justify-center items-center">
+      <div class="flex flex-col justify-center items-center px-12 lg:px-6 xl:px-12 ">
+        <h1 class="text-lg lg:text-xl xl:text-3xl">{{ section.settings.title_2 }}</h1>
+        <p class="text-xs sm:text-base font-normal opacity-70 mt-4 h-24 lg:h-28 xl:h-24  text-center">
+          {{ section.settings.description_2 }}
+        </p>
+        <a
+          href="#"
+          type="button"
+          style="background: var(--background-blue)"
+          class="mt-10 text-white focus:outline-none font-medium rounded-lg text-sm w-full flex justify-center py-3 text-center items-center">
+          {{ section.settings.photo_guide_button }}
+          <span class="mr-2 ml-3">
+            {% render 'icon-arrow-right-rounded' %}
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="bg-blue__gradient rounded-3xl grid grid-cols-1 col-span-6 w-1/2 lg:w-full lg:col-span-2">
+    <div class="flex justify-center items-center -translate-y-16">
+      <img
+        src="{{ 'icon-how-it-works-place-your-order.png' | asset_url }}"
+        alt="pick_a_card_img"
+        class="object-contain">
+    </div>
+    <div class="-translate-y-8 flex justify-center items-center">
+      <div class="flex flex-col justify-center items-center px-12 lg:px-6 xl:px-12 ">
+        <h1 class="text-lg lg:text-xl xl:text-3xl">{{ section.settings.title_3 }}</h1>
+        <p class="text-xs sm:text-base font-normal opacity-70 mt-4 h-24 lg:h-28 xl:h-24  text-center">
+          {{ section.settings.description_3 }}
+        </p>
+        <a
+          href="#"
+          type="button"
+          style="background: var(--background-blue)"
+          class="mt-10 text-white focus:outline-none font-medium rounded-lg text-sm w-full flex justify-center py-3 text-center items-center">
+          {{ section.settings.how_it_works_button }}
+          <span class="mr-2 ml-3">
+            {% render 'icon-arrow-right-rounded' %}
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  grid end-->

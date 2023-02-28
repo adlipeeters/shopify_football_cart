@@ -3,12 +3,6 @@
     "header": {
       "type": "header"
     },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "featured_collection": "all"
-      }
-    },
     "intro-index": {
       "type": "intro-index"
     },
@@ -32,6 +26,9 @@
     },
     "product-features": {
       "type": "product-features"
+    },
+    "gift-section": {
+      "type": "gift-section"
     }
   },
   "order": [
@@ -44,6 +41,6 @@
     "frequently-asked-questions",
     "get-in-touch",
     "product-features",
-    "featured-collection"
+    "gift-section"
   ]
 }

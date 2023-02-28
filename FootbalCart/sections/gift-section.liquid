@@ -1,0 +1,176 @@
+<style>
+  @keyframes slideInFromLeft {
+    0% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+
+  .gift_slider {
+    cursor: grab;
+  }
+  .gift_slider .slick-slide {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  .gift_slider .slick-center::before {
+    transition: 0.5s;
+  }
+  .gift_slider .slick-center {}
+  .gift_slider .slick-center {
+    transform: scale(1.2);
+    opacity: 1 !important;
+  }
+
+  .gift_slider .center-gift_slider .slick-slide {
+    transition: all 1s ease-in-out;
+  }
+
+  .gift_slider .slick-list {
+    padding-bottom: 50px !important;
+  }
+
+  #gift__gift_slider_wrapper .carousel__arrow-back,
+  #gift__gift_slider_wrapper .carousel__arrow-next {
+    color: #fff;
+    opacity: 0.5;
+    transition: 0.35s;
+  }
+
+
+  #gift__gift_slider_wrapper .carousel__arrow-back:hover,
+  #gift__gift_slider_wrapper .carousel__arrow-next:hover {
+    opacity: 1;
+  }
+
+  .gift_slider .slick-dots li button:before {
+    background-color: transparent;
+    border: 2px solid rgb(129, 129, 129);
+    {% comment %} height: 10px; {% endcomment %}
+    {% comment %} width: 10px; {% endcomment %}
+    border-radius: 50px;
+    text-indent: -9999px;
+    overflow: hidden;
+    margin-top: 32.5px;
+  }
+
+  .gift_slider .slick-dots li.slick-active {
+    transition: 0.35s;
+  }
+
+  .gift_slider .slick-dots li.slick-active button:before {
+    background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 23px;
+    {% comment %} border: 2px solid rgb(129, 129, 129); {% endcomment %}
+    text-indent: -9999px;
+    overflow: hidden;
+    width: 100%;
+  }
+  @media only screen and (max-width: 640px) {
+    .gift_slider .carousel__arrow-back,
+    .gift_slider .carousel__arrow-next {
+      display: none;
+    }
+  }
+</style>
+<div class="flex justify-center items-center my-8 sm:my-32">
+  <div class="container px-6 sm:px-0 flex justify-center items-center flex-col relative">
+    <div class="absolute top-16 m-auto left-0 right-0 flex justify-center h-full">
+      <img
+        src="{{ 'gift_smoke.png' | asset_url }}"
+        class="object-contain"
+        style=""
+        alt="">
+    </div>
+    <div class="w-full">
+      <h1 class="text-center text-3xl sm:text-5xl lg:text-6xl uppercase">{{ section.settings.title }}</h1>
+    </div>
+    <div class="rounded-3xl mt-16 lg:mt-16 md:py-8 flex justify-center w-full sm:px-16 md:px-20 lg:px-44 xl:px-64 2xl:px-120 relative" id="gift__slider_wrapper">
+      <div class="gift_slider flex w-full justify-center items-center">
+        <div class="flex lg:flex-row gap-x-2 md:gap-x-6" style="display:flex; flex-direction:row!important">
+          <div class="flex items-center justify-center w-1/2">
+            <img src="{{ 'aaa.png' | asset_url }}" alt="">
+          </div>
+          <div class="flex flex-col justify-center items-start max-w-sm w-1/2">
+            <h1 class="text-2xl md:text-8xl">03</h1>
+            <h3 class="text-sm md:text-2xl">Amazing gaming setup</h3>
+            <p class="text-xs md:text-base">CardsFlex is the best place to buy football cards in the Middle East.Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.</p>
+          </div>
+        </div>
+        <div class="flex lg:flex-row gap-x-2 md:gap-x-6" style="display:flex; flex-direction:row!important">
+          <div class="flex items-center justify-center w-1/2">
+            <img src="{{ 'aaa.png' | asset_url }}" alt="">
+          </div>
+          <div class="flex flex-col justify-center items-start max-w-sm w-1/2">
+            <h1 class="text-2xl md:text-8xl">03</h1>
+            <h3 class="text-sm md:text-2xl">Amazing gaming setup</h3>
+            <p class="text-xs md:text-base">CardsFlex is the best place to buy football cards in the Middle East.Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="flexd gap-x-6 hidden md:flex absolute translate-y-80 xl:translate-y-96 2xl:translate-y-80 translate-x-60">
+        <button class="carousel__arrow-back bg-slate-900 text-white rounded-full p-1">
+          {% render 'icon-slider-arrow-back' %}
+        </button>
+        <button class="carousel__arrow-next text-blue-custom bg-white rounded-full p-1">
+          {% render 'icon-slider-arrow-next' %}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Product",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "Perfect gift for the big occasion!",
+        "label": "Title"
+      }
+    ]
+  }
+{% endschema %}
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('.gift_slider').slick({
+                dots: true,
+                  centerMode: false,
+                  centerPadding: '60px',
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  speed: 550,
+                  autoplay: false,
+                  autoplaySpeed: 2000,
+                  infinite: true,
+                  prevArrow: $(".carousel__arrow-back"),
+                  nextArrow: $(".carousel__arrow-next"),
+                  cssEase: 'linear',
+                   responsive: [
+                 {
+                   breakpoint: 1280,
+                   settings: {
+                     arrows: false,
+                     centerMode: false,
+                   }
+                 },]
+                  });
+                                               
+                 $('.gift_slider').on('wheel', (function(e) {
+                  e.preventDefault();
+                    if (e.originalEvent.deltaY < 0) {
+                      $(this).slick('slickNext');
+                    } else {
+                      $(this).slick('slickPrev');
+                    }
+                 }));
+                })
+                                         </script>

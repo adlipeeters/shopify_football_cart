@@ -16,13 +16,12 @@
   }
   #intro__text-paragraph {
     font-family: 'Roboto';
-    font-style: normal;
   }
 
   #header__shop_card-button {
-    font-weight: 500;
+    font-weight: 600;
     color: white;
-    padding: 15px 50px;
+    padding: 10px 50px;
     background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);
     transition: 0.35s;
     width: 250px;
@@ -52,7 +51,6 @@
       margin: auto;
     }
     #intro__text-paragraph {
-      max-width: 400px;
       margin: 10px auto auto;
       text-align: center;
     }
@@ -84,17 +82,29 @@
       <div class="w-fit md:w-1/2 flex flex-col justify-center align-center mx-auto">
         <h1 class="text-white whitespace-nowrap leading-none text-4xl md:text-6xl 2xl:text-8xl" id="intro__text-first">THE PERFECT</h1>
         <h1 class="text-white whitespace-nowrap leading-none z-10 text-4xl md:text-6xl 2xl:text-8xl" id="intro__text-second">FOOTBALL GIFT</h1>
-        <p class="text-white lg:leading-7 mt-5 font-light lg:text-2xl tracking-wide" id="intro__text-paragraph">
-          CardsFlex is the best place to buy football cards in the Middle East.Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.
+        <p class="text-white lg:leading-7 mt-5 font-thin lg:text-2xl tracking-wide" id="intro__text-paragraph">
+          CardsFlex is the best place to buy football cards in the Middle East. Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.
         </p>
         <div>
           <a
             href="{{ routes.all_products_collection_url}}"
-            class="heartbeat mt-10 rounded-full"
+            class="mt-10 rounded-full flex items-center"
             id="header__shop_card-button">
             Shop cards
             <span class="translate-x-12">
-              {% render 'icon-arrow-right-rounded' %}
+              {% comment %} {% render 'icon-arrow-right-rounded' %} {% endcomment %}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-8 h-8">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
             </span>
           </a>
         </div>

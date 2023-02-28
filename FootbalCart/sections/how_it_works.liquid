@@ -17,113 +17,67 @@
         <h1 class="text-3xl sm:text-5xl lg:text-6xl">HOW IT WORKS?</h1>
       </div>
 
-      <!--  grid start-->
-      <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 sm:gap-y-20 lg:gap-y-0 place-content-around mt-8 sm:mt-24 px-6 lg:px-0 xl:px-24 gap-x-4 xl:gap-x-16 justify-items-center">
-
-        <!--  first card start-->
-        <div class="w-full rounded-3xl flex sm:flex-col justify-center items-center py-8 sm:py-0" style="background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);">
-          <div class="flex justify-center pl-4 sm:px-0 sm:-translate-y-16">
-            <img
-              src="{{ 'icon-how-it-works-pick-card.png' | asset_url }}"
-              alt="pick_a_card_img"
-              class="hidden sm:block">
-            <img
-              src="{{ 'icon-how-it-works-pick-card_mobile.svg' | asset_url }}"
-              alt="pick_a_card_img"
-              class="sm:hidden w-64">
-          </div>
-          <div class="px-4 sm:px-0 sm:mb-8 flex flex-col justify-center items-center sm:text-center">
-            <h1 class="text-2xl">Pick a Card</h1>
-            <p class="sm:mx-8 text-xs sm:text-base">
-              We have over 35 cool football card designs for you to choose from. All you have to do is find one you like!
-            </p>
-            <div class="w-full px-6 flex justify-center">
-              <a
-                href="#"
-                type="button"
-                style="background: var(--background-blue)"
-                class="mt-6 text-white focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto flex justify-center sm:px-12 py-3 text-center items-center">
-                Shop cards
-                <span class="mr-2 ml-3">
-                  {% render 'icon-arrow-right-rounded' %}
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <!--  first card end-->
-
-        <!--  second card start-->
-
-        <div class="w-full rounded-3xl flex sm:flex-col justify-center items-center py-8 sm:py-0" style="background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);">
-          <div class="flex justify-center pl-4 sm:px-0 sm:-translate-y-16">
-            <img
-              src="{{ 'icon-how-it-works-make-it-yours.png' | asset_url }}"
-              alt="make_it_yours_img"
-              class="hidden sm:block">
-            <img
-              src="{{ 'icon-how-it-works-make-it-yours_mobile.svg' | asset_url }}"
-              alt="pick_a_card_img"
-              class="sm:hidden w-64">
-          </div>
-          <div class="px-4 sm:px-0 sm:mb-8 flex flex-col justify-center items-center sm:text-center">
-            <h1 class="text-2xl">Make it Yours</h1>
-            <p class="sm:mx-8 text-xs sm:text-base">
-              Add your own photo, name, club, and stats with our easy online tool. Our expert designers will do the rest!
-            </p>
-            <div class="w-full px-6 flex justify-center">
-              <a
-                href="#"
-                type="button"
-                style="background: var(--background-blue)"
-                class="mt-6 text-white focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto flex justify-center sm:px-12 py-3 text-center items-center">
-                Shop cards
-                <span class="mr-2 ml-3">
-                  {% render 'icon-arrow-right-rounded' %}
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <!--  second card end-->
-
-        <!--  third card start-->
-
-        <div class="w-full sm:w-1/2 lg:w-full rounded-3xl flex sm:flex-col justify-center items-center py-8 sm:py-0 col-span-1 sm:col-span-2 lg:col-span-1" style="background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);">
-          <div class="flex justify-center pl-4 sm:px-0 sm:-translate-y-16">
-            <img
-              src="{{ 'icon-how-it-works-place-your-order.png' | asset_url }}"
-              alt="place_your_order_img"
-              class="hidden sm:block">
-            <img
-              src="{{ 'icon-how-it-works-place-your-order_mobile.png' | asset_url }}"
-              alt="place_your_order_img"
-              class="sm:hidden w-64">
-          </div>
-          <div class="px-4 sm:px-0 sm:mb-8 flex flex-col justify-center items-center sm:text-center">
-            <h1 class="text-2xl">Place your Order</h1>
-            <p class="sm:mx-8 text-xs sm:text-base">
-              Our team will send you a stunning edited preview in 2-3 days. Once you approve, we’ll bring it to life and ship it to you worldwide!
-            </p>
-            <div class="w-full px-6 flex justify-center">
-              <a
-                href="#"
-                type="button"
-                style="background: var(--background-blue)"
-                class="mt-6 text-white focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto flex justify-center sm:px-12 py-3 text-center items-center">
-                Shop cards
-                <span class="mr-2 ml-3">
-                  {% render 'icon-arrow-right-rounded' %}
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <!--  third card end-->
-
-      </div>
-      <!--  grid end-->
+      {% render 'how_it_works_desktop' %}
+      {% render 'how_it_works_mobile' %}
 
     </div>
   </div>
 </div>
+
+
+{% schema %}
+  {
+    "name": "How it works",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title_1",
+        "default": "Pick a Card",
+        "label": "Card 1 title"
+      },
+      {
+        "type": "text",
+        "id": "description_1",
+        "default": "We have over 35 cool football card designs for you to choose from. All you have to do is find one you like!",
+        "label": "Card 1 description"
+      },
+      {
+        "type": "text",
+        "id": "title_2",
+        "default": "Make it Yours",
+        "label": "Card 2 title"
+      },
+      {
+        "type": "text",
+        "id": "description_2",
+        "default": "Add your own photo, name, club, and stats with our easy online tool. Our expert designers will do the rest!",
+        "label": "Card 2 description"
+      }, {
+        "type": "text",
+        "id": "title_3",
+        "default": "Place your Order",
+        "label": "Card 3 title"
+      }, {
+        "type": "text",
+        "id": "description_3",
+        "default": "Our team will send you a stunning edited preview in 2-3 days. Once you approve, we’ll bring it to life and ship it to you worldwide!",
+        "label": "Card 3 description"
+      }, {
+        "type": "text",
+        "id": "shop_button",
+        "default": "Shop cards",
+        "label": "Shop button"
+      }, {
+        "type": "text",
+        "id": "photo_guide_button",
+        "default": "Photo Guide",
+        "label": "Photo Guide button"
+      }, {
+        "type": "text",
+        "id": "how_it_works_button",
+        "default": "How it Works",
+        "label": "How it Works button"
+      }
+    ]
+  }
+{% endschema %}

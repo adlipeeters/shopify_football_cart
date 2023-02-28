@@ -45,10 +45,10 @@ let stats = {
     index: 6,
   },
 };
-let currIndex = 0;
 
-const indicators = document.getElementsByClassName("screen-indicator");
-const progressElm = document.getElementsByClassName("progress")[0];
+let section_control = {
+  active: "section_card_size",
+};
 
 $(document).ready(function () {
   // getLeaguesData();
@@ -57,6 +57,8 @@ $(document).ready(function () {
   let dominantColor = getDominantColor(canvas);
   // console.log(dominantColor);
   initialiseCanvas();
+  initialiseLeagues();
+  initialiseCountries();
 
   $(".tab-item").click(function () {
     let id = $(this).attr("data-attr");
@@ -67,14 +69,14 @@ $(document).ready(function () {
   });
 
   $(".player__position").on("click", function () {
-    $(".empty-svg").removeClass("hidden");
-    $(".check-svg").addClass("hidden");
+    $(".empty-svg").show();
+    $(".check-svg").hide();
     $(this).toggle("selected");
-    $(this).parent().find(".check-svg").removeClass("hidden");
-    $(this).parent().find(".empty-svg").addClass("hidden");
+    $(this).parent().find(".check-svg").show();
+    $(this).parent().find(".empty-svg").hide();
 
     $("#img__position").text($(this).val());
-    $('input[name="properties[player_position]"]').val($(this).val());
+    $('input[name="properties[Player position]"]').val($(this).val());
     profilePosition($(this).val());
 
     if ($(this).val() != "GK") {
@@ -87,7 +89,7 @@ $(document).ready(function () {
 
   $("#custom_player_position").on("keyup", function () {
     let position = $(this).val().toUpperCase();
-    $('input[name="properties[player_position]"]').val(position);
+    $('input[name="properties[Player position]"]').val(position);
     profilePosition(position);
     $("#img__position").text(position);
     if (position != "GK") {
@@ -211,7 +213,7 @@ $(document).ready(function () {
     profileName($(this).val());
   });
 
-  $('input[name="properties[profile-picture]"]').on("change", function () {
+  $('input[name="properties[Profile picture]"]').on("change", function () {
     profileImage(this);
   });
 
@@ -269,59 +271,118 @@ $(document).ready(function () {
     });
   });
 
-  $(".country-slider").slick({
-    dots: false,
-    centerMode: true,
-    centerPadding: "60px",
-    slidesToShow: 5,
-    speed: 250,
-    autoplay: false,
-    autoplaySpeed: 2000,
-    infinite: true,
-    prevArrow: $(".carousel__arrow-back"),
-    nextArrow: $(".carousel__arrow-next"),
-    cssEase: "linear",
-    asNavFor: ".options-for-country",
-    variableWidth: true,
-    responsive: [
-      {
-        breakpoint: 1280,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: "40px",
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: "40px",
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: "40px",
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: "40px",
-          slidesToShow: 1,
-        },
-      },
-    ],
+  $(".country-slider").on("wheel", function (e) {
+    e.preventDefault();
+    if (e.originalEvent.deltaY < 0) {
+      $(this).slick("slickNext");
+    } else {
+      $(this).slick("slickPrev");
+    }
   });
+
+  $(".go_to_country_option").on("click", function () {
+    let index = $(this).attr("slider-index");
+    $(".country-slider").slick("slickGoTo", index);
+  });
+  $(".go_to_league_option").on("click", function () {
+    let index = $(this).attr("slider-index");
+    $(".league-slider").slick("slickGoTo", index);
+  });
+});
+
+$(document).on("change", ".country-group", function () {
+  let url = $(this).attr("flag");
+  profileCountry(url);
+});
+
+$(document).on("change", ".league-group", function () {
+  let url = $(this).attr("badge");
+  profileLeague(url);
+});
+
+$(document).on("click", "#add_to_cart_first_step", function () {
+  console.log($("input[name='properties[User confirmation]']").val());
+  if (
+    $('input[name="properties[Name]"]').val() != "" &&
+    $("input[type='file'][name='properties[Profile picture]']").get(0).files
+      .length != 0 &&
+    $('input[name="properties[Club]"]').val() != "" &&
+    $("input[type='url'][name='properties[Flag]']").val() != "" &&
+    $("input[type='url'][name='properties[Badge]']").val() != "" &&
+    $("input[name='properties[Overall rating]']").val() != "" &&
+    $("input[name='properties[Player position]']").val() != "" &&
+    $("input[name='properties[User confirmation]']").val() != "" &&
+    $("input[type='file'][name='properties[Generated picture]']").get(0).files
+      .length != 0 &&
+    $('input[name="properties[User confirmation]"]').prop("checked") == true
+  ) {
+    $("#tab-1").hide().removeClass("activee");
+    $("#tab-2").show().addClass("activee");
+  } else {
+    $("#toast-warning").slideDown(300);
+    setTimeout(() => {
+      $("#toast-warning").slideUp(300);
+    }, 1500);
+  }
+});
+
+$(document).on("click", "#close-success-modal", function () {
+  $("#success_dialog").hide(300);
+});
+
+$(document).on("click", ".changeSection", function () {
+  console.log(section_control.active);
+  let go_to = $(this).attr("data-section");
+  $("#" + section_control.active).addClass("hidden");
+  $("#" + go_to).removeClass("hidden");
+  if (go_to == "section_card_club") {
+    initialiseLeagues();
+  } else if (go_to == "section_card_country") {
+    initialiseCountries();
+  }
+  section_control.active = $(this).attr("data-section");
+});
+
+// $(window).resize(function () {
+//   let width = $(window).width();
+//   console.log(width);
+//   if (width < 768) {
+//     if (!$("#section_card_club").hasClass("hidden")) {
+//       $("#section_card_club").addClass("hidden");
+//     }
+//   } else {
+//     $("#section_card_club").removeClass("hidden");
+//   }
+// });
+
+// function addToCart() {
+//   let addToCartForm = document.querySelector("#product-form");
+//   let formData = new FormData(addToCartForm);
+
+//   $.ajax({
+//     url: "/cart/add.js",
+//     type: "POST",
+//     dataType: "json",
+//     processData: false,
+//     contentType: false,
+//     data: formData,
+//     success: function (data) {
+//       // Handle successful submission
+//       // console.log(data);
+//       $("#success_dialog").fadeIn();
+//     },
+//     error: function (XMLHttpRequest, textStatus) {
+//       // Handle error
+//       // console.log("Error: " + textStatus);
+//     },
+//   });
+// }
+
+function initialiseLeagues() {
+  if ($(".league-slider").hasClass("slick-initialized")) {
+    $(".league-slider").slick("unslick");
+    $(".options-for-league").slick("unslick");
+  }
 
   $(".league-slider").slick({
     dots: false,
@@ -377,14 +438,6 @@ $(document).ready(function () {
     ],
   });
 
-  $(".options-for-country").slick({
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    fade: true,
-    asNavFor: ".country-slider",
-  });
-
   $(".options-for-league").slick({
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -392,101 +445,76 @@ $(document).ready(function () {
     fade: true,
     asNavFor: ".league-slider",
   });
+}
 
-  $(".country-slider").on("wheel", function (e) {
-    e.preventDefault();
-    if (e.originalEvent.deltaY < 0) {
-      $(this).slick("slickNext");
-    } else {
-      $(this).slick("slickPrev");
-    }
-  });
-
-  $(".go_to_country_option").on("click", function () {
-    let index = $(this).attr("slider-index");
-    $(".country-slider").slick("slickGoTo", index);
-  });
-  $(".go_to_league_option").on("click", function () {
-    let index = $(this).attr("slider-index");
-    $(".league-slider").slick("slickGoTo", index);
-  });
-});
-
-$(document).on("change", ".country-group", function () {
-  let url = $(this).attr("flag");
-  profileCountry(url);
-});
-
-$(document).on("change", ".league-group", function () {
-  let url = $(this).attr("badge");
-  profileLeague(url);
-});
-
-// $(document).on("click", ".submit_btn", function (e) {
-//   e.preventDefault();
-//   setTimeout(() => {
-//     addToCart();
-//   }, 500);
-// });
-
-$(document).on("click", "#add_to_cart_first_step", function () {
-  // $("#success_dialog").show(300);
-  // tab_item
-  let is_completed = false;
-  let fields = {
-    name: $('input[name="properties[name]"]').val(),
-    profile_picture: $(
-      "input[type='file'][name='properties[profile-picture]']"
-    ).get(0).files.length,
-    player_postion: $('input[name="properties[player_position]"]').val(),
-    flag: $("input[type='url'][name='properties[Flag]']").val().trim(),
-    badge: $("input[type='url'][name='properties[Badge]']").val().trim(),
-  };
-
-  console.log($('input[name="properties[name]"]').val());
-  console.log(
-    $("input[type='file'][name='properties[profile-picture]']").get(0).files
-      .length
-  );
-  console.log($('input[name="properties[player_position]"]').val());
-
-  if (!is_completed) {
-    $("#toast-warning").slideDown(300);
-  } else {
-    $("#tab-1").hide(300).removeClass("activee");
-    $("#tab-2").show(300).addClass("activee");
+function initialiseCountries() {
+  if ($(".country-slider").hasClass("slick-initialized")) {
+    $(".country-slider").slick("unslick");
+    $(".options-for-country").slick("unslick");
   }
-  setTimeout(() => {
-    $("#toast-warning").slideUp(300);
-  }, 1500);
-});
 
-$(document).on("click", "#close-success-modal", function () {
-  $("#success_dialog").hide(300);
-});
+  $(".country-slider").slick({
+    dots: false,
+    centerMode: true,
+    centerPadding: "60px",
+    slidesToShow: 5,
+    speed: 250,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    infinite: true,
+    prevArrow: $(".carousel__arrow-back"),
+    nextArrow: $(".carousel__arrow-next"),
+    cssEase: "linear",
+    asNavFor: ".options-for-country",
+    variableWidth: true,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: "40px",
+          slidesToShow: 1,
+        },
+      },
+    ],
+  });
 
-// function addToCart() {
-//   let addToCartForm = document.querySelector("#product-form");
-//   let formData = new FormData(addToCartForm);
-
-//   $.ajax({
-//     url: "/cart/add.js",
-//     type: "POST",
-//     dataType: "json",
-//     processData: false,
-//     contentType: false,
-//     data: formData,
-//     success: function (data) {
-//       // Handle successful submission
-//       // console.log(data);
-//       $("#success_dialog").fadeIn();
-//     },
-//     error: function (XMLHttpRequest, textStatus) {
-//       // Handle error
-//       // console.log("Error: " + textStatus);
-//     },
-//   });
-// }
+  $(".options-for-country").slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    asNavFor: ".country-slider",
+  });
+}
 
 function initialiseCanvas() {
   let imgElement = document.getElementById("featured__image");
@@ -679,46 +707,52 @@ function updateForm(id, price) {
   $("#variant__id").val(id);
   $(".active__variant").removeClass("active__variant");
   $("#selected__variant_id-" + id).addClass("active__variant");
+
+  // testing scroll
+  // Get a reference to the section you want to scroll to
+  // $("#section_profile_picture").show();
+  // const section = document.querySelector("#section_profile_picture");
+  // section.scrollIntoView({ behavior: "smooth" });
 }
 
 function setPosition(type) {
   if (type == 1) {
     $("#position_property_1").text("PAC");
-    $('input[name="properties[player_text_property_position_1]"]').val("PAC");
+    $('input[name="properties[Stat Title 1]"]').val("PAC");
     stats[1].name = "PAC";
     $("#position_property_2").text("DRI");
-    $('input[name="properties[player_text_property_position_2]"]').val("DRI");
+    $('input[name="properties[Stat Title 2]"]').val("DRI");
     stats[2].name = "DRI";
     $("#position_property_3").text("SHO");
-    $('input[name="properties[player_text_property_position_3]"]').val("SHO");
+    $('input[name="properties[Stat Title 3]"]').val("SHO");
     stats[3].name = "SHO";
     $("#position_property_4").text("DEF");
-    $('input[name="properties[player_text_property_position_4]"]').val("DEF");
+    $('input[name="properties[Stat Title 4]"]').val("DEF");
     stats[4].name = "DEF";
     $("#position_property_5").text("PAS");
-    $('input[name="properties[player_text_property_position_5]"]').val("PAS");
+    $('input[name="properties[Stat Title 5]"]').val("PAS");
     stats[5].name = "PAS";
     $("#position_property_6").text("PHY");
-    $('input[name="properties[player_text_property_position_6]"]').val("PHY");
+    $('input[name="properties[Stat Title 6]"]').val("PHY");
     stats[6].name = "PHY";
   } else {
     $("#position_property_1").text("DIV");
-    $('input[name="properties[player_text_property_position_1]"]').val("DIV");
+    $('input[name="properties[Stat Title 1]"]').val("DIV");
     stats[1].name = "DIV";
     $("#position_property_2").text("REF");
-    $('input[name="properties[player_text_property_position_2]"]').val("REF");
+    $('input[name="properties[Stat Title 2]"]').val("REF");
     stats[2].name = "REF";
     $("#position_property_3").text("HAN");
-    $('input[name="properties[player_text_property_position_3]"]').val("HAN");
+    $('input[name="properties[Stat Title 3]"]').val("HAN");
     stats[3].name = "HAN";
     $("#position_property_4").text("SPE");
-    $('input[name="properties[player_text_property_position_4]"]').val("SPE");
+    $('input[name="properties[Stat Title 4]"]').val("SPE");
     stats[4].name = "SPE";
     $("#position_property_5").text("KIC");
-    $('input[name="properties[player_text_property_position_5]"]').val("KIC");
+    $('input[name="properties[Stat Title 5]"]').val("KIC");
     stats[5].name = "KIC";
     $("#position_property_6").text("POS");
-    $('input[name="properties[player_text_property_position_6]"]').val("POS");
+    $('input[name="properties[Stat Title 6]"]').val("POS");
     stats[6].name = "POS";
   }
   profileStats();
@@ -726,9 +760,7 @@ function setPosition(type) {
 
 function enableInputStats() {
   for (let i = 0; i <= 6; i++) {
-    $(
-      'input[name="properties[player_number_property_position_' + i + ']"]'
-    ).prop("disabled", false);
+    $('input[name="properties[Stat Value ' + i + ']"]').prop("disabled", false);
   }
   $("#randomise_btn").attr("disabled", false);
 }
@@ -740,9 +772,7 @@ function randomiseStats() {
     let random = Math.floor(Math.random() * (max - min + 1) + min);
     stats[i].value = random;
     $("#position_number_property_" + i).text(random);
-    $(
-      'input[name="properties[player_number_property_position_' + i + ']"]'
-    ).val(random);
+    $('input[name="properties[Stat Value ' + i + ']"]').val(random);
   }
   profileStats();
 }
@@ -767,24 +797,4 @@ function getDominantColor(canvas) {
     return colorCount[b] - colorCount[a];
   })[0];
   return dominantColor;
-}
-
-function checkStepper() {}
-
-function previous() {
-  // Delay should not be applied when removing class
-  indicators[currIndex].style.transitionDelay = "0s";
-  indicators[currIndex].classList.remove("completed");
-  --currIndex;
-  progressElm.style.height = `${(currIndex / (indicators.length - 1)) * 100}%`;
-  // disableControls();
-}
-
-function next() {
-  ++currIndex;
-  // Delay should be applied when adding class
-  indicators[currIndex].style.transitionDelay = "0.6s";
-  indicators[currIndex].classList.add("completed");
-  progressElm.style.height = `${(currIndex / (indicators.length - 1)) * 100}%`;
-  // disableControls();
 }

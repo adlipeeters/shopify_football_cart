@@ -22,7 +22,7 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium">${country.name.official}</p>
+              <p class="font-medium truncate ">${country.name.official}</p>
               </div>
               </div>
               </label> `;
@@ -43,7 +43,7 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium">${country.name.official}</p>
+              <p class="font-medium truncate ">${country.name.official}</p>
               </div>
               </div>
               </label> `;
@@ -64,7 +64,7 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium">${country.name.official}</p>
+              <p class="font-medium truncate ">${country.name.official}</p>
               </div>
               </div>
               </label> `;
@@ -85,7 +85,7 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium">${country.name.official}</p>
+              <p class="font-medium truncate">${country.name.official}</p>
               </div>
               </div>
               </label> `;
@@ -106,7 +106,7 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium">${country.name.official}</p>
+              <p class="font-medium truncate">${country.name.official}</p>
               </div>
               </div>
               </label> `;
@@ -127,7 +127,7 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium">${country.name.official}</p>
+              <p class="font-medium truncate">${country.name.official}</p>
               </div>
               </div>
               </label> `;
@@ -145,11 +145,13 @@ function getCountries() {
 // };
 
 const getLeaguesData = async () => {
+  console.log('asd')
   try {
     let data = leagues_json_data[0];
     // console.log(data)
     // clubs = [...leagues_json_data[0]];
     for (const [key, value] of Object.entries(data)) {
+      $("#data-league-" + key).empty();
       value.forEach((league) => {
         clubs.push(league)
         let append = `<label class="custom-league-radio my-2">
@@ -167,7 +169,7 @@ const getLeaguesData = async () => {
                     </div>
                     </div>
                     <div>
-                    <p class="font-medium">${league.strTeam}</p>
+                    <p class="font-medium truncate">${league.strTeam}</p>
                     </div>
                     </div>
                     </label> `;

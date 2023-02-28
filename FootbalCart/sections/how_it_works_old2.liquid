@@ -1,0 +1,129 @@
+<style>
+  #how_it_works-background {
+    background: url('{{ 'how_it_works__smoke-background.png' | asset_url }}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 100%;
+  }
+</style>
+
+
+<div class="flex justify-center align-center my-8 sm:my-32 relative">
+  <div id="how_it_works-background" class="h-screen w-screen absolute -translate-y-36 hidden 2xl:block"></div>
+  <div class="container">
+    <div class="flex flex-col">
+      <div class="w-full text-center">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl">HOW IT WORKS?</h1>
+      </div>
+
+      <!--  grid start-->
+      <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 sm:gap-y-20 lg:gap-y-0 place-content-around mt-8 sm:mt-24 px-6 lg:px-0 xl:px-24 gap-x-4 xl:gap-x-28 justify-items-center">
+
+        <!--  first card start-->
+        <div class="w-full rounded-3xl flex sm:flex-col justify-center items-center py-8 sm:py-0" style="background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);">
+          <div class="flex justify-center pl-4 sm:px-0 sm:-translate-y-16">
+            <img
+              src="{{ 'icon-how-it-works-pick-card.png' | asset_url }}"
+              alt="pick_a_card_img"
+              class="hidden sm:block">
+            <img
+              src="{{ 'icon-how-it-works-pick-card_mobile.svg' | asset_url }}"
+              alt="pick_a_card_img"
+              class="sm:hidden w-64">
+          </div>
+          <div class="px-4 sm:px-0 sm:mb-8 flex flex-col gap-y-6 justify-center items-center sm:text-center -mt-8">
+            <h1 class="text-3xl">Pick a Card</h1>
+            <p class="sm:mx-12 text-xs sm:text-base font-normal opacity-70">
+              We have over 35 cool football card designs for you to choose from. All you have to do is find one you like!
+            </p>
+            <div class="w-full px-6 flex justify-center">
+              <a
+                href="#"
+                type="button"
+                style="background: var(--background-blue)"
+                class="mt-6 text-white focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto flex justify-center sm:px-12 py-3 text-center items-center">
+                Shop cards
+                <span class="mr-2 ml-3">
+                  {% render 'icon-arrow-right-rounded' %}
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!--  first card end-->
+
+        <!--  second card start-->
+
+        <div class="w-full rounded-3xl flex sm:flex-col justify-center items-center py-8 sm:py-0" style="background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);">
+          <div class="flex justify-center pl-4 sm:px-0 sm:-translate-y-16">
+            <img
+              src="{{ 'icon-how-it-works-make-it-yours.png' | asset_url }}"
+              alt="make_it_yours_img"
+              class="hidden sm:block">
+            <img
+              src="{{ 'icon-how-it-works-make-it-yours_mobile.svg' | asset_url }}"
+              alt="pick_a_card_img"
+              class="sm:hidden w-64">
+          </div>
+          <div class="px-4 sm:px-0 sm:mb-8 flex flex-col justify-center items-center sm:text-center">
+            <h1 class="text-2xl">Make it Yours</h1>
+            <p class="sm:mx-12 text-xs sm:text-base font-normal opacity-70">
+              Add your own photo, name, club, and stats with our easy online tool. Our expert designers will do the rest!
+            </p>
+            <div class="w-full px-6 flex justify-center">
+              <a
+                href="#"
+                type="button"
+                style="background: var(--background-blue)"
+                class="mt-6 text-white focus:outline-none font-medium rounded-full text-sm w-full flex justify-center sm:px-12 py-2 text-center items-center">
+                Shop cards
+                <span class="mr-2 ml-3">
+                  {% render 'icon-arrow-right-rounded' %}
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!--  second card end-->
+
+        <!--  third card start-->
+
+        <div class="w-full sm:w-1/2 lg:w-full rounded-3xl flex sm:flex-col justify-center items-center py-8 sm:py-0 col-span-1 sm:col-span-2 lg:col-span-1" style="background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);">
+          <div class="flex justify-center pl-4 sm:px-0 sm:-translate-y-16">
+            <img
+              src="{{ 'icon-how-it-works-place-your-order.png' | asset_url }}"
+              alt="place_your_order_img"
+              class="hidden sm:block">
+            <img
+              src="{{ 'icon-how-it-works-place-your-order_mobile.png' | asset_url }}"
+              alt="place_your_order_img"
+              class="sm:hidden w-64">
+          </div>
+          <div class="px-4 sm:px-0 sm:mb-8 flex flex-col justify-center items-center sm:text-center">
+            <h1 class="text-2xl">Place your Order</h1>
+            <p class="sm:mx-12 text-xs sm:text-base font-normal opacity-70">
+              Our team will send you a stunning edited preview in 2-3 days. Once you approve, we’ll bring it to life and ship it to you worldwide!
+            </p>
+            <div class="w-full px-6 flex justify-center">
+              <a
+                href="#"
+                type="button"
+                style="background: var(--background-blue)"
+                class="mt-6 text-white focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto flex justify-center sm:px-12 py-3 text-center items-center">
+                Shop cards
+                <span class="mr-2 ml-3">
+                  {% render 'icon-arrow-right-rounded' %}
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!--  third card end-->
+
+      </div>
+      <!--  grid end-->
+
+    </div>
+  </div>
+</div>

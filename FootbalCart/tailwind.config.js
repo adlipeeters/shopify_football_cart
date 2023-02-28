@@ -14,6 +14,13 @@ module.exports = {
       height: {
         94: "22rem",
       },
+      padding: {
+        "480px": "480px",
+        120: "480px",
+      },
+      screens: {
+        xxs: "425px", // min-width
+      },
     },
     fontFamily: {
       Roboto: ["Roboto", "sans-serif"],
