@@ -1,7 +1,8 @@
 h1,
 .shop__name,
 .footer__logo {
-    font-family: 'Kufam', sans-serif;
+    /* font-family: 'Kufam', sans-serif; */
+    font-family: 'Poppins', sans-serif;
     font-weight: 800 !important;
     font-style: italic;
 }
@@ -11,7 +12,8 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Kufam', sans-serif;
+    /* font-family: 'Kufam', sans-serif; */
+    font-family: 'Poppins', sans-serif;
     font-weight: 800;
 }
 
@@ -35,7 +37,8 @@ label {
 }
 
 .font-family-kufam {
-    font-family: 'Kufam', sans-serif;
+    /* font-family: 'Kufam', sans-serif; */
+    font-family: 'Poppins', sans-serif;
 }
 
 .font-family-roboto {
