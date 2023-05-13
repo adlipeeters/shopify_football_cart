@@ -1,6 +1,6 @@
-<div class="filter__background">
-  <ul class="help-list">
-    <li>
+<div class="filter__background sticky top-10">
+  <ul class="help-list pl-3" style="list-style-type: disc;!important;padding-left: 1em;">
+    <li class="border-b border-gray-600">
       <div class="flex items-center toggle__filter" id="general_information">
         <div class="text-white rounded-full p-2">
           {% render 'icon-support-general-information' %}
@@ -11,20 +11,21 @@
           </h3>
         </div>
       </div>
-      <div class="answer py-4 ml-16 ">
+      <div class="answer py-4 ml-16">
         {% for article in blog.articles %}
           {% if article.tags contains 'general_information' %}
-            <a
+          <a
               href="{{article.url}}"
               data-href="general_information"
-              class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
-              <p>{{ article.title }}</p>
+              style="text-decoration-color: #D8D8D8!important;"
+              class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link{% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
+              <p class="py-2"><span class="mr-2">•</span>{{ article.title }}</p>
             </a>
           {% endif %}
         {% endfor %}
       </div>
     </li>
-    <li>
+    <li class="border-b border-gray-600">
       <div class="flex items-center toggle__filter" id="delivery">
         <div class="text-white  rounded-full p-2">
           {% render 'icon-support-delivery' %}
@@ -41,14 +42,15 @@
             <a
               href="{{article.url}}"
               data-href="delivery"
+              style="text-decoration-color: #D8D8D8!important;"
               class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
-              <p>{{ article.title }}</p>
+              <p class="py-2">{{ article.title }}</p>
             </a>
           {% endif %}
         {% endfor %}
       </div>
     </li>
-    <li>
+    <li class="border-b border-gray-600">
       <div class="flex items-center toggle__filter" id="order">
         <div class="text-white  rounded-full p-2">
           {% render 'icon-support-order' %}
@@ -65,14 +67,15 @@
             <a
               href="{{article.url}}"
               data-href="order"
+              style="text-decoration-color: #D8D8D8!important;"
               class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
-              <p>{{ article.title }}</p>
+              <p class="py-2">{{ article.title }}</p>
             </a>
           {% endif %}
         {% endfor %}
       </div>
     </li>
-    <li>
+    <li class="border-b border-gray-600">
       <div class="flex items-center toggle__filter" id="technical">
         <div class="text-white  rounded-full p-2">
           {% render 'icon-support-technical' %}
@@ -89,14 +92,15 @@
             <a
               href="{{article.url}}"
               data-href="technical"
+              style="text-decoration-color: #D8D8D8!important;"
               class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
-              <p>{{ article.title }}</p>
+              <p class="py-2">{{ article.title }}</p>
             </a>
           {% endif %}
         {% endfor %}
       </div>
     </li>
-    <li>
+    <li class="border-b border-gray-600">
       <div class="flex items-center toggle__filter" id="payment">
         <div class="text-white  rounded-full p-2">
           {% render 'icon-support-payment' %}
@@ -113,8 +117,9 @@
             <a
               href="{{article.url}}"
               data-href="payment"
+              style="text-decoration-color: #D8D8D8!important;"
               class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
-              <p>{{ article.title }}</p>
+              <p class="py-2">{{ article.title }}</p>
             </a>
           {% endif %}
         {% endfor %}
@@ -137,8 +142,9 @@
             <a
               href="{{article.url}}"
               data-href="return"
+              style="text-decoration-color: #D8D8D8!important;"
               class="mt-2 transition duration-300 ease-in-out hover:opacity-70 info-link {% if current_article == article.handle %}opacity-70 underline underline-offset-4 decoration-white active__tab{%endif%}">
-              <p>{{ article.title }}</p>
+              <p class="py-2">{{ article.title }}</p>
             </a>
           {% endif %}
         {% endfor %}

@@ -86,7 +86,7 @@ ul.filter-list-mobile li .filters:after {
   background-color: white;
   overflow-y: auto;
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
-  transform: translateY(91%);
+  transform: translateY(85%);
   transition: transform 0.3s ease-in-out;
 }
 
@@ -100,8 +100,8 @@ ul.filter-list-mobile li .filters:after {
   <div class="flex justify-center align-center my-8 md:my-32"> <div class="container document__click">
     <div class="flex flex-col">
       <div class="w-full text-center sm:text-start">
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">Best selling football cards</h1>
-        <p class="font-light">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since.</p>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">{{ section.settings.title }}</h1>
+        <p class="font-light">{{ section.settings.description }}</p>
       </div>
 
       <div class="w-full">{% comment %} {% render 'products-filter' %} {% endcomment %}
@@ -114,7 +114,7 @@ ul.filter-list-mobile li .filters:after {
         {% comment %} mobile filter {% endcomment %}
         <div class="md:hidden mobile__filter z-30 rounded-t-2xl bg-blue__gradient">
           <button class="open-filter fixed top-0 h-14 w-full px-6" type="button">
-            <div class="flex items-center justify-between mt-2">
+            <div class="flex items-center justify-between mt-6">
               <div>
                 <p class="font-family-kufam text-xl font-semibold italic">Filters</p>
               </div>
@@ -124,7 +124,7 @@ ul.filter-list-mobile li .filters:after {
             </div>
           </button>
           <div class="w-full flex justify-center items-center px-6">
-            <hr class="w-full mt-14 opacity-30">
+            <hr class="w-full mt-20 opacity-30">
           </div>
           <div class="filter-options px-6">
             {% render 'products-filter-mobile' %}
@@ -135,7 +135,7 @@ ul.filter-list-mobile li .filters:after {
           {% paginate collection.products by section.settings.number_of_products_per_page %}
             <div class="px-4 sm:px-0 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-4 sm:gap-x-8 xl:gap-x-16 gap-y-8 place-items-center">
               {% for product in collection.products %}
-                {% if product.collections.first.handle != "additional-options" %}
+                {% if product.collections.first.handle != "additional-options" and product.type != "Gift Card" %}
                   {%- render 'product-card', product: product -%}
                 {% endif %}
               {% else %}
@@ -241,11 +241,18 @@ ul.filter-list-mobile li .filters:after {
         "id": "number_of_products_per_page",
         "default": 16,
         "label": "Number of products per page"
-      }, {
-        "type": "number",
-        "id": "size",
-        "default": 22,
-        "label": "Title size"
+      }, 
+      {
+        "type": "text",
+        "id": "title",
+        "default": "Best selling football cards",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since.",
+        "label": "Description"
       }
     ]
   }

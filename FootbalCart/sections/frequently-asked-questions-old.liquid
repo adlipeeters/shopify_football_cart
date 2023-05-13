@@ -1,0 +1,245 @@
+<style>
+  ul.accordion-list {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+
+  }
+  ul.accordion-list li {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 15px 20px;
+    margin: 0 auto 15px;
+    {% comment %}
+      border: 1px solid #eee;
+    {% endcomment %}
+    border-radius: 5px;
+    cursor: pointer;
+    background: #232D39;
+    box-shadow: 8px 10px 11px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+  ul.accordion-list li.active h3:after {
+    transform: rotate(180deg);
+  }
+  ul.accordion-list li h3 {
+    font-weight: 700;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+  }
+  ul.accordion-list li h3:after {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    content: "\f107";
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    font-size: 17px;
+  }
+</style>
+<div class="flex justify-center items-center my-8 sm:my-32">
+  <div class="container px-6 sm:px-0">
+    <div class="flex flex-col">
+      <div class="w-full">
+        <h1 class="text-center sm:text-start text-3xl sm:text-5xl lg:text-6xl">{{ section.settings.title }}</h1>
+      </div>
+      <div class="mt-8 sm:mt-16">
+        <ul class="accordion-list">
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full mr-3">
+                <h3>{{ section.settings.card_title_1 }}</h3>
+              </div>
+            </div>
+            <div class="answer py-4 ml-16">
+              <p class="text-gray-400">{{ section.settings.card_subtitle_1 }}</p>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full mr-3">
+                <h3>{{ section.settings.card_title_2 }}</h3>
+              </div>
+            </div>
+            <div class="answer py-4 ml-16">
+              <p class="text-gray-400">{{ section.settings.card_subtitle_2 }}</p>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full mr-3">
+                <h3>{{ section.settings.card_title_3 }}</h3>
+              </div>
+            </div>
+            <div class="answer py-4 ml-16">
+              <p class="text-gray-400">{{ section.settings.card_subtitle_3 }}</p>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full mr-3">
+                <h3>{{ section.settings.card_title_4 }}</h3>
+              </div>
+            </div>
+            <div class="answer py-4 ml-16">
+              <p class="text-gray-400">{{ section.settings.card_subtitle_4 }}</p>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full mr-3">
+                <h3>{{ section.settings.card_title_5 }}</h3>
+              </div>
+            </div>
+            <div class="answer py-4 ml-16">
+              <p class="text-gray-400">{{ section.settings.card_subtitle_5 }}</p>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <div class="text-white bg-gray-400 rounded-full p-2">
+                {% render 'icon-question' %}
+              </div>
+              <div class="ml-4 w-full mr-3">
+                <h3>{{ section.settings.card_title_6 }}</h3>
+              </div>
+            </div>
+            <div class="answer py-4 ml-16">
+              <p class="text-gray-400">{{ section.settings.card_subtitle_6 }}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Questions",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "Frequently asked questions",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "card_title_1",
+        "default": "What is CardsFlex?",
+        "label": "Card 1 Title"
+      },
+      {
+        "type": "text",
+        "id": "card_subtitle_1",
+        "default": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?",
+        "label": "Card 1 Description"
+      },
+      {
+        "type": "text",
+        "id": "card_title_2",
+        "default": "Are CardsPlug cards high quality?",
+        "label": "Card 2 Title"
+      },
+      {
+        "type": "text",
+        "id": "card_subtitle_2",
+        "default": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?",
+        "label": "Card 2 Description"
+      },
+      {
+        "type": "text",
+        "id": "card_title_3",
+        "default": "What are the cards made of?",
+        "label": "Card 3 Title"
+      },
+      {
+        "type": "text",
+        "id": "card_subtitle_3",
+        "default": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?",
+        "label": "Card 3 Description"
+      },
+      {
+        "type": "text",
+        "id": "card_title_4",
+        "default": "Can I view my order before it is sent?",
+        "label": "Card 4 Title"
+      },
+      {
+        "type": "text",
+        "id": "card_subtitle_4",
+        "default": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?",
+        "label": "Card 4 Description"
+      },
+      {
+        "type": "text",
+        "id": "card_title_5",
+        "default": "Will CardsPlug edit my photo for me?",
+        "label": "Card 5 Title"
+      },
+      {
+        "type": "text",
+        "id": "card_subtitle_5",
+        "default": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?",
+        "label": "Card 5 Description"
+      },
+      {
+        "type": "text",
+        "id": "card_title_6",
+        "default": "What shall I do if I received the wrong cads(s)?",
+        "label": "Card 6 Title"
+      },
+      {
+        "type": "text",
+        "id": "card_subtitle_6",
+        "default": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique impedit quod repellat, officiis, quas perspiciatis iste, vero minus consectetur sint architecto! At tempore quod reprehenderit quidem expedita harum laboriosam veritatis quaerat, atque amet suscipit, ullam, nemo facere culpa sunt. Fuga doloribus incidunt unde sit natus ullam. Laudantium labore atque accusantium?",
+        "label": "Card 6 Description"
+      }
+    ]
+  }
+{% endschema %}
+
+<script>
+  $(document).ready(function() {
+    $('.accordion-list > li > .answer').hide();
+    $('.accordion-list > li').click(function() {
+      if ($(this).hasClass("active")) {
+        $(this).removeClass("active").find(".answer").slideUp();
+      } else {
+        {% comment %} $(".accordion-list > li.active .answer").slideUp(); {% endcomment %}
+        {% comment %} $(".accordion-list > li.active").removeClass("active"); {% endcomment %}
+        $(this).addClass("active").find(".answer").slideDown();
+      }
+      return false;
+    });
+  });
+</script>

@@ -49,8 +49,12 @@
   .gift_slider .slick-dots li button:before {
     background-color: transparent;
     border: 2px solid rgb(129, 129, 129);
-    {% comment %} height: 10px; {% endcomment %}
-    {% comment %} width: 10px; {% endcomment %}
+    {% comment %}
+      height: 10px;
+    {% endcomment %}
+    {% comment %}
+      width: 10px;
+    {% endcomment %}
     border-radius: 50px;
     text-indent: -9999px;
     overflow: hidden;
@@ -65,7 +69,9 @@
     background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 23px;
-    {% comment %} border: 2px solid rgb(129, 129, 129); {% endcomment %}
+    {% comment %}
+      border: 2px solid rgb(129, 129, 129);
+    {% endcomment %}
     text-indent: -9999px;
     overflow: hidden;
     width: 100%;
@@ -93,24 +99,55 @@
       <div class="gift_slider flex w-full justify-center items-center">
         <div class="flex lg:flex-row gap-x-2 md:gap-x-6" style="display:flex; flex-direction:row!important">
           <div class="flex items-center justify-center w-1/2">
-            <img src="{{ 'aaa.png' | asset_url }}" alt="">
+            <img src="{{ 'aaa.png' | asset_url }}" alt="alt">
           </div>
           <div class="flex flex-col justify-center items-start max-w-sm w-1/2">
-            <h1 class="text-2xl md:text-8xl">03</h1>
-            <h3 class="text-sm md:text-2xl">Amazing gaming setup</h3>
-            <p class="text-xs md:text-base">CardsFlex is the best place to buy football cards in the Middle East.Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.</p>
+            <h1 class="text-2xl md:text-8xl">{{ section.settings.card_1_number }}</h1>
+            <h3 class="text-sm md:text-2xl">{{ section.settings.card_1_title }}</h3>
+            <p class="text-xs md:text-base">{{ section.settings.card_1_description }}</p>
           </div>
         </div>
         <div class="flex lg:flex-row gap-x-2 md:gap-x-6" style="display:flex; flex-direction:row!important">
           <div class="flex items-center justify-center w-1/2">
-            <img src="{{ 'aaa.png' | asset_url }}" alt="">
+            <img src="{{ 'aaa.png' | asset_url }}" alt="alt">
           </div>
           <div class="flex flex-col justify-center items-start max-w-sm w-1/2">
-            <h1 class="text-2xl md:text-8xl">03</h1>
-            <h3 class="text-sm md:text-2xl">Amazing gaming setup</h3>
-            <p class="text-xs md:text-base">CardsFlex is the best place to buy football cards in the Middle East.Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.</p>
+            <h1 class="text-2xl md:text-8xl">{{ section.settings.card_2_number }}</h1>
+            <h3 class="text-sm md:text-2xl">{{ section.settings.card_2_title }}</h3>
+            <p class="text-xs md:text-base">{{ section.settings.card_2_description }}</p>
           </div>
         </div>
+        <div class="flex lg:flex-row gap-x-2 md:gap-x-6" style="display:flex; flex-direction:row!important">
+          <div class="flex items-center justify-center w-1/2">
+            <img src="{{ 'aaa.png' | asset_url }}" alt="alt">
+          </div>
+          <div class="flex flex-col justify-center items-start max-w-sm w-1/2">
+            <h1 class="text-2xl md:text-8xl">{{ section.settings.card_3_number }}</h1>
+            <h3 class="text-sm md:text-2xl">{{ section.settings.card_3_title }}</h3>
+            <p class="text-xs md:text-base">{{ section.settings.card_3_description }}</p>
+          </div>
+        </div>
+        <div class="flex lg:flex-row gap-x-2 md:gap-x-6" style="display:flex; flex-direction:row!important">
+          <div class="flex items-center justify-center w-1/2">
+            <img src="{{ 'aaa.png' | asset_url }}" alt="alt">
+          </div>
+          <div class="flex flex-col justify-center items-start max-w-sm w-1/2">
+            <h1 class="text-2xl md:text-8xl">{{ section.settings.card_4_number }}</h1>
+            <h3 class="text-sm md:text-2xl">{{ section.settings.card_4_title }}</h3>
+            <p class="text-xs md:text-base">{{ section.settings.card_4_description }}</p>
+          </div>
+        </div>
+        <div class="flex lg:flex-row gap-x-2 md:gap-x-6" style="display:flex; flex-direction:row!important">
+          <div class="flex items-center justify-center w-1/2">
+            <img src="{{ 'aaa.png' | asset_url }}" alt="alt">
+          </div>
+          <div class="flex flex-col justify-center items-start max-w-sm w-1/2">
+            <h1 class="text-2xl md:text-8xl">{{ section.settings.card_5_number }}</h1>
+            <h3 class="text-sm md:text-2xl">{{ section.settings.card_5_title }}</h3>
+            <p class="text-xs md:text-base">{{ section.settings.card_5_description }}</p>
+          </div>
+        </div>
+
 
       </div>
       <div class="flexd gap-x-6 hidden md:flex absolute translate-y-80 xl:translate-y-96 2xl:translate-y-80 translate-x-60">
@@ -134,6 +171,84 @@
         "id": "title",
         "default": "Perfect gift for the big occasion!",
         "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "card_1_number",
+        "default": "01",
+        "label": "1 Card Number"
+      },
+      {
+        "type": "text",
+        "id": "card_1_title",
+        "default": "Unique Birthday gift",
+        "label": "1 Card Title"
+      },
+      {
+        "type": "text",
+        "id": "card_1_description",
+        "default": "CardsFlex is the best place to buy football cards in the Middle East.Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.",
+        "label": "1 Card Title"
+      }, {
+        "type": "text",
+        "id": "card_2_number",
+        "default": "02",
+        "label": "2 Card Number"
+      }, {
+        "type": "text",
+        "id": "card_2_title",
+        "default": "Team awards night",
+        "label": "2 Card Title"
+      }, {
+        "type": "text",
+        "id": "card_2_description",
+        "default": "CardsFlex is the best place to buy football cards in the Middle East.Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.",
+        "label": "2 Card Title"
+      }, {
+        "type": "text",
+        "id": "card_3_number",
+        "default": "03",
+        "label": "3 Card Number"
+      }, {
+        "type": "text",
+        "id": "card_3_title",
+        "default": "Football bedroom decor",
+        "label": "3 Card Title"
+      }, {
+        "type": "text",
+        "id": "card_3_description",
+        "default": "CardsFlex is the best place to buy football cards in the Middle East.Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.",
+        "label": "3 Card Title"
+      }, {
+        "type": "text",
+        "id": "card_4_number",
+        "default": "04",
+        "label": "4 Card Number"
+      }, {
+        "type": "text",
+        "id": "card_4_title",
+        "default": "Amazing gaming setup",
+        "label": "4 Card Title"
+      }, {
+        "type": "text",
+        "id": "card_4_description",
+        "default": "CardsFlex is the best place to buy football cards in the Middle East.Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.",
+        "label": "4 Card Title"
+      }, {
+        "type": "text",
+        "id": "card_5_number",
+        "default": "05",
+        "label": "5 Card Number"
+      }, {
+        "type": "text",
+        "id": "card_5_title",
+        "default": "Training motivation",
+        "label": "5 Card Title"
+      }, {
+        "type": "text",
+        "id": "card_5_description",
+        "default": "CardsFlex is the best place to buy football cards in the Middle East.Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.",
+        "label": "5 Card Title"
       }
     ]
   }
@@ -142,35 +257,34 @@
 <script type="text/javascript">
   $(document).ready(function() {
   $('.gift_slider').slick({
-                dots: true,
-                  centerMode: false,
-                  centerPadding: '60px',
-                  slidesToShow: 1,
-                  slidesToScroll: 1,
-                  speed: 550,
-                  autoplay: false,
-                  autoplaySpeed: 2000,
-                  infinite: true,
-                  prevArrow: $(".carousel__arrow-back"),
-                  nextArrow: $(".carousel__arrow-next"),
-                  cssEase: 'linear',
-                   responsive: [
-                 {
-                   breakpoint: 1280,
-                   settings: {
-                     arrows: false,
-                     centerMode: false,
-                   }
-                 },]
-                  });
-                                               
-                 $('.gift_slider').on('wheel', (function(e) {
-                  e.preventDefault();
-                    if (e.originalEvent.deltaY < 0) {
-                      $(this).slick('slickNext');
-                    } else {
-                      $(this).slick('slickPrev');
-                    }
-                 }));
-                })
-                                         </script>
+                        dots: true,
+                        centerMode: false,
+                        centerPadding: '60px',
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        speed: 550,
+                        autoplay: false,
+                        autoplaySpeed: 2000,
+                        infinite: true,
+                        prevArrow: $(".carousel__arrow-back"),
+                        nextArrow: $(".carousel__arrow-next"),
+                        cssEase: 'linear',
+                         responsive: [
+                       {
+                         breakpoint: 1280,
+                         settings: {
+                           arrows: false,
+                           centerMode: false,
+                         }
+                       },]
+                        });
+                                                     
+                       $('.gift_slider').on('wheel', (function(e) {
+                        e.preventDefault();
+                          if (e.originalEvent.deltaY < 0) {
+                            $(this).slick('slickNext');
+                          } else {
+                            $(this).slick('slickPrev');
+                          }
+                       }));
+                      })</script>

@@ -102,7 +102,8 @@
                     id="product-canvas"
                     width="350"
                     height="500"
-                    crossOrigin="anonymous"></canvas>
+                    crossOrigin="anonymous"
+                    style="z-index: -1111;"></canvas>
                   <img
                     class="object-cover hidden"
                     src="{{ product.featured_image | img_url: 'large' }}"
@@ -125,11 +126,11 @@
               <section id="section_card_size">
                 <div class="bg-blue__gradient p-6 rounded-lg">
                   <div class="">
-                    <h3 class="text-xl md:text-2xl lg:text-3xl">1. Card Size</h3>
+                    <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_1 }}</h3>
                   </div>
                   <div>
                     <div>
-                      <label for="" class="uppercase text-xs">SELECT THE SIZE OF YOUR PERSONAL CARD</label>
+                      <label for="" class="uppercase text-xs">{{ section.settings.step_label_1 }}</label>
 
                       <!-- Current price start -->
                       <div class="my-3" id="price-{{ section.id }}">
@@ -163,11 +164,82 @@
                     </div>
                     <div class="flex justify-center flex-col gap-y-4">
                       <div class="flex items-center">
-                        <div class="text-white">
-                          {% render 'icon-info' %}
-                        </div>
-                        <div class="ml-1">
-                          <p class="text-xs">Size Guide</p>
+                        <div class="flex relative cursor-pointer z-10">
+                          <div class="text-white" id="info-product-icon">
+                            {% render 'icon-info' %}
+                          </div>
+                          <div class="ml-1">
+                            <span class="text-white text-xs">{{ section.settings.step_1_tooltip }}</span>
+                            <div
+                              class="transition-opacity bg-gray-800 px-4 text-sm text-gray-100 rounded-md absolute opacity-0 -left-3 mt-2"
+                              style="visibility:hidden"
+                              id="info-product-tooltip">
+                              <div class="grid grid-cols-4 gap-x-4 md:gap-x-20 py-2 px-1 md:py-4 md:px-3 w-80 md:w-[600px]">
+                                <div class="flex flex-col justify-start items-center">
+                                  <p>
+                                    Small(A4)
+                                  </p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Height - 29cm</p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Width - 18cm</p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Tickness - 3cm</p>
+                                </div>
+                                <div class="flex flex-col justify-start items-center">
+                                  <p>
+                                    Small(A4)
+                                  </p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Height - 29cm</p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Width - 18cm</p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Tickness - 3cm</p>
+                                </div>
+                                <div class="flex flex-col justify-start items-center">
+                                  <p>
+                                    Small(A4)
+                                  </p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Height - 29cm</p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Width - 18cm</p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Tickness - 3cm</p>
+                                </div>
+                                <div class="flex flex-col justify-start items-center">
+                                  <p>
+                                    Small(A4)
+                                  </p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Height - 29cm</p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Width - 18cm</p>
+                                  <p class="text-[10px] md:text-xs text-gray-400">Tickness - 3cm</p>
+                                </div>
+                              </div>
+                            </div>
+                            {% comment %}  {% endcomment %}
+                          {% comment %} <div class="bg-gray-800">
+                          <div class="grid grid-cols-3 gap-x-4 md:gap-x-12 py-2 px-1 md: md:py-3 md:px-3">
+                          <div class="flex flex-col justify-start items-center">
+                          <p>
+                          Small(A4)
+                          </p>
+                          <p class="text-xs text-gray-400">Height - 29cm</p>
+                          <p class="text-xs text-gray-400">Width - 18cm</p>
+                          <p class="text-xs text-gray-400">Tickness - 3cm</p>
+                          </div>
+                          <div class="flex flex-col justify-start items-center">
+                          <p>
+                          Small(A4)
+                          </p>
+                          <p class="text-xs text-gray-400">Height - 29cm</p>
+                          <p class="text-xs text-gray-400">Width - 18cm</p>
+                          <p class="text-xs text-gray-400">Tickness - 3cm</p>
+                          </div>
+                          <div class="flex flex-col justify-start items-center">
+                          <p>
+                          Small(A4)
+                          </p>
+                          <p class="text-xs text-gray-400">Height - 29cm</p>
+                          <p class="text-xs text-gray-400">Width - 18cm</p>
+                          <p class="text-xs text-gray-400">Tickness - 3cm</p>
+                          </div>
+                          </div>
+                          </div> {% endcomment %}
+                            {% comment %}  {% endcomment %}
+                          </div>
                         </div>
                       </div>
                       <div class="flex items-center justify-end gap-x-4">
@@ -196,11 +268,11 @@
                 style="">
                 <div class="bg-blue__gradient p-6 rounded-lg mt-12">
                   <div class="">
-                    <h3 class="text-xl md:text-2xl lg:text-3xl">2. Profile</h3>
+                    <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_2 }}</h3>
                   </div>
                   <div>
                     <div>
-                      <label for="name" class="text-xs uppercase">Name</label>
+                      <label for="name" class="text-xs uppercase">{{ section.settings.step_label_2 }}</label>
                     </div>
                     <div class="flex justify-between py-4">
                       <input
@@ -212,11 +284,11 @@
                     </div>
                   </div>
                   <div class="mt-16">
-                    <h3 class="text-xl md:text-2xl lg:text-3xl">3. Upload Picture</h3>
+                    <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_3 }}</h3>
                   </div>
                   <div>
                     <div>
-                      <label for="profile-picture" class="text-xs uppercase">Choose an image from your phone or computer</label>
+                      <label for="profile-picture" class="text-xs uppercase">{{ section.settings.step_label_3 }}</label>
                     </div>
                     <div class="flex justify-between py-4 bordered border-dashed border-white border-2 relative h-64 mt-2 rounded cursor-pointer">
                       <div class="absolute flex items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer">
@@ -250,7 +322,7 @@
                           {% render 'icon-info' %}
                         </div>
                         <div class="ml-1">
-                          <p class="text-xs">If necessary the background of the image will be removed by our design team.</p>
+                          <p class="text-xs">{{ section.settings.step_tooltip_3 }}</p>
                         </div>
                       </div>
                       <div class="flex items-center gap-x-4">
@@ -291,7 +363,7 @@
                 class="hidden lg:block">
                 <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
                   <div class="">
-                    <h3 class="text-xl md:text-2xl lg:text-3xl">4. Position</h3>
+                    <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_4 }}</h3>
                   </div>
                   <div>
                     <div class="flex justify-between py-4">
@@ -360,7 +432,7 @@
                 class="hidden lg:block">
                 <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
                   <div class="">
-                    <h3 class="text-xl md:text-2xl lg:text-3xl">5. Choose club</h3>
+                    <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_5 }}</h3>
                   </div>
                   <div>
                     <div class="flex justify-between py-4">
@@ -412,7 +484,7 @@
                 class="hidden lg:block">
                 <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
                   <div class="">
-                    <h3 class="text-xl md:text-2xl lg:text-3xl">6. Choose Country</h3>
+                    <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_6 }}</h3>
                   </div>
                   <div>
                     <div class="flex justify-between py-4">
@@ -462,7 +534,7 @@
                 <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
                   <div class="flex justify-between">
                     <div>
-                      <h3 class="text-xl md:text-2xl lg:text-3xl">7. Choose Stats</h3>
+                      <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_7 }}</h3>
                     </div>
                     <div>
                       <button
@@ -475,7 +547,7 @@
                           {% render 'icon-randomise' %}
                         </span>
                         <p class="text-gray-900 ml-6 mr-6">
-                          Randomise
+                          {{ section.settings.step_button_7 }}
                         </p>
                       </button>
                     </div>
@@ -504,7 +576,7 @@
                     data-tab="tab-2"
                     style="color:var(--blue-text)">
                     {{ section.settings.add_to_cart }}</button>
-                  <div class="flex justify-center flex-col gap-y-4 mt-4">
+                  <div class="flex justify-center flex-col gap-y-4 mt-4 lg:hidden">
                     <div class="flex items-center gap-x-4">
                       <button
                         type="button"
@@ -596,7 +668,7 @@
 
 {% schema %}
   {
-    "name": "Product",
+    "name": "Product Page",
     "settings": [
       {
         "type": "text",
@@ -626,10 +698,87 @@
         "id": "warning_error",
         "default": "Complete all fields!",
         "label": "Error Message"
+      }, {
+        "type": "text",
+        "id": "step_title_1",
+        "default": "1. Card Size",
+        "label": "1 Step Title"
+      }, {
+        "type": "text",
+        "id": "step_label_1",
+        "default": "SELECT THE SIZE OF YOUR PERSONAL CARD",
+        "label": "1 Step Label"
+      }, {
+        "type": "text",
+        "id": "step_1_tooltip",
+        "default": "Size Guide",
+        "label": "1 Step Tooltip"
+      }, {
+        "type": "text",
+        "id": "step_title_2",
+        "default": "2. Profile",
+        "label": "2 Step Title"
+      }, {
+        "type": "text",
+        "id": "step_label_2",
+        "default": "Name",
+        "label": "2 Step Label"
+      }, {
+        "type": "text",
+        "id": "step_title_3",
+        "default": "3. Upload Picture",
+        "label": "3 Step Title"
+      }, {
+        "type": "text",
+        "id": "step_label_3",
+        "default": "Choose an image from your phone or computer",
+        "label": "3 Step Label"
+      }, {
+        "type": "text",
+        "id": "step_tooltip_3",
+        "default": "If necessary the background of the image will be removed by our design team.",
+        "label": "3 Step Tooltip"
+      }, {
+        "type": "text",
+        "id": "step_title_4",
+        "default": "4. Position",
+        "label": "4 Step Title"
+      }, {
+        "type": "text",
+        "id": "step_title_5",
+        "default": "5. Choose club",
+        "label": "5 Step Title"
+      }, {
+        "type": "text",
+        "id": "step_title_6",
+        "default": "6. Choose Country",
+        "label": "6 Step Title"
+      }, {
+        "type": "text",
+        "id": "step_title_7",
+        "default": "7. Choose Stats",
+        "label": "7 Step Title"
+      }, {
+        "type": "text",
+        "id": "step_button_7",
+        "default": "Randomise",
+        "label": "7 Step Button Randomise Title"
       }
     ]
   }
 {% endschema %}
+
+<script>
+  $("#info-product-icon").on({
+    mouseenter: function() {
+      $('#info-product-tooltip').css({'opacity': 1, 'visibility': 'visible'});
+    },
+    mouseleave: function() {
+      $('#info-product-tooltip').css({'opacity': 0, 'visibility': 'hidden'});
+    }
+  });
+</script>
+
 <script>
   $(document).ready(function() {
     getCountries()

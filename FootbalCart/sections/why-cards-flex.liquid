@@ -16,14 +16,14 @@
   <div class="container z-10">
     <div class="flex flex-col w-full">
       <div class="w-full text-center md:text-start px-0 xl:pl-20 2xl:pl-28">
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl">WHY CARDSFLEX</h1>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">{{ section.settings.title }}</h1>
       </div>
       <div class="w-full flex flex-col sm:flex-row justify-center align-center mt-4 sm:mt-16">
         <div class="w-full sm:w-1/2 flex flex-col justify-center items-center sm:items-center">
           <div class="flex items-center">
             <img
               src="{{ 'why_cardsflex.png' | asset_url }}"
-              alt=""
+              alt="img"
               class="w-60 sm:w-96 md:w-11/12">
           </div>
         </div>
@@ -33,53 +33,107 @@
               <img
                 src="{{ 'upload_why_cardsflex.png' | asset_url }}"
                 class="w-11 h-11 md:w-16 md:h-16 mr-4"
-                alt="">
-              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">Upload any picture</p>
+                alt="img">
+              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">{{ section.settings.subtitle_1 }}</p>
             </div>
             <div class="flex items-center sm:ml-12">
               <img
-                src="{{ 'upload_why_cardsflex.png' | asset_url }}"
+                src="{{ 'shipping_why_cardsflex.png' | asset_url }}"
                 class="w-11 h-11 md:w-16 md:h-16 mr-4"
-                alt="">
-              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">Worldwide shipping</p>
+                alt="img">
+              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">{{ section.settings.subtitle_2 }}</p>
             </div>
             <div class="flex items-center sm:ml-16">
               <img
-                src="{{ 'upload_why_cardsflex.png' | asset_url }}"
+                src="{{ 'customizable_why_cardsflex.png' | asset_url }}"
                 class="w-11 h-11 md:w-16 md:h-16 mr-4"
-                alt="">
-              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">Fully customizable</p>
+                alt="img">
+              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">{{ section.settings.subtitle_3 }}</p>
             </div>
             <div class="flex items-center sm:ml-16">
               <img
-                src="{{ 'upload_why_cardsflex.png' | asset_url }}"
+                src="{{ 'hanging_why_cardsflex.png' | asset_url }}"
                 class="w-11 h-11 md:w-16 md:h-16 mr-4"
-                alt="">
-              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">Easy wall hanging</p>
+                alt="img">
+              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">{{ section.settings.subtitle_4 }}</p>
             </div>
             <div class="flex items-center sm:ml-12">
               <img
-                src="{{ 'upload_why_cardsflex.png' | asset_url }}"
+                src="{{ 'printing_why_cardsflex.png' | asset_url }}"
                 class="w-11 h-11 md:w-16 md:h-16 mr-4"
-                alt="">
-              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">Preview before printing</p>
+                alt="img">
+              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">{{ section.settings.subtitle_5 }}</p>
             </div>
 
             <div class="flex items-center sm:ml-4">
               <img
-                src="{{ 'upload_why_cardsflex.png' | asset_url }}"
+                src="{{ 'quality_why_cardsflex.png' | asset_url }}"
                 class="w-11 h-11 md:w-16 md:h-16 mr-4"
-                alt="">
-              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">Unbreakable quality</p>
+                alt="img">
+              <p class="text-xl sm:text-2xl lg:text-3xl font-medium">{{ section.settings.subtitle_6 }}</p>
             </div>
           </div>
         </div>
       </div>
       <div class="w-full sm:w-1/2 flex justify-center mt-8 sm:mt-0">
         <div class="flex items-center mt-8 md:mr-6">
-          <button class="text-white text-base sm:text-2xl border border-white px-16 py-1 rounded-3xl hover:opacity-80 transition duration-350">Select your card</button>
+          <a href="{{ routes.all_products_collection_url}}">
+            <button class="text-white text-base sm:text-2xl border border-white px-16 py-1 rounded-3xl hover:opacity-80 transition duration-350">{{ section.settings.go_to_shop }}</button>
+          </a>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+{% schema %}
+  {
+    "name": "Why Cardsflex",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "WHY CARDSFLEX",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "subtitle_1",
+        "default": "Upload any picture",
+        "label": "Subtitle 1"
+      },
+      {
+        "type": "text",
+        "id": "subtitle_2",
+        "default": "GCC shipping",
+        "label": "Subtitle 2"
+      },
+      {
+        "type": "text",
+        "id": "subtitle_3",
+        "default": "Fully customizable",
+        "label": "Subtitle 3"
+      }, {
+        "type": "text",
+        "id": "subtitle_4",
+        "default": "Easy wall hanging",
+        "label": "Subtitle 4"
+      }, {
+        "type": "text",
+        "id": "subtitle_5",
+        "default": "Preview before printing",
+        "label": "Subtitle 5"
+      }, {
+        "type": "text",
+        "id": "subtitle_6",
+        "default": "Unbreakable quality",
+        "label": "Subtitle 6"
+      }, {
+        "type": "text",
+        "id": "go_to_shop",
+        "default": "Select your card",
+        "label": "Shop button"
+      }
+    ]
+  }
+{% endschema %}

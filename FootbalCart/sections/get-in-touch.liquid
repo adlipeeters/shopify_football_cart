@@ -2,14 +2,40 @@
   <div class="container px-6 sm:px-0">
     <div class="flex flex-col items-center justify-center">
       <div class="w-full text-center">
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl">Need more help?<br>Let's talk!</h1>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl">{{ section.settings.title }}</h1>
       </div>
       <div class="w-full mt-8">
-        <p class="text-center md:px-24">CardsFlex is home to the world’s favourite personalised football cards. Our easy football card builder lets you make a real life football card with your own name, photo, and skill ratings. With 100+ designs to choose from and some inspired by FIFA cards seen in games.</p>
+        <p class="text-center md:px-24">{{ section.settings.description }}</p>
       </div>
       <div class="mt-12">
-        <button class="text-white border border-white px-12 py-1 rounded-3xl hover:opacity-80 transition duration-350">Get in touch now</button>
+        <button class="text-white border border-white px-12 py-1 rounded-3xl hover:opacity-80 transition duration-350">{{ section.settings.button-title }}</button>
       </div>
     </div>
   </div>
 </div>
+
+{% schema %}
+  {
+    "name": "Get in touch",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "Need more help?<br>Let's talk!",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "default": "CardsFlex is home to the world’s favourite personalised football cards. Our easy football card builder lets you make a real life football card with your own name, photo, and skill ratings. With 100+ designs to choose from and some inspired by FIFA cards seen in games.",
+        "label": "Description"
+      },
+      {
+        "type": "text",
+        "id": "button-title",
+        "default": "Get in touch now",
+        "label": "Button title"
+      }
+    ]
+  }
+{% endschema %}

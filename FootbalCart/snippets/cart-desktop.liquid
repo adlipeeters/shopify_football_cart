@@ -200,26 +200,26 @@
   {% else %}
     {% endif %}
   </div>
+  {% comment %} subtotal {% endcomment %}
+  <div class="flex items-center justify-between">
+    <div class="flex flex-col gap-y-2">
+      <p class="font-normal text-2xl">Subtotal:
+        <span class="font-bold text-3xl">{{ cart.total_price | money }}</span>
+      </p>
+      <p class="opacity-50">
+        <span class="underline underline-offset-2">Shipping</span>
+        & taxes calculated at checkout</p>
+    </div>
+    <div>
+      <button
+        type="submit"
+        name="checkout"
+        class="bg-blue__gradient rounded-full px-24 py-3 text-white font-medium duration-300 hover:opacity-75 flex justify-center items-center relative">
+        Proceed to checkout
+        <span class="absolute right-7">
+          {% render 'icon-checkout' %}
+        </span>
+      </button>
+    </div>
+  </div>
 </form>
-{% comment %} subtotal {% endcomment %}
-<div class="flex items-center justify-between">
-  <div class="flex flex-col gap-y-2">
-    <p class="font-normal text-2xl">Subtotal:
-      <span class="font-bold text-3xl">{{ cart.total_price | money }}</span>
-    </p>
-    <p class="opacity-50">
-      <span class="underline underline-offset-2">Shipping</span>
-      & taxes calculated at checkout</p>
-  </div>
-  <div>
-    <button
-      type="submit"
-      name="checkout"
-      class="bg-blue__gradient rounded-full px-24 py-3 text-white font-medium duration-300 hover:opacity-75 flex justify-center items-center relative">
-      Proceed to checkout
-      <span class="absolute right-5">
-        {% render 'icon-checkout' %}
-      </span>
-    </button>
-  </div>
-</div>

@@ -1,0 +1,29 @@
+<div class="w-full flex justify-center items-center pt-8 pb-32">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-5 gap-x-12">
+      {% for article in blogs['news'].articles limit: 5 %}
+        <div class="">
+          <div class="w-full">
+            {% if article.image %}
+              <a href="{{ article.url }}">
+                <img
+                  class="w-full h-[150px] bg-cover object-cover"
+                  src="{{ article.image | img_url: 'medium' }}"
+                  alt="{{ article.image.alt }}">
+              </a>
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
+            {% endif %}
+            <div class="mt-2 mb-3">
+              <a href="{{ article.url }}" class="text-xs sm:text-base font-medium hover: text-gray-500">{{ section.settings.blog_read_more }}</a>
+            </div>
+          </div>
+          <div class="w-full">
+            <h1 class="text-xs sm:text-base md:text-md font-medium text-white not-italic">{{ article.title }}</h1>
+            <p class="text-zinc-500 font-light mt-2">{{ article.content | strip_html | truncatewords: 30 }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

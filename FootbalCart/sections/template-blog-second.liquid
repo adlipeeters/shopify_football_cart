@@ -18,7 +18,8 @@
     width: 100%;
     height: auto;
     margin: 0;
-    list-style: none;
+    {% comment %} list-style-type: disc !important; {% endcomment %}
+    {% comment %} list-style: disc !important; {% endcomment %}
     padding: 0 25px;
   }
   ul.help-list li {
@@ -108,7 +109,7 @@
     background-color: white;
     overflow-y: auto;
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
-    transform: translateY(91%);
+    transform: translateY(85%);
     transition: transform 0.3s ease-in-out;
   }
 
@@ -145,7 +146,7 @@
 {% comment %} mobile menu {% endcomment %}
 <div class="md:hidden support_mobile_menu z-30 rounded-t-2xl bg-blue__gradient">
   <button class="open-filter fixed top-0 h-14 w-full px-6" type="button">
-    <div class="flex items-center justify-between mt-2">
+    <div class="flex items-center justify-between mt-6">
       <div>
         <p class="font-family-kufam text-xl font-semibold italic">{{ section.settings.filter }}</p>
       </div>
@@ -155,7 +156,7 @@
     </div>
   </button>
   <div class="w-full flex justify-center items-center px-6">
-    <hr class="w-full mt-14 opacity-30">
+    <hr class="w-full mt-20 opacity-30">
   </div>
   <div class="filter-options px-6">
     {% render 'support-mobile-menu' %}

@@ -15,7 +15,7 @@
     font-weight: 800;
   }
   #intro__text-paragraph {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
   }
 
   #header__shop_card-button {
@@ -80,17 +80,15 @@
   <div class="container">
     <div class="wrapper px-5 flex py-24">
       <div class="w-fit md:w-1/2 flex flex-col justify-center align-center mx-auto">
-        <h1 class="text-white whitespace-nowrap leading-none text-4xl md:text-6xl 2xl:text-8xl" id="intro__text-first">THE PERFECT</h1>
-        <h1 class="text-white whitespace-nowrap leading-none z-10 text-4xl md:text-6xl 2xl:text-8xl" id="intro__text-second">FOOTBALL GIFT</h1>
-        <p class="text-white lg:leading-7 mt-5 font-thin lg:text-2xl tracking-wide" id="intro__text-paragraph">
-          CardsFlex is the best place to buy football cards in the Middle East. Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.
-        </p>
+        <h1 class="text-white whitespace-nowrap leading-none text-4xl md:text-6xl 2xl:text-8xl uppercase" id="intro__text-first">{{ section.settings.title }}</h1>
+        <h1 class="text-white whitespace-nowrap leading-none z-10 text-4xl md:text-6xl 2xl:text-8xl uppercase" id="intro__text-second">{{ section.settings.subtitle }}</h1>
+        <p class="text-white lg:leading-7 mt-5 font-thin lg:text-2xl tracking-wide" id="intro__text-paragraph">{{ section.settings.description }}</p>
         <div>
           <a
             href="{{ routes.all_products_collection_url}}"
             class="mt-10 rounded-full flex items-center"
             id="header__shop_card-button">
-            Shop cards
+            {{ section.settings.button-title }}
             <span class="translate-x-12">
               {% comment %} {% render 'icon-arrow-right-rounded' %} {% endcomment %}
               <svg
@@ -120,3 +118,34 @@
     <div class="w-full h-10 bg-white rounded-lg md:rounded-3xl" id="intro__banner"></div>
   </div>
 </div>
+
+{% schema %}
+  {
+    "name": "Landing Index",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "The perfect",
+        "label": "Title"
+      }, {
+        "type": "text",
+        "id": "subtitle",
+        "default": "Football Gift",
+        "label": "Subtitle"
+      }, 
+      {
+        "type": "text",
+        "id": "description",
+        "default": "CardsFlex is the best place to buy football cards in the Middle East. Our collection of cards from Saudi Arabia is one of the largest and most comprehensive in the region. Shop now to get the best football cards.",
+        "label": "Description"
+      },
+      {
+        "type": "text",
+        "id": "button-title",
+        "default": "Shop cards",
+        "label": "Button title"
+      }
+    ]
+  }
+{% endschema %}

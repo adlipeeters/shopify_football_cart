@@ -18,7 +18,7 @@ h6 {
 }
 
 .header__link {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 300;
     /* font-size: 20px; */
@@ -32,7 +32,8 @@ h3,
 h4,
 h5,
 h6,
-label {
+label,
+b {
     color: white;
 }
 
@@ -42,5 +43,5 @@ label {
 }
 
 .font-family-roboto {
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
 }

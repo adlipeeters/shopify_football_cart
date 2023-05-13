@@ -14,7 +14,7 @@
   <div class="container">
     <div class="flex flex-col">
       <div class="w-full text-center">
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl">HOW IT WORKS?</h1>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl">{{ section.settings.title }}</h1>
       </div>
 
       {% render 'how_it_works_desktop' %}
@@ -29,6 +29,12 @@
   {
     "name": "How it works",
     "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "HOW IT WORKS?",
+        "label": "Title"
+      },
       {
         "type": "text",
         "id": "title_1",

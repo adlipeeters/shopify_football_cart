@@ -34,7 +34,7 @@
           </div>
           <div class="flex gap-x-4 lg:gap-x-6 xl:gap-x-8">
             <a href="{{ routes.all_products_collection_url}}" class="font-medium text-white py-2 xl:py-2 px-6 rounded-3xl bg-blue__gradient flex justify-center duration-300 hover:opacity-75">
-              Shop cards
+              {{ section.settings.shop-button-title }}
               <span class="ml-3">
                 {% render 'icon-arrow-right-rounded' %}
               </span>
@@ -116,7 +116,7 @@
             </div>
             <div class="flex gap-x-4 lg:gap-x-6 xl:gap-x-8">
               <a href="{{ routes.all_products_collection_url}}" class="font-medium text-white py-2 xl:py-2 px-6 rounded-3xl bg-blue__gradient flex justify-center duration-300 hover:opacity-75">
-                Shop cards
+                {{ section.settings.shop-button-title }}
                 <span class="ml-3">
                   {% render 'icon-arrow-right-rounded' %}
                 </span>
@@ -150,6 +150,11 @@
         "id": "blog_link",
         "default": "BLOG",
         "label": "Blog Link Title"
+      }, {
+        "type": "text",
+        "id": "shop-button-title",
+        "default": "Shop cards",
+        "label": "Shop Button title"
       }
     ]
   }

@@ -215,4 +215,15 @@
       <span class="underline underline-offset-2">Shipping</span>
       & taxes calculated at checkout</p>
   </div>
+  <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 z-10 w-full">
+    <button
+      type="submit"
+      name="checkout"
+      class="bg-blue__gradient rounded-t-xl w-full py-6 text-white font-medium text-xl duration-300 hover:opacity-75 flex justify-center items-center relative">
+      Proceed to checkout
+      <span class="absolute right-5">
+        {% render 'icon-checkout' %}
+      </span>
+    </button>
+  </div>
 </form>

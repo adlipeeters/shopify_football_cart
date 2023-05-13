@@ -52,7 +52,16 @@ let section_control = {
 
 $(document).ready(function () {
   // getLeaguesData();
-  canvas = new fabric.Canvas("product-canvas");
+  canvas = new fabric.Canvas("product-canvas", {
+    lockMovementX: true,
+    lockMovementY: true,
+    lockScalingX: true,
+    lockScalingY: true,
+    hasControls: false,
+    hasBorders: false,
+    selection: false,
+    allowTouchScrolling: true,
+  });
   // canvas.setBackgroundColor("#00ff00", canvas.renderAll.bind(canvas));
   let dominantColor = getDominantColor(canvas);
   // console.log(dominantColor);
@@ -301,7 +310,7 @@ $(document).on("change", ".league-group", function () {
 });
 
 $(document).on("click", "#add_to_cart_first_step", function () {
-  console.log($("input[name='properties[User confirmation]']").val());
+  let errorMessage = "";
   if (
     $('input[name="properties[Name]"]').val() != "" &&
     $("input[type='file'][name='properties[Profile picture]']").get(0).files
@@ -319,10 +328,48 @@ $(document).on("click", "#add_to_cart_first_step", function () {
     $("#tab-1").hide().removeClass("activee");
     $("#tab-2").show().addClass("activee");
   } else {
+    if ($('input[name="properties[Name]"]').val() == "") {
+      errorMessage += "<p>Name field is required</p>";
+    }
+    if (
+      $("input[type='file'][name='properties[Profile picture]']").get(0).files
+        .length == 0
+    ) {
+      errorMessage += "<p>Profile picture is required</p>";
+    }
+    if ($('input[name="properties[Club]"]').val() == "") {
+      errorMessage += "<p>Club is required</p>";
+    }
+    if ($("input[type='url'][name='properties[Flag]']").val() == "") {
+      errorMessage += "<p>Country is required</p>";
+    }
+    // if ($("input[type='url'][name='properties[Badge]']").val() == "") {
+    //   errorMessage += "<p>Badge is required</p>";
+    // }
+    if ($("input[name='properties[Overall rating]']").val() == "") {
+      errorMessage += "<p>Overall rating is required</p>";
+    }
+    if ($("input[name='properties[Player position]']").val() == "") {
+      errorMessage += "<p>Player position is required</p>";
+    }
+    if (
+      $('input[name="properties[User confirmation]"]').prop("checked") == false
+    ) {
+      errorMessage += "<p>User confirmation is required</p>";
+    }
+    if (
+      $("input[type='file'][name='properties[Generated picture]']").get(0).files
+        .length == 0
+    ) {
+      errorMessage += "<p>Image is not completed!</p>";
+    }
+    $("#error_message").append(errorMessage);
     $("#toast-warning").slideDown(300);
     setTimeout(() => {
       $("#toast-warning").slideUp(300);
-    }, 1500);
+      $("#error_message").empty();
+      errorMessage = "";
+    }, 2500);
   }
 });
 
@@ -533,21 +580,63 @@ function initialiseCanvas() {
   img.centerV();
 }
 
+// function profileName(name) {
+//   removeCanvasItem("profile_name");
+//   let color = "white";
+//   let text = new fabric.Text(name, {
+//     left: 75,
+//     top: 295,
+//     fill: color,
+//     fontSize: 16,
+//     fontFamily: "Roboto",
+//     index: "profile_name",
+//     editable: false,
+//     lockMovementX: true,
+//     lockMovementY: true,
+//     lockScalingX: true,
+//     lockScalingY: true,
+//     hasControls: false,
+//     hasBorders: false,
+//   });
+//   canvas.add(text);
+//   let image = canvas.getObjects()[0];
+//   image.sendToBack();
+//   text.set("text", name);
+//   canvas.renderAll();
+// }
 function profileName(name) {
   removeCanvasItem("profile_name");
   let color = "white";
+  let margin = 10;
+  let maxWidth = 150;
   let text = new fabric.Text(name, {
-    left: 75,
+    left: 175,
     top: 300,
     fill: color,
     fontSize: 16,
     fontFamily: "Roboto",
     index: "profile_name",
+    editable: false,
+    lockMovementX: true,
+    lockMovementY: true,
+    lockScalingX: true,
+    lockScalingY: true,
+    hasControls: false,
+    hasBorders: false,
   });
+
+  text
+    .set({
+      textAlign: "center",
+      originX: "center",
+      originY: "center",
+      splitByGrapheme: true,
+    })
+    .setCoords();
   canvas.add(text);
+
   let image = canvas.getObjects()[0];
   image.sendToBack();
-  text.set("text", name);
   canvas.renderAll();
 }
 
@@ -561,6 +650,13 @@ function profileImage(input) {
       let fabricImage = new fabric.Image(image, {
         selectable: true,
         evented: true,
+        editable: false,
+        lockMovementX: true,
+        lockMovementY: true,
+        lockScalingX: true,
+        lockScalingY: true,
+        hasControls: false,
+        hasBorders: false,
       });
       canvas.add(fabricImage);
       // fabricImage.scaleToHeight(200);
@@ -591,6 +687,13 @@ function profilePosition(name) {
     fontSize: 16,
     fontFamily: "Roboto",
     index: "profile_position",
+    editable: false,
+    lockMovementX: true,
+    lockMovementY: true,
+    lockScalingX: true,
+    lockScalingY: true,
+    hasControls: false,
+    hasBorders: false,
   });
   canvas.add(text);
   text.set("text", name);
@@ -605,7 +708,15 @@ function profileCountry(url) {
   uploadedImg.src = url;
 
   setTimeout(() => {
-    let img = new fabric.Image(uploadedImg);
+    let img = new fabric.Image(uploadedImg, {
+      editable: false,
+      lockMovementX: true,
+      lockMovementY: true,
+      lockScalingX: true,
+      lockScalingY: true,
+      hasControls: false,
+      hasBorders: false,
+    });
     img.scaleToWidth(30);
     img.set({
       index: "profile_country",
@@ -624,7 +735,15 @@ function profileLeague(url) {
   uploadedImg.src = url;
 
   setTimeout(() => {
-    let img = new fabric.Image(uploadedImg);
+    let img = new fabric.Image(uploadedImg, {
+      editable: false,
+      lockMovementX: true,
+      lockMovementY: true,
+      lockScalingX: true,
+      lockScalingY: true,
+      hasControls: false,
+      hasBorders: false,
+    });
     img.scaleToWidth(30);
     img.set({
       index: "profile_league",
@@ -646,6 +765,13 @@ function profileStats() {
       fontSize: 16,
       index: value.index,
       fontFamily: "Roboto",
+      editable: false,
+      lockMovementX: true,
+      lockMovementY: true,
+      lockScalingX: true,
+      lockScalingY: true,
+      hasControls: false,
+      hasBorders: false,
     });
     canvas.add(text);
   }
@@ -662,6 +788,13 @@ function profileRating(num) {
     fontSize: 16,
     fontFamily: "Roboto",
     index: "profile_rating",
+    editable: false,
+    lockMovementX: true,
+    lockMovementY: true,
+    lockScalingX: true,
+    lockScalingY: true,
+    hasControls: false,
+    hasBorders: false,
   });
   canvas.add(text);
   text.set("text", num);

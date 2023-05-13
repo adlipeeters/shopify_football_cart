@@ -1,6 +1,6 @@
 <style>
   .customer_login_account__page-background {
-    background-image: linear-gradient(180deg, #0F1521 0%, rgba(15, 21, 33, 0.479167) 43.96%, #303741 100%), url('{{ 'login_bg.png' | asset_url }}');
+    background-image: linear-gradient(180deg, #0F1521 0%, rgba(15, 21, 33, 0.479167) 43.96%, #303741 100%), url('{{ 'login-background.png' | asset_url }}');
     width: 100%;
     height: auto;
     height: 100vh;
@@ -24,7 +24,7 @@
           </div>
         {% endif %}
 
-        <div class="my-2">
+        <div class="my-4">
           <label for="first_name" class="sr-only">{{ section.settings.firstname_label }}</label>
           <input
             type="text"
@@ -35,7 +35,7 @@
             placeholder="{{ section.settings.firstname_label }}">
         </div>
 
-        <div class="my-2">
+        <div class="my-4">
           <label for="last_name" class="sr-only">{{ section.settings.lastname_label }}</label>
           <input
             type="text"
@@ -46,16 +46,16 @@
             placeholder="{{ section.settings.lastname_label }}">
         </div>
 
-        <div class="my-2">
+        {% comment %} <div class="my-4">
           <label for="birthday" class="sr-only">{{ section.settings.birthday_label }}</label>
           <input
             type="date"
             name="customer[note][Birthday]"
             id="birthday"
             class="w-full bg-transparent rounded-md text-white px-3 py-2 border placeholder:text-white placeholder:opacity-75 duration-300 hover:opacity-75">
-        </div>
+        </div> {% endcomment %}
 
-        <div class="my-2">
+        <div class="my-4">
           <label for="email_address" class="sr-only">{{ section.settings.email_label }}</label>
           <input
             type="email"
@@ -77,13 +77,13 @@
             class="w-full bg-transparent rounded-md text-white px-3 py-2 border placeholder:text-white placeholder:opacity-75 duration-300 hover:opacity-75"
             placeholder="{{ section.settings.password_label }}">
         </div>
-        <div class="my-2 text-sm">
+        <div class="my-6 text-sm">
           <a href="{{ shop.url }}/account/login" class="duration-300 hover:opacity-75">
             <p>
               {{ section.settings.login_link }}</a>
           </p>
         </div>
-        <div class="flex justify-center items-center my-4">
+        <div class="flex justify-center items-center my-8">
           <button type="submit" class="py-2 text-sm text-white bg-blue__gradient w-7/12 rounded-full duration-300 hover:opacity-75">
             {{ section.settings.register_btn_text }}
           </button>

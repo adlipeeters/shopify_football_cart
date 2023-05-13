@@ -1,0 +1,208 @@
+<style>
+  @keyframes slideInFromLeft {
+    0% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+
+  .slider {
+    cursor: grab;
+  }
+  .slider .slick-slide {
+    margin: 20px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+
+  .slider .slick-center::before {
+    transition: 0.5s;
+  }
+  .slider .slick-center {
+    animation: 0.5s ease-out 0s 1 slideInFromLeft;
+  }
+  .slider .slick-center {
+    transform: scale(1.2);
+    opacity: 1 !important;
+  }
+
+  .slider .center-slider .slick-slide {
+    transition: all 1s ease-in-out;
+  }
+
+  .slider .slick-list {
+    padding-bottom: 50px !important;
+  }
+
+  #slider__wrapper {
+    background: #242E3A;
+    box-shadow: inset 5px 5px 50px rgba(0, 0, 0, 0.25);
+  }
+  #slider__wrapper .carousel__arrow-back,
+  #slider__wrapper .carousel__arrow-next {
+    color: #fff;
+    opacity: 0.5;
+    transition: 0.35s;
+  }
+
+
+  #slider__wrapper .carousel__arrow-back:hover,
+  #slider__wrapper .carousel__arrow-next:hover {
+    opacity: 1;
+  }
+
+  .slider .slick-dots li button:before {
+    background-color: transparent;
+    border: 2px solid rgb(129, 129, 129);
+    height: 10px;
+    width: 10px;
+    border-radius: 50px;
+    text-indent: -9999px;
+    overflow: hidden;
+    margin-top: 32.5px;
+  }
+
+  .slider .slick-dots li.slick-active {
+    transition: 0.35s;
+  }
+
+  .slider .slick-dots li.slick-active button:before {
+    background: linear-gradient(222.29deg, #437FD8 -10.81%, #0D2E84 138.98%);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 23px;
+    border: 2px solid rgb(129, 129, 129);
+    text-indent: -9999px;
+    overflow: hidden;
+    width: 100%;
+  }
+  @media only screen and (max-width: 640px) {
+    .slider .carousel__arrow-back,
+    .slider .carousel__arrow-next {
+      display: none;
+    }
+  }
+</style>
+
+<div class="flex justify-center align-center my-8 sm:my-32">
+  <div class="container px-6 sm:px-0">
+    <div class="flex flex-col">
+      <div class="w-full text-center">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">{{ section.settings.title }}</h1>
+      </div>
+      <div class="rounded-3xl mt-8 sm:mt-16 py-8" id="slider__wrapper">
+        <div class="slider flex">
+
+        {% for product in collections.all.products limit:10 %}
+          {% if product.collections.first.handle != "additional-options" and product.type != "Gift Card" %}
+          <div class="flex flex-col align-center justify-center">
+            <img src="{{ product.featured_image | img_url: 'large'}}"
+            alt="{{ product.featured_image.alt }}">
+            <h3>{{ product.title }}</h3>
+          </div>
+          {% endif %}
+        {% endfor %}
+        </div>
+        <div class="float-right mr-16 hidden md:block">
+          <button class="carousel__arrow-back">
+            {% render 'icon-slider-arrow-back' %}
+          </button>
+          <button class="carousel__arrow-next">
+            {% render 'icon-slider-arrow-next' %}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Best Selling Cards",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "default": "BEST SELLING FOOTBALL CARDS",
+        "label": "Title"
+      }
+    ]
+  }
+{% endschema %}
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('.slider').slick({
+             dots: true,
+             centerMode: true,
+             swipeToSlide: true,
+             centerPadding: '60px',
+             slidesToShow: 5,
+             slidesToScroll: 5,
+             speed: 350,
+             autoplay: false,
+             autoplaySpeed: 2000,
+             infinite: true,
+             prevArrow: $(".carousel__arrow-back"),
+             nextArrow: $(".carousel__arrow-next"),
+             cssEase: 'linear',
+             responsive: [
+               {
+                 breakpoint: 1280,
+                 settings: {
+                   arrows: false,
+                   centerMode: true,
+                   centerPadding: '40px',
+                   slidesToShow: 3,
+                   slidesToScroll: 3,
+                 }
+               }, {
+                 breakpoint: 1024,
+                 settings: {
+                   arrows: false,
+                   centerMode: true,
+                   centerPadding: '40px',
+                   slidesToShow: 3,
+                   slidesToScroll: 3,
+                 }
+               }, {
+                 breakpoint: 768,
+                 settings: {
+                   arrows: true,
+                   centerMode: true,
+                   centerPadding: '40px',
+                   slidesToShow: 3,
+                   slidesToScroll: 3,
+                   dots: false,
+                   prevArrow: $(".carousel__arrow-back"),
+                   nextArrow: $(".carousel__arrow-next"),
+                 }
+               }, {
+                 breakpoint: 480,
+                 settings: {
+                   arrows: true,
+                   centerMode: true,
+                   centerPadding: '40px',
+                   slidesToShow: 1,
+                   slidesToScroll: 1,
+                   dots: false,
+                   prevArrow: $(".carousel__arrow-back"),
+                   nextArrow: $(".carousel__arrow-next"),
+                 }
+               }
+             ]
+           })
+
+            $(".carousel__arrow-back").on('click', (function(e) {
+                $('.slider').slick('slickPrev');
+            }))
+            $(".carousel__arrow-next").on('click', (function(e) {
+                $('.slider').slick('slickNext');
+            }))
+           })           
+</script>

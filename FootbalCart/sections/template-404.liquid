@@ -1,15 +1,35 @@
-<div class="max-w-md">
-  <div class="text-5xl font-bold my-4">{{ section.settings.title }}</div>
-  <div class="my-4">
-    <p class="text-base md:text-xl leading-normal">{{ section.settings.subtext_title }}</p>
-  </div>
-  <div class="my-4">
-    {%- if section.settings.button_url == blank -%}
-      {%- assign shop_url = shop.secure_url -%}
-    {%- else -%}
-      {%- assign shop_url = section.settings.button_url -%}
-    {%- endif -%}
-    <a href="{{ shop_url }}" class="px-4 inline py-2 text-base font-medium shadow bg-green-600 transition duration-50  ease-in-out hover:bg-green-800 text-white  ">{{ section.settings.button_label }}</a>
+{% comment %} <div class="max-w-md">
+<div class="text-5xl font-bold my-4">{{ section.settings.title }}</div>
+<div class="my-4">
+<p class="text-base md:text-xl leading-normal">{{ section.settings.subtext_title }}</p>
+</div>
+<div class="my-4">
+{%- if section.settings.button_url == blank -%}
+{%- assign shop_url = shop.secure_url -%}
+{%- else -%}
+{%- assign shop_url = section.settings.button_url -%}
+{%- endif -%}
+<a href="{{ shop_url }}" class="px-4 inline py-2 text-base font-medium shadow bg-green-600 transition duration-50  ease-in-out hover:bg-green-800 text-white  ">{{ section.settings.button_label }}</a>
+</div>
+</div> {% endcomment %}
+
+<div class="flex justify-center items-center">
+  <div class="container px-6 sm:px-0">
+    <div class="flex flex-col items-center justify-center">
+      <div class="w-full flex justify-center items-center">
+        <img
+          src="{{ '404-shopify.png' | asset_url }}"
+          class="max-w-xs md:max-w-xl"
+          alt="">
+      </div>
+      <div class="w-full mt-8">
+        <p class="text-center md:px-24 opacity-40">{{ section.settings.subtext_title }}</p>
+      </div>
+      <div class="mt-12">
+        {% comment %} <button class="text-white border border-white px-12 py-1 rounded-3xl hover:opacity-80 transition duration-350">Get in touch now</button> {% endcomment %}
+        <a href="{{ shop_url }}" class="px-12 inline py-3 text-base font-medium shadow transition duration-300 ease-in-out bg-blue__gradient hover:opacity-70 rounded-full text-white  ">{{ section.settings.button_label }}</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -27,12 +47,12 @@
       }, {
         "type": "text",
         "id": "subtext_title",
-        "default": "The page you are looking for not found",
+        "default": "OOPPS! THE PAGE YOU WERE LOOKING FOR, COULDN'T BE FOUND.",
         "label": "404 Subtext Title"
       }, {
         "type": "text",
         "id": "button_label",
-        "default": "Back to homepage",
+        "default": "GO TO HOME PAGE",
         "label": "Button Label"
       }, {
         "type": "url",

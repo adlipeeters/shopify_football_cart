@@ -22,11 +22,10 @@
           {{ blog.title }}
         </h1>
       </div>
-      <div>
-        {% paginate blog.articles by section.settings.number_of_blog_posts %}
+      <div class="mt-6">
           <div class="mx-auto mt-12">
             <div class="grid xl:grid-rows-4 xl:grid-flow-col gap-x-40 gap-y-8 xl:gap-y-4">
-              {% for article in blog.articles %}
+              {% for article in blog.articles limit:5 %}
                 {% if forloop.index == 1 %}
 
                   <!-- left side start -->
@@ -88,14 +87,14 @@
           </div>
 
           <div class="max-w-6xl mx-auto">
-            {% render 'pagination', pagination: paginate %}
           </div>
 
-        {% endpaginate %}
       </div>
     </div>
   </div>
 </div>
+
+{% render 'last-blog-articles' %}
 
 
 

@@ -69,18 +69,18 @@
           {% endpaginate %}
 
         {% else %}
-          <div class="col-span-12 bg-blue-custom">
-            <div class="flex">
+          <div class="col-span-12 bg-blue-custom rounded-lg">
+            <div class="flex p-6">
               <div>
                 <h1>
                   {{ section.settings.no_order_message }}
                 </h1>
               </div>
-              <div>
+              {% comment %} <div>
                 <p>
                   {{ section.settings.no_order_message_desc }}
                 </p>
-              </div>
+              </div> {% endcomment %}
             </div>
           </div>
         {% endif %}
@@ -88,7 +88,7 @@
     </div>
   </div>
 </div>
-{{ customer.default_address | format_address }}
+{% comment %} {{ customer.default_address | format_address }} {% endcomment %}
 {% schema %}
   {
     "name": "Orders",

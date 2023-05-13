@@ -68,7 +68,7 @@
         {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-gray-100' }}
       {% endif %}
     </a>
-    <div class="grid grid-cols-3 px-3 py-4 sm:py-2  product__description">
+    {% comment %} <div class="grid grid-cols-3 px-3 py-4 sm:py-2  product__description">
       <div class="col-span-2 flex items-center">
         <a href="{{ product.url }}">
           <p class="font-family-kufam font-medium text-sm sm:text-lg">
@@ -77,6 +77,19 @@
         </a>
       </div>
       <div class="float-right text-right flex items-center">
+        <p class="font-family-kufam font-black italic text-sm sm:text-lg opacity-50">{{ product.price | money }}</p>
+        {% comment %} <p class="font-family-kufam font-black italic text-sm sm:text-lg opacity-50">{{ product.collection }}</p> {% endcomment %}
+      </div>
+    </div> {% endcomment %}
+    <div class="flex flex-col items-center justify-center px-3 py-4 sm:py-2  product__description">
+      <div class="flex items-center">
+        <a href="{{ product.url }}">
+          <p class="font-family-kufam font-medium text-sm sm:text-lg">
+            {{ product.title }}
+          </p>
+        </a>
+      </div>
+      <div class="flex items-center">
         <p class="font-family-kufam font-black italic text-sm sm:text-lg opacity-50">{{ product.price | money }}</p>
         {% comment %} <p class="font-family-kufam font-black italic text-sm sm:text-lg opacity-50">{{ product.collection }}</p> {% endcomment %}
       </div>
