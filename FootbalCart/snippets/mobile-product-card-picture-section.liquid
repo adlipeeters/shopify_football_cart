@@ -1,0 +1,35 @@
+<div class="bg-blue__gradient p-6 rounded-lg lg:hidden mt-6 mobile_section_card_picture hidden">
+  <div>
+    <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_2 }}</h3>
+  </div>
+  <div>
+    <label for="profile-picture" class="text-xs uppercase">{{ section.settings.step_label_3 }}</label>
+  </div>
+  <div class="flex justify-between py-4 bordered border-dashed border-white border-2 relative h-24 mt-2 rounded cursor-pointer">
+    <div class="absolute flex items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer">
+      <div class="text-white">
+        {% render 'icon-upload-image' %}
+      </div>
+      <div class="ml-2">
+        <p class="text-gray-300">Drop here</p>
+      </div>
+    </div>
+    <input
+      type="file"
+      id="profile-picture"
+      name="properties[Profile picture]"
+      class="w-full h-full opacity-0"
+      accept="image/*" />
+  </div>
+  {% comment %} <div class="flex justify-center flex-col gap-y-4 mt-4">
+    <div class="flex items-center">
+      <div class="text-white">
+        {% render 'icon-info' %}
+      </div>
+      <div class="ml-1">
+        <p class="text-xs">{{ section.settings.step_tooltip_3 }}</p>
+      </div>
+    </div>
+  </div> {% endcomment %}
+
+</div>

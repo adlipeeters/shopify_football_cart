@@ -1,0 +1,82 @@
+<style>
+  .mobile__filter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background-color: white;
+    overflow-y: auto;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+    transform: translateY(65%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .mobile__filter.open {
+    transform: translateY(10%);
+  }
+</style>
+<div class="lg:hidden mobile__filter z-30 rounded-t-2xl bg-blue__gradient section_card_guides_size">
+  <button class="open-filter fixed top-0 h-14 w-full px-6" type="button">
+    <div class="flex flex-col gap-y-4 items-center justify-between mt-6">
+      <div class="transition-all duration-300 rotate-180 icon-swipe">
+        {% render 'icon-swipe' %}
+      </div>
+      <div class="w-full">
+        <div class="w-full text-start">
+          <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_1 }}</h3>
+        </div>
+      </div>
+    </div>
+  </button>
+  {% comment %} <div class="w-full flex justify-center items-center px-6">
+  <hr class="w-full mt-28 opacity-30">
+  </div> {% endcomment %}<div class="filter-options px-6 mt-24">
+    <div class="flex overflow-x-scroll py-6 gap-4">
+      {% for item in product.variants %}
+        <a
+          href="javascript:void(0)"
+          onclick="updateForm('{{item.id}}', '{{ item.price | money }}')"
+          id=""
+          class="mobile_variant_handler w-full selected__variant_id-{{item.id}}">
+          <div class="relative bg-gray-300 rounded-lg w-[130px]">
+            <p class="font-family-kufam absolute italic font-black text-gray-500 right-0 mr-3 mt-1">{{ item.price | money }}</p>
+            <p class="font-family-kufam absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-500 text-sm">{{ item.title }}</p>
+            <img
+              src="{{ item.featured_image.src | img_url: 'large' }}"
+              alt=""
+              class="w-full max-h-[250px] pt-4 object-contain">
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  $(".open-filter").click(function() {
+    $(".mobile__filter").toggleClass("open");
+    $('.icon-swipe').toggleClass('rotate-180')
+  });
+  $(document).on("click", function(event) {
+    if (!$(".mobile__filter").is(event.target) && $(".mobile__filter").has(event.target).length === 0) {
+      $(".mobile__filter").removeClass("open");
+    }
+  });
+
+  $(".close-filter").click(function() {
+    $(".mobile__filter").removeClass("open");
+  });
+
+  $(document).on("swipeup", function() {
+    $(".mobile__filter").addClass("open");
+  });
+
+  $(document).on("swipedown", function() {
+    $(".mobile__filter").removeClass("open");
+  });
+
+  $('.mobile_variant_handler').on('click', function(event) {
+    $(".open-filter").click()
+  })
+</script>

@@ -46,9 +46,32 @@ let stats = {
   },
 };
 
-let section_control = {
-  active: "section_card_size",
-};
+// let section_control = {
+//   active: "section_card_size",
+// };
+let section_control = [
+  { order: 1, percents: 14, id: "section_card_guides_size", active: true },
+  {
+    order: 2,
+    percents: 56,
+    id: "section_card_picture_position",
+    active: false,
+  },
+  { order: 3, percents: 85, id: "section_card_club_country", active: false },
+  { order: 4, percents: 100, id: "section_card_stats", active: false },
+  // { order: 5, percents: 84, id: "section_card_country", active: false },
+  // { order: 6, percents: 100, id: "section_card_stats", active: false },
+];
+
+let mobile_section_control = [
+  { order: 1, percents: 14, id: "section_card_guides_size", active: true },
+  { order: 2, percents: 28, id: "mobile_section_card_name", active: false },
+  { order: 3, percents: 42, id: "mobile_section_card_picture", active: false },
+  { order: 4, percents: 56, id: "mobile_section_card_position", active: false },
+  { order: 5, percents: 70, id: "mobile_section_card_club", active: false },
+  { order: 6, percents: 84, id: "mobile_section_card_country", active: false },
+  { order: 7, percents: 100, id: "mobile_section_card_stats", active: false },
+];
 
 $(document).ready(function () {
   // getLeaguesData();
@@ -62,6 +85,12 @@ $(document).ready(function () {
     selection: false,
     allowTouchScrolling: true,
   });
+
+  if ($(window).width() > 1024) {
+    canvas.setDimensions({ height: 500 });
+  } else {
+    canvas.setDimensions({ height: 350 });
+  }
   // canvas.setBackgroundColor("#00ff00", canvas.renderAll.bind(canvas));
   let dominantColor = getDominantColor(canvas);
   // console.log(dominantColor);
@@ -138,8 +167,8 @@ $(document).ready(function () {
     }
   });
 
-  $("#search_for_club").on("keyup", function () {
-    $("#data-league-search").empty();
+  $(".search_for_club").on("keyup", function () {
+    $(".data-league-search").empty();
     let filter = $(this).val().toUpperCase();
     $(".league-slider").slick("slickGoTo", 13);
     const options = {
@@ -168,16 +197,16 @@ $(document).ready(function () {
                 </div>
                 </div>
                 <div>
-                <p class="font-medium">${league.item.strTeam}</p>
+                <p class="text-xs custom-option-style font-medium">${league.item.strTeam}</p>
                 </div>
                 </div>
                 </label> `;
-      $("#data-league-search").append(res);
+      $(".data-league-search").append(res);
     });
   });
 
-  $("#search_for_country").on("keyup", function () {
-    $("#data-country-search").empty();
+  $(".search_for_country").on("keyup", function () {
+    $(".data-country-search").empty();
     let filter = $(this).val().toUpperCase();
     $(".country-slider").slick("slickGoTo", 7);
     const options = {
@@ -206,19 +235,19 @@ $(document).ready(function () {
               </div>
               </div>
               <div>
-              <p class="font-medium">${country.item.name.official}</p>
+              <p class="text-xs custom-option-style font-medium">${country.item.name.official}</p>
               </div>
               </div>
               </label> `;
-      $("#data-country-search").append(res);
+      $(".data-country-search").append(res);
     });
   });
 
-  $("#name").on("keyup", function () {
+  $(".name").on("keyup", function () {
     profileName($(this).val());
   });
 
-  $("#name").on("change", function () {
+  $(".name").on("change", function () {
     profileName($(this).val());
   });
 
@@ -309,7 +338,7 @@ $(document).on("change", ".league-group", function () {
   profileLeague(url);
 });
 
-$(document).on("click", "#add_to_cart_first_step", function () {
+$(document).on("click", ".add_to_cart_first_step", function () {
   let errorMessage = "";
   if (
     $('input[name="properties[Name]"]').val() != "" &&
@@ -327,6 +356,7 @@ $(document).on("click", "#add_to_cart_first_step", function () {
   ) {
     $("#tab-1").hide().removeClass("activee");
     $("#tab-2").show().addClass("activee");
+    $("#progress-wrapper").hide();
   } else {
     if ($('input[name="properties[Name]"]').val() == "") {
       errorMessage += "<p>Name field is required</p>";
@@ -377,53 +407,89 @@ $(document).on("click", "#close-success-modal", function () {
   $("#success_dialog").hide(300);
 });
 
-$(document).on("click", ".changeSection", function () {
-  console.log(section_control.active);
-  let go_to = $(this).attr("data-section");
-  $("#" + section_control.active).addClass("hidden");
-  $("#" + go_to).removeClass("hidden");
-  if (go_to == "section_card_club") {
-    initialiseLeagues();
-  } else if (go_to == "section_card_country") {
-    initialiseCountries();
-  }
-  section_control.active = $(this).attr("data-section");
-});
-
-// $(window).resize(function () {
-//   let width = $(window).width();
-//   console.log(width);
-//   if (width < 768) {
-//     if (!$("#section_card_club").hasClass("hidden")) {
-//       $("#section_card_club").addClass("hidden");
-//     }
-//   } else {
-//     $("#section_card_club").removeClass("hidden");
+// $(document).on("click", ".changeSection", function () {
+//   console.log(section_control.active);
+//   let go_to = $(this).attr("data-section");
+//   $("#" + section_control.active).addClass("hidden");
+//   $("#" + go_to).removeClass("hidden");
+//   if (go_to == "section_card_club") {
+//     initialiseLeagues();
+//   } else if (go_to == "section_card_country") {
+//     initialiseCountries();
 //   }
+//   section_control.active = $(this).attr("data-section");
 // });
 
-// function addToCart() {
-//   let addToCartForm = document.querySelector("#product-form");
-//   let formData = new FormData(addToCartForm);
+$(document).on("click", ".changeSection", function () {
+  let workingSection = null;
 
-//   $.ajax({
-//     url: "/cart/add.js",
-//     type: "POST",
-//     dataType: "json",
-//     processData: false,
-//     contentType: false,
-//     data: formData,
-//     success: function (data) {
-//       // Handle successful submission
-//       // console.log(data);
-//       $("#success_dialog").fadeIn();
-//     },
-//     error: function (XMLHttpRequest, textStatus) {
-//       // Handle error
-//       // console.log("Error: " + textStatus);
-//     },
-//   });
-// }
+  if ($(window).width() > 1024) {
+    workingSection = section_control;
+  } else {
+    workingSection = mobile_section_control;
+  }
+  let current = workingSection.find((item) => {
+    return item.active == true;
+  });
+
+  let go_to = null;
+  if ($(this).data("type") == "next") {
+    go_to = workingSection.find((item) => {
+      return item.order == current.order + 1;
+    });
+  } else {
+    go_to = workingSection.find((item) => {
+      return item.order == current.order - 1;
+    });
+  }
+
+  console.log(go_to);
+
+  if (go_to) {
+    $("." + current.id).addClass("hidden");
+    $("." + go_to.id).removeClass("hidden");
+
+    setTimeout(() => {
+      $("#step_progress").animate({ width: go_to.percents + "%" }, 500);
+      $("#step_progress_title").text(go_to.percents);
+    }, 300);
+
+    if (go_to.id == "section_card_club_country") {
+      initialiseLeagues();
+      initialiseCountries();
+    }
+
+    if (go_to.id == "mobile_section_card_club") {
+      initialiseLeagues();
+    }
+
+    if (go_to.id == "mobile_section_card_country") {
+      initialiseCountries();
+    }
+
+    if ($(window).width() > 1024) {
+      section_control.map((item) => {
+        if (item.order == current.order) {
+          item.active = false;
+        }
+
+        if (item.order == go_to.order) {
+          item.active = true;
+        }
+      });
+    } else {
+      mobile_section_control.map((item) => {
+        if (item.order == current.order) {
+          item.active = false;
+        }
+
+        if (item.order == go_to.order) {
+          item.active = true;
+        }
+      });
+    }
+  }
+});
 
 function initialiseLeagues() {
   if ($(".league-slider").hasClass("slick-initialized")) {
@@ -575,7 +641,7 @@ function initialiseCanvas() {
     top: centerY,
   });
   canvas.add(img);
-  img.scaleToHeight(500);
+  img.scaleToHeight(canvas.height);
   img.centerH();
   img.centerV();
 }
@@ -609,11 +675,15 @@ function profileName(name) {
   let color = "white";
   let margin = 10;
   let maxWidth = 150;
+  let canvasWidth = canvas.width;
+  let canvasHeight = canvas.height;
   let text = new fabric.Text(name, {
-    left: 175,
-    top: 300,
+    // left: 175,
+    // top: 300,
+    left: canvasWidth * 0.5,
+    top: canvasHeight * 0.6,
     fill: color,
-    fontSize: 16,
+    fontSize: canvas.height / 31,
     fontFamily: "Roboto",
     index: "profile_name",
     editable: false,
@@ -643,6 +713,8 @@ function profileName(name) {
 function profileImage(input) {
   removeCanvasItem("profile_image");
   let reader = new FileReader();
+  let canvasWidth = canvas.width;
+  let canvasHeight = canvas.height;
   reader.addEventListener("load", function () {
     let image = new Image();
     image.src = reader.result;
@@ -659,11 +731,11 @@ function profileImage(input) {
         hasBorders: false,
       });
       canvas.add(fabricImage);
-      // fabricImage.scaleToHeight(200);
-      fabricImage.scaleToWidth(110);
+
+      fabricImage.scaleToWidth(canvas.height / 4);
       fabricImage.set({
-        left: 175,
-        top: 75,
+        left: canvasWidth * 0.5,
+        top: canvasHeight * 0.2,
         index: "profile_image",
       });
     };
@@ -681,10 +753,10 @@ function profilePosition(name) {
   removeCanvasItem("profile_position");
   let color = "white";
   let text = new fabric.Text(name, {
-    left: left,
-    top: 125,
+    left: canvas.width / 5.4,
+    top: canvas.height * 0.25,
     fill: color,
-    fontSize: 16,
+    fontSize: canvas.height / 31,
     fontFamily: "Roboto",
     index: "profile_position",
     editable: false,
@@ -839,7 +911,7 @@ function removeCanvasItem(item) {
 function updateForm(id, price) {
   $("#variant__id").val(id);
   $(".active__variant").removeClass("active__variant");
-  $("#selected__variant_id-" + id).addClass("active__variant");
+  $(".selected__variant_id-" + id).addClass("active__variant");
 
   // testing scroll
   // Get a reference to the section you want to scroll to

@@ -1,0 +1,33 @@
+<div class="bg-blue__gradient p-6 rounded-lg lg:hidden mobile_section_card_position hidden">
+  <div class="">
+    <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_4 }}</h3>
+  </div>
+  <div>
+    <div class="flex justify-between py-2">
+      <input
+        type="text"
+        class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
+        id="search_for_player_position"
+        placeholder="Search position">
+    </div>
+  </div>
+  <div>
+    <div class="tabs">
+      <ul class="flex justify-start gap-x-6 sm:gap-x-12">
+        <li class="tab-item text-white opacity-50 underline-animation active" data-attr="defence">
+          <a href="javascript:void(0)" class="uppercase text-sm md:text-base">DEFENCE</a>
+        </li>
+        <li class="tab-item text-white opacity-50 underline-animation" data-attr="midfield">
+          <a href="javascript:void(0)" class="uppercase text-sm md:text-base">MIDFIELD</a>
+        </li>
+        <li class="tab-item text-white opacity-50 underline-animation" data-attr="attack">
+          <a href="javascript:void(0)" class="uppercase text-sm md:text-base">ATTACK</a>
+        </li>
+        <li class="tab-item text-white opacity-50 underline-animation" data-attr="custom">
+          <a href="javascript:void(0)" class="uppercase text-sm md:text-base">CUSTOM</a>
+        </li>
+      </ul>
+      {% render 'player-position' %}
+    </div>
+  </div>
+</div>

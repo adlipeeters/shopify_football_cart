@@ -1,0 +1,76 @@
+<style>
+  .club_mobile_filter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background-color: white;
+    overflow-y: auto;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+    transform: translateY(65%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .club_mobile_filter.open {
+    transform: translateY(0%);
+  }
+</style>
+<div class="lg:hidden club_mobile_filter z-30 rounded-t-2xl bg-blue__gradient mobile_section_card_club hidden">
+  <button class="open-filter-club fixed top-0 h-14 w-full px-6" type="button">
+    <div class="flex flex-col gap-y-4 items-center justify-between mt-6">
+      <div class="transition-all duration-300 rotate-180 icon-swipe-club">
+        {% render 'icon-swipe' %}
+      </div>
+      <div class="w-full">
+        <div class="w-full text-start">
+          <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_5 }}</h3>
+        </div>
+      </div>
+    </div>
+  </button>
+  <div class="filter-options px-6 mt-24 overflow-y-hidden">
+    <div class="overflow-y-hidden">
+      <div>
+        <div class="flex justify-between py-4">
+          <input
+            type="text"
+            class="search_for_club bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
+            placeholder="Search club name">
+        </div>
+      </div>
+      <div>
+        {% render 'league-options' %}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+  $(".open-filter-club").click(function() {
+    $(".club_mobile_filter").toggleClass("open");
+    $('.icon-swipe-club').toggleClass('rotate-180')
+  });
+  $(document).on("click", function(event) {
+    if (!$(".club_mobile_filter").is(event.target) && $(".club_mobile_filter").has(event.target).length === 0) {
+      $(".club_mobile_filter").removeClass("open");
+    }
+  });
+
+  $(".close-filter").click(function() {
+    $(".club_mobile_filter").removeClass("open");
+  });
+
+  $(document).on("swipeup", function() {
+    $(".club_mobile_filter").addClass("open");
+  });
+
+  $(document).on("swipedown", function() {
+    $(".club_mobile_filter").removeClass("open");
+  });
+
+// modify thissss
+  $(document).on('click', '.league-group', function(event) {
+    $(".open-filter-club").click()
+  })
+</script>

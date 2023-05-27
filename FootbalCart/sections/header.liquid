@@ -4,25 +4,33 @@
       {% comment %} desktop menu start {% endcomment %}
       <div class="hidden md:flex items-center justify-between">
         <div>
+
           <a href="{{ routes.root_url }}" class="flex items-center">
             <h1 class="text-2xl xl:text-4xl font-semibold whitespace-nowrap">{{ shop.name }}</h1>
           </a>
         </div>
         <div class="flex gap-x-4 lg:gap-x-6 xl:gap-x-8 justify-center items-center">
           <div class="flex gap-x-4 lg:gap-x-6 xl:gap-x-8">
-            <a href="/blogs/support" class="transition-opacity duration-300 hover:opacity-75">
+            <script>
+              console.log({{ blogs['news'].url|json}})
+            </script>
+            {% assign support_blog = blogs['support'] %}
+            {% assign news_blog = blogs['news'] %}
+
+            <a href="{{ support_blog.url | url_for_locale: request.locale }}" class="transition-opacity duration-300 hover:opacity-75">
+
               <p class="text-base lg:text-lg font-light tracking-widest">
                 {{ section.settings.support_link }}
               </p>
             </a>
-            <a href="/blogs/news" class="transition-opacity duration-300 hover:opacity-75">
+            <a href="{{ news_blog.url | url_for_locale: request.locale }}" class="transition-opacity duration-300 hover:opacity-75">
               <p class="text-base lg:text-lg font-light tracking-widest">
                 {{ section.settings.blog_link }}
               </p>
             </a>
           </div>
           <div class="flex gap-x-4 lg:gap-x-6 xl:gap-x-8">
-            <a href="/account" class="transition-opacity duration-300 hover:opacity-75">
+            <a href="{{ routes.account_url }}" class="transition-opacity duration-300 hover:opacity-75">
               {% render 'icon-account' %}
             </a>
             <div class="relative">
@@ -42,7 +50,7 @@
           </div>
           <div class="flex gap-x-4 lg:gap-x-6 xl:gap-x-8">
             <div class="border border-green-800 pt-1 px-1 flex items-center justify-center">
-              <a href="#" class="duration-300 hover:opacity-75 text-base lg:text-lg">
+              <a href="/" class="duration-300 hover:opacity-75 text-base lg:text-lg">
                 {% render 'icon-eng-lang' %}
                 <p class="text-base lg:text-lg">
                   EN
@@ -50,14 +58,27 @@
               </a>
             </div>
             <div class="border border-green-800 pt-1 px-1 flex items-center justify-center">
-              <a href="#" class="duration-300 hover:opacity-75 text-base lg:text-lg">
+              <a href="/ar" class="duration-300 hover:opacity-75 text-base lg:text-lg">
                 {% render 'icon-eng-lang' %}
                 <p class="text-base lg:text-lg">
-                  EN
+                  AR
                 </p>
               </a>
             </div>
           </div>
+          <!--  <div class="flex gap-x-4 lg:gap-x-6 xl:gap-x-8">
+          {% for locale in shop.enabled_locales %}
+          <div class="border border-green-800 pt-1 px-1 flex items-center justify-center">
+          <a href="{{ routes.root_url | within: locale }}" class="duration-300 hover:opacity-75 text-base lg:text-lg">
+          {% render 'icon-eng-lang' %}
+          <p class="text-base lg:text-lg">
+          <script>console.log({{locale|json}})</script>
+          {{ locale.name }}
+          </p>
+          </a>
+          </div>
+          {% endfor %}
+          </div> -->
         </div>
       </div>
       {% comment %} desktop menu end {% endcomment %}

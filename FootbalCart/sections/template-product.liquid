@@ -1,7 +1,6 @@
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {{ 'leagues.js' | asset_url | script_tag }}
 {{ 'countries.js' | asset_url | script_tag }}
-
 <style>
   .product--information {
     height: fit-content;
@@ -21,8 +20,8 @@
   }
 
   .active__variant {
-    border: 3px solid rgb(0, 0, 0);
-    border-radius: 10px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 8px;
   }
 
   .active {
@@ -82,17 +81,16 @@
   <div class="tab-pane activee" id="tab-1">
     <div class="flex justify-center align-center relative">
       <div class="container">
-        <div class="flex flex-col my-24 sm:my-36">
-
+        <div class="flex flex-col my-24 sm:my-28">
           <!-- Product title start -->
-          <div class="w-full text-center sm:text-start">
+          <div class="w-full text-center sm:text-start hidden lg:block">
             <h1 class="text-3xl sm:text-5xl lg:text-6xl uppercase">{{ product.title }}</h1>
             <p class="font-light sm:w-2/3">{{ product.description }}</p>
           </div>
           <!-- Product title end -->
 
           <!-- Product options start -->
-          <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-y-6 justify-items-center mt-8 sm:mt-16">
+          <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-y-6 justify-items-center mt-4 sm:mt-16">
 
             <!-- Product left side start -->
             <div class="w-full grid grid-cols-5 justify-center">
@@ -100,8 +98,13 @@
                 <div id="fixed__product">
                   <canvas
                     id="product-canvas"
+                    {% comment %}
                     width="350"
+                    {% endcomment %}
+                    {% comment %}
                     height="500"
+                    {% endcomment %}
+                    class=""
                     crossOrigin="anonymous"
                     style="z-index: -1111;"></canvas>
                   <img
@@ -117,25 +120,68 @@
 
             <!-- Product right side start ( PRODUCT FORM ) -->
             <div class="w-full h-full flex flex-col">
-              <input type="hidden"
+              <input
+                type="hidden"
                 name="id"
                 id="variant__id"
                 value="{{ selected_variant.id }}">
 
+              <section class="section_card_guides_size">
+                <div class="bg-blue__gradient p-6 rounded-lg hidden lg:block">
+                  <div class="grid grid-cols-3 gap-y-3 gap-x-6">
+                    <div class="flex items-center justify-start">
+                      <div class="flex flex-col items-start justify-center gap-y-3">
+                        <div class="flex items-center gap-x-2">
+                          <span>{% render 'easy_to_personalise_icon' %}</span>
+                          <p class="text-xs">{{ section.settings.guide_1 }}</p>
+                        </div>
+                        <div class="flex items-center gap-x-2">
+                          <span>{% render 'easy_to_personalise_icon' %}</span>
+                          <p class="text-xs">{{ section.settings.guide_2 }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-center">
+                      <div class="flex flex-col items-start justify-center gap-y-3">
+                        <div class="flex items-center gap-x-2">
+                          <span>{% render 'easy_to_personalise_icon' %}</span>
+                          <p class="text-xs">{{ section.settings.guide_3 }}</p>
+                        </div>
+                        <div class="flex items-center gap-x-2">
+                          <span>{% render 'easy_to_personalise_icon' %}</span>
+                          <p class="text-xs">{{ section.settings.guide_4 }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-end">
+                      <div class="flex flex-col items-start justify-center gap-y-3">
+                        <div class="flex items-center gap-x-2">
+                          <span>{% render 'easy_to_personalise_icon' %}</span>
+                          <p class="text-xs">{{ section.settings.guide_5 }}</p>
+                        </div>
+                        <div class="flex items-center gap-x-2">
+                          <span>{% render 'easy_to_personalise_icon' %}</span>
+                          <p class="text-xs">{{ section.settings.guide_6 }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
               <!-- Product size start -->
-              <section id="section_card_size">
-                <div class="bg-blue__gradient p-6 rounded-lg">
+              <section class="section_card_guides_size">
+                <div class="bg-blue__gradient p-6 rounded-lg mt-4 hidden lg:block">
                   <div class="">
                     <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_1 }}</h3>
                   </div>
                   <div>
                     <div>
                       <label for="" class="uppercase text-xs">{{ section.settings.step_label_1 }}</label>
-
                       <!-- Current price start -->
                       <div class="my-3" id="price-{{ section.id }}">
-                        <span class="text-base text-gray-500 line-through">{{ selected_variant.compare_at_price | money }}</span>
-                        <span class="text-lg text-white">{{ selected_variant.price | money }}</span>
+                        {% comment %} <span class="text-base text-gray-500 line-through">{{ selected_variant.compare_at_price | money }}</span>
+                        <span class="text-lg text-white">{{ selected_variant.price | money }}</span> {% endcomment %}
 
                         {% if selected_variant.price < selected_variant.compare_at_price %}
                           <span class="px-5 py-1 text-sm font-bold bg-red-500 rounded-full text-white mx-4">Sale</span>
@@ -144,20 +190,20 @@
                       <!-- Current price end -->
 
                     </div>
-                    <div class="grid grid-cols-2 gap-y-4 gap-x-4 xl:grid-cols-4 place-items-center py-4">
+                    <div class="grid grid-cols-2 gap-y-4 gap-x-2 xl:grid-cols-4 place-items-center py-4">
                       {% for item in product.variants %}
                         <a
                           href="javascript:void(0)"
                           onclick="updateForm('{{item.id}}', '{{ item.price | money }}')"
-                          id="selected__variant_id-{{item.id}}"
-                          class="">
-                          <div class="relative">
-                            <p class="font-family-kufam absolute italic font-black text-gray-500 right-0 mr-2">{{ item.price | money }}</p>
+                          id=""
+                          class="w-full selected__variant_id-{{item.id}}">
+                          <div class="relative bg-gray-300 rounded-lg">
+                            <p class="font-family-kufam absolute italic font-black text-gray-500 right-0 mr-3 mt-1">{{ item.price | money }}</p>
                             <p class="font-family-kufam absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-500 text-sm">{{ item.title }}</p>
                             <img
                               src="{{ item.featured_image.src | img_url: 'large' }}"
                               alt=""
-                              class="object-cover">
+                              class="w-full max-h-[250px] pt-4 object-contain">
                           </div>
                         </a>
                       {% endfor %}
@@ -209,51 +255,8 @@
                                 </div>
                               </div>
                             </div>
-                            {% comment %}  {% endcomment %}
-                          {% comment %} <div class="bg-gray-800">
-                          <div class="grid grid-cols-3 gap-x-4 md:gap-x-12 py-2 px-1 md: md:py-3 md:px-3">
-                          <div class="flex flex-col justify-start items-center">
-                          <p>
-                          Small(A4)
-                          </p>
-                          <p class="text-xs text-gray-400">Height - 29cm</p>
-                          <p class="text-xs text-gray-400">Width - 18cm</p>
-                          <p class="text-xs text-gray-400">Tickness - 3cm</p>
-                          </div>
-                          <div class="flex flex-col justify-start items-center">
-                          <p>
-                          Small(A4)
-                          </p>
-                          <p class="text-xs text-gray-400">Height - 29cm</p>
-                          <p class="text-xs text-gray-400">Width - 18cm</p>
-                          <p class="text-xs text-gray-400">Tickness - 3cm</p>
-                          </div>
-                          <div class="flex flex-col justify-start items-center">
-                          <p>
-                          Small(A4)
-                          </p>
-                          <p class="text-xs text-gray-400">Height - 29cm</p>
-                          <p class="text-xs text-gray-400">Width - 18cm</p>
-                          <p class="text-xs text-gray-400">Tickness - 3cm</p>
-                          </div>
-                          </div>
-                          </div> {% endcomment %}
-                            {% comment %}  {% endcomment %}
                           </div>
                         </div>
-                      </div>
-                      <div class="flex items-center justify-end gap-x-4">
-                        <button
-                          type="button"
-                          data-section="section_card_picture"
-                          class="bg-white rounded-full py-1 w-1/2 text-white font-medium text-blue-custom duration-300 hover:opacity-75 flex justify-center relative lg:hidden changeSection">
-                          <span>
-                            Next
-                          </span>
-                          <span class="absolute right-2.5">
-                            {% render 'icon-arrow-right-rounded' %}
-                          </span>
-                        </button>
                       </div>
                     </div>
                   </div>
@@ -261,36 +264,45 @@
               </section>
               <!-- Product size end -->
 
+              {% render 'mobile-product-size-section' %}
+              {% render 'mobile-product-card-name-section' %}
+              {% render 'mobile-product-card-picture-section' %}
+              {% render 'mobile-product-card-position-section' %}
+              {% render 'mobile-product-card-club-section' %}
+              {% render 'mobile-product-card-country-section' %}
+              {% render 'mobile-product-card-stats-section' %}
               <!-- Product name/picture start -->
               <section
-                class="hidden lg:block"
-                id="section_card_picture"
+                class="section_card_picture_position hidden"
+                id=""
                 style="">
-                <div class="bg-blue__gradient p-6 rounded-lg mt-12">
+                <div class="bg-blue__gradient p-6 rounded-lg hidden lg:block">
                   <div class="">
-                    <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_2 }}</h3>
-                  </div>
-                  <div>
                     <div>
-                      <label for="name" class="text-xs uppercase">{{ section.settings.step_label_2 }}</label>
+                      <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_2 }}</h3>
                     </div>
-                    <div class="flex justify-between py-4">
-                      <input
-                        type="text"
-                        class="bg-transparent text-white border-white product__form-input w-full placeholder:uppercase placeholder:text-white placeholder:opacity-75 rounded px-3 py-1"
-                        id="name"
-                        name="properties[Name]"
-                        placeholder="Enter your name">
+                    <div>
+                      <div>
+                        <label for="name" class="text-xs uppercase">{{ section.settings.step_label_2 }}</label>
+                      </div>
+                      <div class="flex justify-between py-2">
+                        <input
+                          type="text"
+                          class="name bg-transparent text-white border-white product__form-input w-full placeholder:uppercase placeholder:text-white placeholder:opacity-75 rounded px-3 py-1"
+                          id=""
+                          name="properties[Name]"
+                          placeholder="Enter your name">
+                      </div>
                     </div>
                   </div>
-                  <div class="mt-16">
-                    <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_3 }}</h3>
-                  </div>
-                  <div>
+                  {% comment %} <div class="mt-8">
+                  <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_3 }}</h3>
+                  </div> {% endcomment %}
+                  <div class="hidden lg:block">
                     <div>
                       <label for="profile-picture" class="text-xs uppercase">{{ section.settings.step_label_3 }}</label>
                     </div>
-                    <div class="flex justify-between py-4 bordered border-dashed border-white border-2 relative h-64 mt-2 rounded cursor-pointer">
+                    <div class="flex justify-between py-4 bordered border-dashed border-white border-2 relative h-24 mt-2 rounded cursor-pointer">
                       <div class="absolute flex items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer">
                         <div class="text-white">
                           {% render 'icon-upload-image' %}
@@ -306,16 +318,6 @@
                         class="w-full h-full opacity-0"
                         accept="image/*" />
                     </div>
-                    {% comment %} <div class="flex items-center mt-4">
-                    <div class="text-white">
-                    {% render 'icon-info' %}
-                    </div>
-                    <div class="ml-1">
-                    <p class="text-xs">If necessary the background of the image will be removed by our design team.</p>
-                    </div>
-
-                    </div> {% endcomment %}
-
                     <div class="flex justify-center flex-col gap-y-4 mt-4">
                       <div class="flex items-center">
                         <div class="text-white">
@@ -324,30 +326,6 @@
                         <div class="ml-1">
                           <p class="text-xs">{{ section.settings.step_tooltip_3 }}</p>
                         </div>
-                      </div>
-                      <div class="flex items-center gap-x-4">
-                        <button
-                          type="button"
-                          data-section="section_card_size"
-                          class="bg-gray-400 rounded-full py-1 w-1/2 text-white font-medium duration-300 hover:opacity-75 flex justify-center relative lg:hidden changeSection">
-                          <span class="absolute left-2.5">
-                            {% render 'icon-arrow-left-rounded' %}
-                          </span>
-                          <span>
-                            Back
-                          </span>
-                        </button>
-                        <button
-                          type="button"
-                          data-section="section_card_position"
-                          class="bg-white rounded-full py-1 w-1/2 text-white font-medium text-blue-custom duration-300 hover:opacity-75 flex justify-center relative lg:hidden changeSection">
-                          <span>
-                            Next
-                          </span>
-                          <span class="absolute right-2.5">
-                            {% render 'icon-arrow-right-rounded' %}
-                          </span>
-                        </button>
                       </div>
                     </div>
 
@@ -358,10 +336,10 @@
 
               <!-- Product profile start -->
               <section
-                id="section_card_position"
+                id=""
                 style=""
-                class="hidden lg:block">
-                <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
+                class="section_card_picture_position hidden">
+                <div class="bg-blue__gradient p-6 rounded-lg mt-4 hidden lg:block">
                   <div class="">
                     <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_4 }}</h3>
                   </div>
@@ -393,44 +371,16 @@
                       {% render 'player-position' %}
                     </div>
                   </div>
-                  <div class="flex justify-center flex-col gap-y-4 mt-4">
-                    <div class="flex items-center gap-x-4">
-                      <button
-                        type="button"
-                        data-section="section_card_picture"
-                        class="bg-gray-400 rounded-full py-1 w-1/2 text-white font-medium duration-300 hover:opacity-75 flex justify-center relative lg:hidden changeSection">
-                        <span class="absolute left-2.5">
-                          {% render 'icon-arrow-left-rounded' %}
-                        </span>
-                        <span>
-                          Back
-                        </span>
-                      </button>
-                      <button
-                        type="button"
-                        data-section="section_card_club"
-                        class="bg-white rounded-full py-1 w-1/2 text-white font-medium text-blue-custom duration-300 hover:opacity-75 flex justify-center relative lg:hidden changeSection">
-                        <span>
-                          Next
-                        </span>
-                        <span class="absolute right-2.5">
-                          {% render 'icon-arrow-right-rounded' %}
-                        </span>
-                      </button>
-                    </div>
-                  </div>
                 </div>
               </section>
               <!-- Product profile end -->
 
-
-
               <!-- Product choose club start -->
               <section
-                id="section_card_club"
+                id=""
                 style=""
-                class="hidden lg:block">
-                <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
+                class="section_card_club_country hidden">
+                <div class="bg-blue__gradient p-6 rounded-lg">
                   <div class="">
                     <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_5 }}</h3>
                   </div>
@@ -438,39 +388,12 @@
                     <div class="flex justify-between py-4">
                       <input
                         type="text"
-                        class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
-                        id="search_for_club"
+                        class="search_for_club bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
                         placeholder="Search club name">
                     </div>
                   </div>
                   <div>
                     {% render 'league-options' %}
-                  </div>
-                  <div class="flex justify-center flex-col gap-y-4 mt-4">
-                    <div class="flex items-center gap-x-4">
-                      <button
-                        type="button"
-                        data-section="section_card_position"
-                        class="bg-gray-400 rounded-full py-1 w-1/2 text-white font-medium duration-300 hover:opacity-75 flex justify-center relative lg:hidden changeSection">
-                        <span class="absolute left-2.5">
-                          {% render 'icon-arrow-left-rounded' %}
-                        </span>
-                        <span>
-                          Back
-                        </span>
-                      </button>
-                      <button
-                        type="button"
-                        data-section="section_card_country"
-                        class="bg-white rounded-full py-1 w-1/2 text-white font-medium text-blue-custom duration-300 hover:opacity-75 flex justify-center relative lg:hidden changeSection">
-                        <span>
-                          Next
-                        </span>
-                        <span class="absolute right-2.5">
-                          {% render 'icon-arrow-right-rounded' %}
-                        </span>
-                      </button>
-                    </div>
                   </div>
                 </div>
 
@@ -479,10 +402,10 @@
 
               <!-- Product choose country start -->
               <section
-                id="section_card_country"
+                id=""
                 style=""
-                class="hidden lg:block">
-                <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
+                class="section_card_club_country hidden">
+                <div class="bg-blue__gradient p-6 rounded-lg mt-4 ">
                   <div class="">
                     <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_6 }}</h3>
                   </div>
@@ -490,48 +413,21 @@
                     <div class="flex justify-between py-4">
                       <input
                         type="text"
-                        class="bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
-                        id="search_for_country"
+                        class="search_for_country bg-transparent text-white border-white product__form-input w-full rounded-full px-3 py-1 placeholder:text-white placeholder:opacity-75"
                         placeholder="Search country">
                     </div>
                   </div>
                   {% render 'country-options' %}
-                  <div class="flex justify-center flex-col gap-y-4 mt-4">
-                    <div class="flex items-center gap-x-4">
-                      <button
-                        type="button"
-                        data-section="section_card_club"
-                        class="bg-gray-400 rounded-full py-1 w-1/2 text-white font-medium duration-300 hover:opacity-75 flex justify-center relative lg:hidden changeSection">
-                        <span class="absolute left-2.5">
-                          {% render 'icon-arrow-left-rounded' %}
-                        </span>
-                        <span>
-                          Back
-                        </span>
-                      </button>
-                      <button
-                        type="button"
-                        data-section="section_card_stats"
-                        class="bg-white rounded-full py-1 w-1/2 text-white font-medium text-blue-custom duration-300 hover:opacity-75 flex justify-center relative lg:hidden changeSection">
-                        <span>
-                          Next
-                        </span>
-                        <span class="absolute right-2.5">
-                          {% render 'icon-arrow-right-rounded' %}
-                        </span>
-                      </button>
-                    </div>
-                  </div>
                 </div>
               </section>
               <!-- Product choose country end -->
 
               <!-- Product stats start -->
               <section
-                id="section_card_stats"
+                id=""
                 style=""
-                class="hidden lg:block">
-                <div class="bg-blue__gradient p-6 rounded-lg mt-12 ">
+                class="section_card_stats hidden">
+                <div class="bg-blue__gradient p-6 rounded-lg mt-4">
                   <div class="flex justify-between">
                     <div>
                       <h3 class="text-xl md:text-2xl lg:text-3xl">{{ section.settings.step_title_7 }}</h3>
@@ -539,10 +435,9 @@
                     <div>
                       <button
                         type="button"
-                        class="bg-white flex items-center px-4 py-2 rounded-full transition duration-300 hover:opacity-80 disabled:opacity-50"
+                        class="randomise_btn bg-white flex items-center px-4 py-2 rounded-full transition duration-300 hover:opacity-80 disabled:opacity-50"
                         onclick="randomiseStats()"
-                        disabled
-                        id="randomise_btn">
+                        disabled>
                         <span>
                           {% render 'icon-randomise' %}
                         </span>
@@ -553,9 +448,9 @@
                     </div>
                   </div>
                   {% render 'product-page-stats-step' %}
-                  <label class="checkbox__container flex items-center mt-12">
+                  <label class="checkbox__container flex items-center mt-4">
                     <div>
-                      <p class="opacity-75 font-light text-sm md:text-lg">
+                      <p class="opacity-75 font-light text-sm">
                         {{ section.settings.confirm_submit }}
                       </p>
                     </div>
@@ -571,44 +466,16 @@
                   <button
                     type="button"
                     onclick="saveCanvas()"
-                    id="add_to_cart_first_step"
-                    class="bg-white w-full rounded-full font-medium mt-12 py-3 duration-300 hover:opacity-75 hidden lg:block tab-item active"
+                    class="add_to_cart_first_step bg-white w-full rounded-full font-medium mt-2 py-2 duration-300 hover:opacity-75 tab-item active"
                     data-tab="tab-2"
                     style="color:var(--blue-text)">
                     {{ section.settings.add_to_cart }}</button>
-                  <div class="flex justify-center flex-col gap-y-4 mt-4 lg:hidden">
-                    <div class="flex items-center gap-x-4">
-                      <button
-                        type="button"
-                        data-section="section_card_country"
-                        class="bg-gray-400 rounded-full py-1 w-1/2 text-white font-medium duration-300 hover:opacity-75 flex justify-center relative lg:hidden changeSection">
-                        <span class="absolute left-2.5">
-                          {% render 'icon-arrow-left-rounded' %}
-                        </span>
-                        <span>
-                          Back
-                        </span>
-                      </button>
-                      <button
-                        type="button"
-                        onclick="saveCanvas()"
-                        id="add_to_cart_first_step"
-                        class="bg-white w-1/2 rounded-full font-medium py-1 duration-300 hover:opacity-75 tab-item active"
-                        data-tab="tab-2"
-                        style="color:var(--blue-text)">
-                        {{ section.settings.add_to_cart }}</button>
-                    </div>
-                  </div>
                 </div>
 
               </section>
               <!-- Product stats end -->
 
-              {% comment %} <button
-              type="button"
-              class="submit_btn"
-              onclick="saveCanvas()">Submit</button> {% endcomment %}
-              {% comment %} <button type="button" onclick="saveCanvas()">Submit</button> {% endcomment %} <br> <input
+              <br> <input
                 type="text"
                 name="properties[Player position]"
                 placeholder="Player position"
@@ -644,8 +511,56 @@
         {% render 'additional-options', products: collection.products %}
       </div>
     </div>
-    <!-- Product title end -->
-    {% comment %} <button class="bg-white w-full rounded-full mt-12  py-3 hover:opacity-75 transition-opacity duration-300 tab_item" data-tab="tab-1">{{ section.settings.back_to_product }}</button> {% endcomment %}
+  </div>
+  <div
+    class="w-full fixed bottom-0 py-4 lg:py-6 flex justify-center items-center z-50 container rounded-t-2xl mx-auto left-1/2 -translate-x-1/2"
+    style="background: linear-gradient(29.11deg, #303741 0%, #424B57 100%);"
+    id="progress-wrapper">
+    <div class="container flex items-center flex-col lg:flex-row justify-center gap-x-6 gap-y-6 px-4 sm:px-8 md:px-20">
+      <button
+        type="button"
+        data-type="back"
+        class="bg-gray-500 rounded-full py-2 px-12 text-white font-medium duration-300 hover:opacity-75 hidden lg:flex gap-x-2 justify-center items-center changeSection">
+        <span>
+          {% render 'return-icon' %}
+        </span>
+        <span>
+          Return
+        </span>
+      </button>
+      <div class="shadow w-full bg-gray-300 h-2">
+        <div
+          class="bg-blue__gradient text-xs leading-none h-full text-center text-white flex items-center justify-end relative"
+          style="width: 30%"
+          id="step_progress">
+          <div class="absolute lg:-top-6 bg-gray-400 px-4 py-1 rounded-full" id="step_progress_title">14%</div>
+        </div>
+      </div>
+      <div class="flex justify-between w-full lg:w-auto">
+        <button
+          type="button"
+          data-type="back"
+          class="bg-gray-500 rounded-full py-1 px-8 text-white font-medium duration-300 hover:opacity-75 flex lg:hidden gap-x-2 justify-center items-center changeSection">
+          <span>
+            {% render 'return-icon' %}
+          </span>
+          <span>
+            Return
+          </span>
+        </button>
+        <button
+          type="button"
+          data-type="next"
+          class="bg-blue__gradient rounded-full py-2 px-12 text-white font-medium duration-300 hover:opacity-75 flex gap-x-2 justify-center items-center changeSection">
+          <span>
+            Next
+          </span>
+          <span>
+            {% render 'icon-arrow-right-rounded' %}
+          </span>
+        </button>
+      </div>
+    </div>
   </div>
 {% endform %}
 {% comment %} <div class="tab-group">
@@ -763,6 +678,36 @@
         "id": "step_button_7",
         "default": "Randomise",
         "label": "7 Step Button Randomise Title"
+      }, {
+        "type": "text",
+        "id": "guide_1",
+        "default": "Easy to personalise",
+        "label": "Guide 1"
+      }, {
+        "type": "text",
+        "id": "guide_2",
+        "default": "All photo edits done for you",
+        "label": "Guide 2"
+      }, {
+        "type": "text",
+        "id": "guide_3",
+        "default": "Unique footballs surprise",
+        "label": "Guide 3"
+      }, {
+        "type": "text",
+        "id": "guide_4",
+        "default": "Incredible print quality",
+        "label": "Guide 4"
+      }, {
+        "type": "text",
+        "id": "guide_5",
+        "default": "Easy to wall hang",
+        "label": "Guide 5"
+      }, {
+        "type": "text",
+        "id": "guide_6",
+        "default": "Ultra strong materials",
+        "label": "Guide 6"
       }
     ]
   }

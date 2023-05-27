@@ -22,11 +22,11 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium truncate ">${country.name.official}</p>
+              <p class="text-xs custom-option-style font-medium truncate">${country.name.official}</p>
               </div>
               </div>
               </label> `;
-        $("#data-country-asia").append(asia);
+        $(".data-country-asia").append(asia);
       } else if (country.region == "Africa") {
         let africa = `<label class="custom-country-radio my-2">
           <input
@@ -43,11 +43,11 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium truncate ">${country.name.official}</p>
+              <p class="text-xs custom-option-style font-medium truncate">${country.name.official}</p>
               </div>
               </div>
               </label> `;
-        $("#data-country-africa").append(africa);
+        $(".data-country-africa").append(africa);
       } else if (country.region == "Europe") {
         let europe = `<label class="custom-country-radio my-2">
           <input
@@ -64,11 +64,11 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium truncate ">${country.name.official}</p>
+              <p class="text-xs custom-option-style font-medium truncate ">${country.name.official}</p>
               </div>
               </div>
               </label> `;
-        $("#data-country-europe").append(europe);
+        $(".data-country-europe").append(europe);
       } else if (country.continents[0] == "North America") {
         let north_america = `<label class="custom-country-radio my-2">
           <input
@@ -85,11 +85,11 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium truncate">${country.name.official}</p>
+              <p class="text-xs custom-option-style font-medium truncate">${country.name.official}</p>
               </div>
               </div>
               </label> `;
-        $("#data-country-north_america").append(north_america);
+        $(".data-country-north_america").append(north_america);
       } else if (country.continents[0] == "South America") {
         let south_america = `<label class="custom-country-radio my-2">
           <input
@@ -106,11 +106,11 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium truncate">${country.name.official}</p>
+              <p class="text-xs custom-option-style font-medium truncate">${country.name.official}</p>
               </div>
               </div>
               </label> `;
-        $("#data-country-south_america").append(south_america);
+        $(".data-country-south_america").append(south_america);
       } else if (country.continents[0] == "Oceania") {
         let oceania = `<label class="custom-country-radio my-2">
           <input
@@ -127,11 +127,11 @@ function getCountries() {
               </div>
               </div>
               <div>
-              <p class="font-medium truncate">${country.name.official}</p>
+              <p class="text-xs custom-option-style font-medium truncate">${country.name.official}</p>
               </div>
               </div>
               </label> `;
-        $("#data-country-oceania").append(oceania);
+        $(".data-country-oceania").append(oceania);
       }
     });
   } catch (error) {
@@ -145,13 +145,12 @@ function getCountries() {
 // };
 
 const getLeaguesData = async () => {
-  console.log('asd')
   try {
     let data = leagues_json_data[0];
     // console.log(data)
     // clubs = [...leagues_json_data[0]];
     for (const [key, value] of Object.entries(data)) {
-      $("#data-league-" + key).empty();
+      $(".data-league-" + key).empty();
       value.forEach((league) => {
         clubs.push(league)
         let append = `<label class="custom-league-radio my-2">
@@ -169,11 +168,11 @@ const getLeaguesData = async () => {
                     </div>
                     </div>
                     <div>
-                    <p class="font-medium truncate">${league.strTeam}</p>
+                    <p class="text-xs custom-option-style font-medium truncate">${league.strTeam}</p>
                     </div>
                     </div>
                     </label> `;
-        $("#data-league-" + key).append(append);
+        $(".data-league-" + key).append(append);
       });
     }
   } catch (error) {
